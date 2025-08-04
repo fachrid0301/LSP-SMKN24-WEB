@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Login() {
+function Register() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -45,7 +45,7 @@ function Login() {
           color: '#000',
           marginBottom: '30px'
         }}>
-          Login
+          Register
         </h1>
 
         {/* Username */}
@@ -175,11 +175,11 @@ function Login() {
             cursor: 'pointer'
           }}
         >
-          Sign In
+          Sign Up
         </button>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;

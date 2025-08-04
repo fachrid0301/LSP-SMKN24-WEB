@@ -1,7 +1,6 @@
-// File: ./layouts/Navbar.jsx
 import { useState } from 'react';
 
-function Navbar({ onLoginClick }) {
+function Navbar({ onLoginClick, onRegisterClick }) {
   const [activeNav, setActiveNav] = useState('home');
 
   return (
@@ -43,23 +42,43 @@ function Navbar({ onLoginClick }) {
             </button>
           ))}
         </div>
-        <button 
-          onClick={onLoginClick}
-          style={{
-            backgroundColor: 'white',
-            color: '#f97316',
-            border: 'none',
-            padding: '8px 20px',
-            borderRadius: '20px',
-            fontWeight: '600',
-            fontSize: '14px',
-            cursor: 'pointer',
-            position: 'absolute',
-            right: '40px'
-          }}
-        >
-          Login
-        </button>
+        <div style={{
+          position: 'absolute',
+          right: '40px',
+          display: 'flex',
+          gap: '10px'
+        }}>
+          <button 
+            onClick={onLoginClick}
+            style={{
+              backgroundColor: 'white',
+              color: '#f97316',
+              border: 'none',
+              padding: '8px 20px',
+              borderRadius: '20px',
+              fontWeight: '600',
+              fontSize: '14px',
+              cursor: 'pointer'
+            }}
+          >
+            Login
+          </button>
+          <button 
+            onClick={onRegisterClick}
+            style={{
+              padding: '8px 20px',
+              backgroundColor: '#f97316',
+              color: 'white',
+              border: 'none',
+              borderRadius: '20px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            Register
+          </button>
+        </div>
       </div>
     </nav>
   );

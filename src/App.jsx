@@ -113,7 +113,7 @@ function App() {
             lineHeight: '1',
             fontFamily: 'Poppins, sans-serif'
           }}>
-            "LSPD" JAYA JAYA JAYA
+            "LSPD" GUDANG GARAM JAYA
           </div>
         </div>
       </div>

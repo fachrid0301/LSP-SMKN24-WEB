@@ -2,26 +2,38 @@ import { useState } from 'react';
 import Login from "./layouts/Login";
 import Navbar from "./layouts/Navbar";
 import Register from "./layouts/Register";
+import Dashboard from "./layouts/Dashboard";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
 
   const handleLoginClick = () => {
     setShowLogin(true);
     setShowRegister(false);
+    setShowDashboard(false);
     console.log("Navigating to Login");
   };
 
   const handleRegisterClick = () => {
     setShowRegister(true);
     setShowLogin(false);
+    setShowDashboard(false);
     console.log("Navigating to Register");
+  };
+
+  const handleDashboardClick = () => {
+    setShowDashboard(true);
+    setShowLogin(false);
+    setShowRegister(false);
+    console.log("Navigating to Dashboard");
   };
 
   const handleBackToHome = () => {
     setShowLogin(false);
     setShowRegister(false);
+    setShowDashboard(false);
     console.log("Back to Home");
   };
 
@@ -31,6 +43,10 @@ function App() {
 
   if (showRegister) {
     return <Register onBack={handleBackToHome} />;
+  }
+
+  if (showDashboard) {
+    return <Dashboard />;
   }
 
   return (
@@ -94,6 +110,22 @@ function App() {
           }}>
             "LSPD"
           </div>
+          <button
+            onClick={handleDashboardClick}
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#f97316',
+              color: 'white',
+              border: 'none',
+              borderRadius: '20px',
+              fontSize: '16px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              marginTop: '20px'
+            }}
+          >
+            Go to Dashboard
+          </button>
         </div>
       </div>
       

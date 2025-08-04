@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 function App() {
   const [activeNav, setActiveNav] = useState('home');
+  const [showLogin, setShowLogin] = useState(false); // Tambah state login
 
   return (
     <div style={{
@@ -18,7 +19,7 @@ function App() {
       overflow: 'hidden',
       position: 'relative'
     }}>
-      {/* Navigation Bar */}
+      {/* Navbar */}
       <nav style={{
         background: '#FFCB53',
         height: '60px',
@@ -41,7 +42,10 @@ function App() {
             {['Home', 'Profile', 'Certifications', 'Gallery', 'Contact'].map((item) => (
               <button
                 key={item}
-                onClick={() => setActiveNav(item.toLowerCase())}
+                onClick={() => {
+                  setActiveNav(item.toLowerCase());
+                  setShowLogin(false);
+                }}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -57,7 +61,7 @@ function App() {
               </button>
             ))}
           </div>
-          <button style={{
+          <button onClick={() => setShowLogin(true)} style={{
             backgroundColor: 'white',
             color: '#f97316',
             border: 'none',
@@ -83,53 +87,80 @@ function App() {
         width: '100%',
         textAlign: 'center'
       }}>
-        {/* Text Content */}
-        <div>
-          <h1 style={{
-            fontSize: '72px',
-            fontWeight: 'bold',
-            color: '#f97316',
-            margin: '0',
-            lineHeight: '1.1',
-            fontFamily: 'Poppins, sans-serif'
+        {showLogin ? (
+          // TAMPILAN FORM LOGIN
+          <form style={{
+            background: '#fdf0d3',
+            padding: '40px',
+            borderRadius: '25px',
+            boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+            width: '350px'
           }}>
-            Selamat Datang
-          </h1>
-          <h2 style={{
-            fontSize: '64px',
-            fontWeight: '600',
-            color: '#f97316',
-            margin: '0',
-            lineHeight: '1.1',
-            fontFamily: 'Poppins, sans-serif'
-          }}>
-            Di Website Resmi
-          </h2>
-          <div style={{
-            fontSize: '80px',
-            fontWeight: 'bold',
-            color: '#f97316',
-            margin: '20px 0',
-            lineHeight: '1',
-            fontFamily: 'Poppins, sans-serif'
-          }}>
-            "LSPD" GUDANG GARAM JAYA
-          </div>
-        </div>
-      </div>
+            <h1 style={{ fontSize: '36px', marginBottom: '30px', fontWeight: 'bold' }}>Login</h1>
 
-      <style jsx>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        body {
-          margin: 0;
-          padding: 0;
-          overflow-x: hidden;
-        }
-      `}</style>
+            {['Username', 'Password', 'NIK', 'Email'].map((label, index) => (
+              <div key={index} style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px' }}>{label}</label>
+                <input
+                  type={label.toLowerCase() === 'password' ? 'password' : 'text'}
+                  style={{
+                    width: '100%',
+                    padding: '12px 20px',
+                    border: '2px solid orange',
+                    borderRadius: '30px',
+                    outline: 'none'
+                  }}
+                />
+              </div>
+            ))}
+
+            <button type="submit" style={{
+              background: 'orange',
+              color: 'white',
+              border: 'none',
+              padding: '10px 30px',
+              borderRadius: '20px',
+              fontWeight: 'bold',
+              fontSize: '16px',
+              cursor: 'pointer'
+            }}>
+              SignIn
+            </button>
+          </form>
+        ) : (
+          // TAMPILAN AWAL (HOME)
+          <div>
+            <h1 style={{
+              fontSize: '72px',
+              fontWeight: 'bold',
+              color: '#f97316',
+              margin: '0',
+              lineHeight: '1.1',
+              fontFamily: 'Poppins, sans-serif'
+            }}>
+              Selamat Datang
+            </h1>
+            <h2 style={{
+              fontSize: '64px',
+              fontWeight: '600',
+              color: '#f97316',
+              margin: '0',
+              lineHeight: '1.1'
+            }}>
+              Di Website Resmi
+            </h2>
+            <div style={{
+              fontSize: '80px',
+              fontWeight: 'bold',
+              color: '#f97316',
+              margin: '20px 0',
+              lineHeight: '1'
+            }}>
+              "LSPD" GUDANG GARAM JAYA
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

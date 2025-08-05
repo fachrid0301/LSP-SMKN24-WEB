@@ -49,7 +49,7 @@ function Dashboard() {
       {/* Top Header */}
       <nav style={{ 
         backgroundColor: 'white', 
-        padding: '12px 24px',
+        padding: '8px 16px',
         borderBottom: '1px solid #e5e7eb',
         position: 'sticky',
         top: 0,
@@ -95,7 +95,7 @@ function Dashboard() {
               style={{
                 background: 'none',
                 border: 'none',
-                padding: '8px',
+                padding: '6px',
                 cursor: 'pointer',
                 borderRadius: '4px',
                 display: 'flex',
@@ -113,26 +113,26 @@ function Dashboard() {
               <div style={{ 
                 display: 'flex', 
                 flexDirection: 'column', 
-                gap: '4px',
+                gap: '3px',
                 pointerEvents: 'none'
               }}>
                 <div style={{ 
-                  width: '20px', 
-                  height: '3px', 
+                  width: '16px', 
+                  height: '2px', 
                   backgroundColor: '#374151', 
                   borderRadius: '1px',
                   transition: 'all 0.2s ease'
                 }}></div>
                 <div style={{ 
-                  width: '20px', 
-                  height: '3px', 
+                  width: '16px', 
+                  height: '2px', 
                   backgroundColor: '#374151', 
                   borderRadius: '1px',
                   transition: 'all 0.2s ease'
                 }}></div>
                 <div style={{ 
-                  width: '20px', 
-                  height: '3px', 
+                  width: '16px', 
+                  height: '2px', 
                   backgroundColor: '#374151', 
                   borderRadius: '1px',
                   transition: 'all 0.2s ease'
@@ -145,8 +145,8 @@ function Dashboard() {
           <div style={{ position: 'relative' }}>
             <div 
               style={{
-                width: '40px',
-                height: '40px',
+                width: '32px',
+                height: '32px',
                 backgroundColor: '#f97316',
                 borderRadius: '50%',
                 cursor: 'pointer',
@@ -154,7 +154,8 @@ function Dashboard() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: 'white',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontSize: '14px'
               }}
               onClick={() => setShowDropdown(!showDropdown)}
             >
@@ -242,11 +243,11 @@ function Dashboard() {
       <div style={{ display: 'flex' }}>
         {/* Sidebar */}
         <div style={{
-          width: sidebarOpen ? '280px' : '70px',
+          width: sidebarOpen ? '240px' : '60px',
           backgroundColor: 'white',
-          minHeight: 'calc(100vh - 73px)',
+          minHeight: 'calc(100vh - 57px)',
           borderRight: '1px solid #e5e7eb',
-          padding: '20px 0',
+          padding: '16px 0',
           transition: 'width 0.3s ease',
           overflow: 'hidden'
         }}>
@@ -255,14 +256,14 @@ function Dashboard() {
               key={index}
               onClick={() => handleMenuClick(item.name)}
               style={{
-                padding: sidebarOpen ? '12px 24px' : '12px',
-                margin: sidebarOpen ? '4px 16px' : '4px 8px',
-                borderRadius: sidebarOpen ? '50px' : '12px',
+                padding: sidebarOpen ? '10px 20px' : '10px',
+                margin: sidebarOpen ? '3px 12px' : '3px 6px',
+                borderRadius: sidebarOpen ? '24px' : '10px',
                 cursor: 'pointer',
                 backgroundColor: activeMenu === item.name ? '#8b5cf6' : 'transparent',
                 color: activeMenu === item.name ? 'white' : '#6b7280',
                 fontWeight: activeMenu === item.name ? '500' : '400',
-                fontSize: '14px',
+                fontSize: '13px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: sidebarOpen ? 'flex-start' : 'center',
@@ -282,21 +283,21 @@ function Dashboard() {
               }}
             >
               <div style={{
-                width: '20px',
-                height: '20px',
+                width: '16px',
+                height: '16px',
                 backgroundColor: activeMenu === item.name ? 'rgba(255,255,255,0.3)' : '#8b5cf6',
-                borderRadius: '4px',
-                marginRight: sidebarOpen ? '12px' : '0',
+                borderRadius: '3px',
+                marginRight: sidebarOpen ? '10px' : '0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0
               }}>
                 <div style={{
-                  width: '8px',
-                  height: '8px',
+                  width: '6px',
+                  height: '6px',
                   backgroundColor: 'white',
-                  borderRadius: '2px'
+                  borderRadius: '1px'
                 }}></div>
               </div>
               {sidebarOpen && (
@@ -309,7 +310,7 @@ function Dashboard() {
         {/* Main Content */}
         <div style={{ 
           flex: 1, 
-          padding: '40px',
+          padding: '30px',
           backgroundColor: '#f5f5f5',
           transition: 'margin-left 0.3s ease',
           position: 'relative'
@@ -357,9 +358,9 @@ function Dashboard() {
           )}
 
           {/* Welcome Header */}
-          <div style={{ marginBottom: '40px' }}>
+          <div style={{ marginBottom: '30px' }}>
             <h1 style={{ 
-              fontSize: '36px', 
+              fontSize: '28px', 
               fontWeight: '600', 
               color: '#6b7280',
               margin: 0,
@@ -417,7 +418,7 @@ function Dashboard() {
           <div style={{ 
             textAlign: 'center', 
             marginTop: 'auto',
-            paddingTop: '200px',
+            paddingTop: '150px',
             opacity: isLoading ? 0.3 : 1,
             transition: 'opacity 0.3s ease'
           }}>

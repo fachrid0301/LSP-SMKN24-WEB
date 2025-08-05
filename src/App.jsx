@@ -1,8 +1,173 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Login from "./layouts/Login";
 import Navbar from "./layouts/Navbar";
 import Register from "./layouts/Register";
 import Dashboard from "./layouts/Dashboard";
+
+// Image Slider Component
+function ImageSlider() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  // Sample slide data - you can replace with actual images
+  const slides = [
+    {
+      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop',
+      title: 'LAUNCHING DAN PENYERAHAN',
+      subtitle: 'SERTIFIKAT KOMPETENSI',
+      organization: 'LEMBAGA SERTIFIKASI PROFESI',
+      institute: 'Institut Agama Islam Negeri Madura',
+      date: 'Pamekasan, 24 Januari 2025'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&h=600&fit=crop',
+      title: 'SERTIFIKASI KOMPETENSI',
+      subtitle: 'PROFESIONAL',
+      organization: 'LEMBAGA SERTIFIKASI PROFESI',
+      institute: 'Institut Teknologi Indonesia',
+      date: 'Jakarta, 25 Januari 2025'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200&h=600&fit=crop',
+      title: 'WORKSHOP PELATIHAN',
+      subtitle: 'DIGITAL MARKETING',
+      organization: 'LEMBAGA SERTIFIKASI PROFESI',
+      institute: 'Universitas Indonesia',
+      date: 'Depok, 26 Januari 2025'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=600&fit=crop',
+      title: 'SEMINAR NASIONAL',
+      subtitle: 'TEKNOLOGI INFORMASI',
+      organization: 'LEMBAGA SERTIFIKASI PROFESI',
+      institute: 'Institut Teknologi Bandung',
+      date: 'Bandung, 27 Januari 2025'
+    }
+  ];
+
+  // Auto slide every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  return (
+    <div style={{
+      position: 'relative',
+      width: '100%',
+      height: '500px',
+      overflow: 'hidden'
+    }}>
+      {/* Slide Images */}
+      <div style={{
+        display: 'flex',
+        width: `${slides.length * 100}%`,
+        height: '100%',
+        transform: `translateX(-${currentSlide * (100 / slides.length)}%)`,
+        transition: 'transform 0.5s ease-in-out'
+      }}>
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            style={{
+              width: `${100 / slides.length}%`,
+              height: '100%',
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${slide.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative'
+            }}
+          >
+            {/* Slide Content */}
+            <div style={{
+              textAlign: 'center',
+              color: 'white',
+              zIndex: 2
+            }}>
+              <h1 style={{
+                fontSize: '48px',
+                fontWeight: 'bold',
+                margin: '0 0 10px 0',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+              }}>
+                {slide.title}
+              </h1>
+              <h2 style={{
+                fontSize: '42px',
+                fontWeight: '600',
+                margin: '0 0 10px 0',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+              }}>
+                {slide.subtitle}
+              </h2>
+              <div style={{
+                fontSize: '32px',
+                fontWeight: 'bold',
+                margin: '20px 0',
+                color: '#00bcd4',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+              }}>
+                {slide.organization}
+              </div>
+              <p style={{
+                fontSize: '24px',
+                margin: '10px 0',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+              }}>
+                {slide.institute}
+              </p>
+              <p style={{
+                fontSize: '18px',
+                margin: '10px 0',
+                backgroundColor: '#00bcd4',
+                padding: '8px 16px',
+                borderRadius: '20px',
+                display: 'inline-block'
+              }}>
+                {slide.date}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Dots Navigation */}
+      <div style={{
+        position: 'absolute',
+        bottom: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        gap: '10px',
+        zIndex: 3
+      }}>
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              border: 'none',
+              backgroundColor: currentSlide === index ? 'white' : 'rgba(255,255,255,0.5)',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -52,16 +217,10 @@ function App() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#FFCB53',
-      backgroundImage: 'url("./src/img/company.jpeg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
       fontFamily: 'Poppins, sans-serif',
       margin: 0,
       padding: 0,
       width: '100vw',
-      overflow: 'hidden',
       position: 'relative',
       display: 'flex',
       flexDirection: 'column'
@@ -69,84 +228,50 @@ function App() {
       {/* Navigation Bar dari layouts */}
       <Navbar onLoginClick={handleLoginClick} onRegisterClick={handleRegisterClick} />
       
-      {/* Main Content */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: '1 0 auto',
-        width: '100%',
-        textAlign: 'center'
-      }}>
-        {/* Text Content */}
-        <div>
-          <h1 style={{
-            fontSize: '72px',
-            fontWeight: 'bold',
-            color: '#f97316',
-            margin: '0',
-            lineHeight: '1.1',
-            fontFamily: 'Poppins, sans-serif'
-          }}>
-            Selamat Datang
-          </h1>
-          <h2 style={{
-            fontSize: '64px',
-            fontWeight: '600',
-            color: '#f97316',
-            margin: '0',
-            lineHeight: '1.1',
-            fontFamily: 'Poppins, sans-serif'
-          }}>
-            Di Website Resmi
-          </h2>
-          <div style={{
-            fontSize: '80px',
-            fontWeight: 'bold',
-            color: '#f97316',
-            margin: '20px 0',
-            lineHeight: '1',
-            fontFamily: 'Poppins, sans-serif'
-          }}>
-            "LSPD"
-          </div>
-          <button
-            onClick={handleDashboardClick}
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#f97316',
-              color: 'white',
-              border: 'none',
-              borderRadius: '20px',
-              fontSize: '16px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              marginTop: '20px'
-            }}
-          >
-            Go to Dashboard
-          </button>
-        </div>
-      </div>
+      {/* Image Slider */}
+      <ImageSlider />
       
-      {/* Footer dengan teks */}
-      <footer style={{
-        background: '#FFCB53',
-        height: '60px',
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '16px',
-        color: 'white',
+      {/* Optional: Add content section */}
+      <div style={{
+        padding: '60px 40px',
         textAlign: 'center',
-        padding: '0 20px',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        flexShrink: 0
+        background: '#f8f9fa'
       }}>
-        LEMBAGA SERTIFIKASI KOMPETENSI SMKN 24 JAKARTA LEMBAGA SERTIFIKASI KOMPETENSI SMKN 24 JAKARTA LEMBAGA SERTIFIKASI KOMPETENSI
-      </footer>
+        <h2 style={{
+          fontSize: '36px',
+          color: '#333',
+          marginBottom: '20px'
+        }}>
+          Lembaga Sertifikasi Profesi
+        </h2>
+        <p style={{
+          fontSize: '18px',
+          color: '#666',
+          maxWidth: '800px',
+          margin: '0 auto 30px auto',
+          lineHeight: '1.6'
+        }}>
+          Kami berkomitmen untuk memberikan sertifikasi kompetensi profesional yang berkualitas tinggi
+          untuk meningkatkan daya saing sumber daya manusia Indonesia.
+        </p>
+        <button
+          onClick={handleDashboardClick}
+          style={{
+            padding: '15px 30px',
+            backgroundColor: '#f97316',
+            color: 'white',
+            border: 'none',
+            borderRadius: '25px',
+            fontSize: '18px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 15px rgba(249, 115, 22, 0.3)',
+            transition: 'all 0.3s ease'
+          }}
+        >
+          Mulai Sertifikasi
+        </button>
+      </div>
 
       <style jsx>{`
         * {

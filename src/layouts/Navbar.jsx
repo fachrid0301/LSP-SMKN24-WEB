@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Navbar({ onLoginClick }) {
+function Navbar({ onLoginClick, onRegisterClick, onProfileClick }) {
   return (
     <nav
       style={{
@@ -10,12 +10,11 @@ function Navbar({ onLoginClick }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "8px 24px", // ⬅️ KECILIN padding
+        padding: "8px 24px",
         boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-        height: "60px", // ⬅️ Tambahan biar height konsisten
+        height: "60px",
       }}
     >
-      {/* image rectangle dibelakang button login */}
       <img
         src="src/img/Rectangle 11.png"
         alt="blue background"
@@ -27,34 +26,30 @@ function Navbar({ onLoginClick }) {
           zIndex: -1,
         }}
       />
-
-      {/* Logo */}
-     {/* Logo */}
-<div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-  <img
-    src="src/img/image 12.png"
-    alt="Logo LSP"
-    style={{
-      width: '40px',
-      height: '40px',
-      objectFit: 'contain' // biar proporsional
-    }}
-  />
-  <span style={{
-    fontSize: '20px',
-    fontWeight: '700',
-    color: '#f97316'
-  }}>
-    MyLSP
-  </span>
-</div>
-
-
-      {/* Nav links */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <img
+          src="src/img/image 12.png"
+          alt="Logo LSP"
+          style={{
+            width: "40px",
+            height: "40px",
+            objectFit: "contain",
+          }}
+        />
+        <span
+          style={{
+            fontSize: "20px",
+            fontWeight: "700",
+            color: "#f97316",
+          }}
+        >
+          MyLSP
+        </span>
+      </div>
       <div
         style={{
           display: "flex",
-          gap: "24px", // rapetin dikit
+          gap: "24px",
           alignItems: "center",
         }}
       >
@@ -62,10 +57,11 @@ function Navbar({ onLoginClick }) {
           (name) => (
             <button
               key={name}
+              onClick={name === "Profile" ? onProfileClick : name === "Home" ? undefined : undefined}
               style={{
                 background: "none",
                 border: "none",
-                fontSize: "17px", // besar dan kecilin font
+                fontSize: "17px",
                 color: "#333",
                 cursor: "pointer",
                 fontWeight: "500",
@@ -80,8 +76,6 @@ function Navbar({ onLoginClick }) {
           )
         )}
       </div>
-
-      {/* Login Button */}
       <button
         onClick={onLoginClick}
         style={{
@@ -93,7 +87,7 @@ function Navbar({ onLoginClick }) {
           fontSize: "14px",
           fontWeight: "500",
           cursor: "pointer",
-          boxShadow: "0 6px 10px rgba(0, 0, 0, 0.2)", // bayangan halus
+          boxShadow: "0 6px 10px rgba(0, 0, 0, 0.2)",
           transition: "transform 0.2s ease, box-shadow 0.2s ease",
         }}
         onMouseOver={(e) => {

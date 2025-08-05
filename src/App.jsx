@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Login from "./layouts/Login";
 import Navbar from "./layouts/Navbar";
 import Register from "./layouts/Register";
 import Dashboard from "./layouts/Dashboard";
+import Profil from "./layouts/Profil";
 
 // Image Slider Component
 function ImageSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
-  // Sample slide data - you can replace with actual images
+
   const slides = [
     {
       image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop',
@@ -44,7 +44,6 @@ function ImageSlider() {
     }
   ];
 
-  // Auto slide every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -63,7 +62,6 @@ function ImageSlider() {
       height: '500px',
       overflow: 'hidden'
     }}>
-      {/* Slide Images */}
       <div style={{
         display: 'flex',
         width: `${slides.length * 100}%`,
@@ -86,7 +84,6 @@ function ImageSlider() {
               position: 'relative'
             }}
           >
-            {/* Slide Content */}
             <div style={{
               textAlign: 'center',
               color: 'white',
@@ -138,8 +135,6 @@ function ImageSlider() {
           </div>
         ))}
       </div>
-
-      {/* Dots Navigation */}
       <div style={{
         position: 'absolute',
         bottom: '20px',
@@ -173,6 +168,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
+  const profileRef = useRef(null);
 
   const handleLoginClick = () => {
     setShowLogin(true);
@@ -195,10 +191,18 @@ function App() {
     console.log("Navigating to Dashboard");
   };
 
+  const handleProfileClick = () => {
+    if (profileRef.current) {
+      profileRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+    console.log("Navigating to Profile");
+  };
+
   const handleBackToHome = () => {
     setShowLogin(false);
     setShowRegister(false);
     setShowDashboard(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     console.log("Back to Home");
   };
 
@@ -225,13 +229,27 @@ function App() {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {/* Navigation Bar dari layouts */}
-      <Navbar onLoginClick={handleLoginClick} onRegisterClick={handleRegisterClick} />
-      
-      {/* Image Slider */}
+      <Navbar
+        onLoginClick={handleLoginClick}
+        onRegisterClick={handleRegisterClick}
+        onProfileClick={handleProfileClick}
+      />
       <ImageSlider />
-      
-      {/* Optional: Add content section */}
+
+      {/* Penutup Orange di antara ImageSlider dan Profil */}
+      <div style={{
+        height: '40px',
+        backgroundColor: '#f97316',
+        width: '100%',
+        boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+      }} />
+
+      {/* Profil */}
+      <div ref={profileRef} style={{ padding: '20px 40px 60px 40px' }}>
+        <Profil />
+      </div>
+
+      {/* Section Sertifikasi */}
       <div style={{
         padding: '60px 40px',
         textAlign: 'center',
@@ -254,6 +272,7 @@ function App() {
           Kami berkomitmen untuk memberikan sertifikasi kompetensi profesional yang berkualitas tinggi
           untuk meningkatkan daya saing sumber daya manusia Indonesia.
         </p>
+        {/* button dashboard */}
         <button
           onClick={handleDashboardClick}
           style={{
@@ -271,8 +290,27 @@ function App() {
         >
           Mulai Sertifikasi
         </button>
+        {/*  button regis */}
+        <button
+          onClick={handleRegisterClick}
+          style={{
+            padding: '15px 30px',
+            backgroundColor: '#2C94FF',
+            color: 'white',
+            border: 'none',
+            borderRadius: '25px',
+            fontSize: '18px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 15px rgba(249, 115, 22, 0.3)',
+            transition: 'all 0.3s ease'
+          }}
+        >
+          Register
+        </button>
       </div>
 
+      {/* Global Style Reset */}
       <style jsx>{`
         * {
           margin: 0;

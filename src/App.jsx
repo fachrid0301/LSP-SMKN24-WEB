@@ -11,7 +11,7 @@ function ImageSlider() {
 
   const slides = [
     {
-      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop',
+      image: 'src/img/navbar_lsp.jpg',
       title: 'LAUNCHING DAN PENYERAHAN',
       subtitle: 'SERTIFIKAT KOMPETENSI',
       organization: 'LEMBAGA SERTIFIKASI PROFESI',

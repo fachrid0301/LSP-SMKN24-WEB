@@ -5,6 +5,7 @@ import Register from "./layouts/Register";
 import Dashboard from "./layouts/Dashboard";
 import Profil from "./layouts/Profil";
 import MengapaKami from "./layouts/MengapaKami";
+import Skema from "./layouts/Skema";
 
 // Image Slider Component
 function ImageSlider() {
@@ -171,6 +172,7 @@ function App() {
   const [showDashboard, setShowDashboard] = useState(false);
   const profileRef = useRef(null);
   const mengapaKamiRef = useRef(null);
+  const skemaRef = useRef(null);
 
   const handleLoginClick = () => {
     setShowLogin(true);
@@ -205,6 +207,13 @@ function App() {
       mengapaKamiRef.current.scrollIntoView({ behavior: 'smooth' });
     }
     console.log("Navigating to Mengapa Kami");
+  };
+
+  const handleSkemaClick = () => {
+    if (skemaRef.current) {
+      skemaRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+    console.log("Navigating to Skema");
   };
 
   const handleBackToHome = () => {
@@ -243,6 +252,7 @@ function App() {
         onRegisterClick={handleRegisterClick}
         onProfileClick={handleProfileClick}
         onMengapaKamiClick={handleMengapaKamiClick}
+        onSkemaClick={handleSkemaClick}
       />
       <ImageSlider />
 
@@ -262,6 +272,11 @@ function App() {
       {/* Mengapa Kami */}
       <div ref={mengapaKamiRef} style={{ padding: '60px 40px' }}>
         <MengapaKami />
+      </div>
+
+      {/* Skema - Mengapa Kami */}
+      <div ref={skemaRef}>
+        <Skema />
       </div>
 
       {/* Section Sertifikasi */}

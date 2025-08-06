@@ -7,7 +7,6 @@ import Profil from "./layouts/Profil";
 import MengapaKami from "./layouts/MengapaKami";
 import Skema from "./layouts/Skema";
 import CariSkema from "./layouts/CariSkema";
-import DataManagementStaff from "./layouts/DataManagementStaff"; // Tambahkan ini
 
 // Image Slider Component
 function ImageSlider() {
@@ -258,7 +257,6 @@ function App() {
       />
       <ImageSlider />
 
-      {/* Penutup Orange di antara ImageSlider dan Profil */}
       <div style={{
         height: '40px',
         backgroundColor: '#f97316',
@@ -266,36 +264,26 @@ function App() {
         boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
       }} />
 
-      {/* Profil */}
       <div ref={profileRef} style={{ padding: '20px 40px 60px 40px' }}>
         <Profil />
       </div>
 
-      {/* Mengapa Kami */}
       <div ref={mengapaKamiRef} style={{ padding: '60px 40px' }}>
         <MengapaKami />
       </div>
 
-      {/* Skema - Mengapa Kami */}
       <div ref={skemaRef}>
         <Skema />
       </div>
 
-      {/* Cari Skema */}
       <div style={{ padding: '60px 40px' }}>
         <CariSkema />
-      </div>
-
-      {/* Data Management Staff */}
-      <div style={{ padding: '60px 40px' }}>
-        <DataManagementStaff />
       </div>
 
       {/* Section Sertifikasi */}
       <div style={{
         padding: '60px 40px',
         textAlign: 'center',
-        // background: '#f8f9fa'
       }}>
         <h2 style={{
           fontSize: '36px',
@@ -314,7 +302,6 @@ function App() {
           Kami berkomitmen untuk memberikan sertifikasi kompetensi profesional yang berkualitas tinggi
           untuk meningkatkan daya saing sumber daya manusia Indonesia.
         </p>
-        {/* button dashboard */}
         <button
           onClick={handleDashboardClick}
           style={{
@@ -332,7 +319,6 @@ function App() {
         >
           Mulai Sertifikasi
         </button>
-        {/* button regis */}
         <button
           onClick={handleRegisterClick}
           style={{
@@ -353,7 +339,6 @@ function App() {
         </button>
       </div>
 
-      {/* Global Style Reset */}
       <style jsx>{`
         * {
           margin: 0;

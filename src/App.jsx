@@ -4,6 +4,7 @@ import Navbar from "./layouts/Navbar";
 import Register from "./layouts/Register";
 import Dashboard from "./layouts/Dashboard";
 import Profil from "./layouts/Profil";
+import MengapaKami from "./layouts/MengapaKami";
 
 // Image Slider Component
 function ImageSlider() {
@@ -169,6 +170,7 @@ function App() {
   const [showRegister, setShowRegister] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
   const profileRef = useRef(null);
+  const mengapaKamiRef = useRef(null);
 
   const handleLoginClick = () => {
     setShowLogin(true);
@@ -196,6 +198,13 @@ function App() {
       profileRef.current.scrollIntoView({ behavior: 'smooth' });
     }
     console.log("Navigating to Profile");
+  };
+
+  const handleMengapaKamiClick = () => {
+    if (mengapaKamiRef.current) {
+      mengapaKamiRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+    console.log("Navigating to Mengapa Kami");
   };
 
   const handleBackToHome = () => {
@@ -233,6 +242,7 @@ function App() {
         onLoginClick={handleLoginClick}
         onRegisterClick={handleRegisterClick}
         onProfileClick={handleProfileClick}
+        onMengapaKamiClick={handleMengapaKamiClick}
       />
       <ImageSlider />
 
@@ -247,6 +257,11 @@ function App() {
       {/* Profil */}
       <div ref={profileRef} style={{ padding: '20px 40px 60px 40px' }}>
         <Profil />
+      </div>
+
+      {/* Mengapa Kami */}
+      <div ref={mengapaKamiRef} style={{ padding: '60px 40px' }}>
+        <MengapaKami />
       </div>
 
       {/* Section Sertifikasi */}
@@ -290,7 +305,7 @@ function App() {
         >
           Mulai Sertifikasi
         </button>
-        {/*  button regis */}
+        {/* button regis */}
         <button
           onClick={handleRegisterClick}
           style={{
@@ -303,7 +318,8 @@ function App() {
             fontWeight: '600',
             cursor: 'pointer',
             boxShadow: '0 4px 15px rgba(249, 115, 22, 0.3)',
-            transition: 'all 0.3s ease'
+            transition: 'all 0.3s ease',
+            marginLeft: '20px'
           }}
         >
           Register

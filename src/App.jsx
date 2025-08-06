@@ -295,7 +295,7 @@ function App() {
       <div style={{
         padding: '60px 40px',
         textAlign: 'center',
-        background: '#f8f9fa'
+        // background: '#f8f9fa'
       }}>
         <h2 style={{
           fontSize: '36px',

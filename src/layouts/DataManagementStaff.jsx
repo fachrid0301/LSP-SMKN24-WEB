@@ -3,7 +3,7 @@ import React from 'react';
 function DataManagementStaff() {
   return (
     <div style={{ 
-      backgroundColor: '#f8f9fa', 
+      // backgroundColor: '#f8f9fa', 
       padding: '80px 0',
       width: '100%',
       position: 'relative',

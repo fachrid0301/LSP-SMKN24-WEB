@@ -3,7 +3,6 @@ import React from 'react';
 function Skema() {
   return (
     <div style={{ 
-      backgroundColor: '#f8f9fa', 
       padding: '80px 0',
       width: '100%'
     }}>
@@ -12,52 +11,72 @@ function Skema() {
         margin: '0 auto',
         padding: '0 40px'
       }}>
-        {/* Progress Line */}
-        <div style={{
-          position: 'relative',
-          marginBottom: '40px'
-        }}>
-          <div style={{
-            height: '4px',
-            backgroundColor: '#e9ecef',
-            borderRadius: '2px',
-            position: 'relative'
-          }}>
-            <div style={{
-              height: '100%',
-              width: '100%',
-              backgroundColor: '#ff8503',
-              borderRadius: '2px'
-            }}></div>
-          </div>
-          
-          {/* Progress Dots */}
-          <div style={{
-            position: 'absolute',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-between',
-            paddingLeft: '16.66%',
-            paddingRight: '16.66%',
-            boxSizing: 'border-box'
-          }}>
-            {[1, 2, 3].map((dot) => (
-              <div
-                key={dot}
-                style={{
-                  width: '16px',
-                  height: '16px',
-                  backgroundColor: '#ff8503',
-                  borderRadius: '50%',
-                  border: '3px solid white',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}
-              />
-            ))}
-          </div>
-        </div>
+        <div style={{ position: 'relative', width: '100%', height: '40px', marginBottom: '40px' }}>
+  {/* Progress Line */}
+  <div
+    style={{
+      position: 'absolute',
+      top: '50%',
+      left: 0,
+      right: 0,
+      height: '4px',
+      backgroundColor: '#e9ecef',
+      borderRadius: '2px',
+      transform: 'translateY(-50%)',
+      overflow: 'hidden',
+    }}
+  >
+    <div
+      style={{
+        height: '100%',
+        width: '100%',
+        backgroundColor: '#7EB3E9',
+        borderRadius: '2px',
+      }}
+    />
+  </div>
+
+  {/* Progress Dots */}
+  <div
+    style={{
+      position: 'absolute',
+      top: 'calc(50% + 2px)', // 🎯 Geser dikit ke bawah biar pas tengah garis
+      left: 0,
+      right: 0,
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '0 16.66%',
+      transform: 'translateY(-50%)',
+      boxSizing: 'border-box',
+    }}
+  >
+    {[1, 2, 3].map((dot) => (
+      <div
+        key={dot}
+        style={{
+          width: '24px',
+          height: '24px',
+          backgroundColor: 'rgba(255, 131, 3, 0.4)',
+          borderRadius: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            width: '12px',
+            height: '12px',
+            backgroundColor: '#FF8303',
+            borderRadius: '50%',
+          }}
+        />
+      </div>
+    ))}
+  </div>
+</div>
+
 
         {/* Cards Container */}
         <div style={{
@@ -68,14 +87,15 @@ function Skema() {
         }}>
           {/* Card 1 - 36 SKEMA SERTIFIKASI */}
           <div style={{
-            backgroundColor: '#ff8503',
+            backgroundColor: 'white',
             borderRadius: '12px',
             padding: '40px 30px',
             flex: '1',
             maxWidth: '320px',
-            color: 'white',
+            color: '#333',
             position: 'relative',
-            boxShadow: '0 8px 24px rgba(255, 133, 3, 0.2)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
+            border: '1px solid #838280',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -106,7 +126,8 @@ function Skema() {
               fontWeight: '700',
               marginBottom: '15px',
               lineHeight: '1.3',
-              letterSpacing: '0.5px'
+              letterSpacing: '0.5px',
+              color: '#2c3e50'
             }}>
               36 SKEMA SERTIFIKASI
             </h3>
@@ -114,7 +135,7 @@ function Skema() {
             <p style={{
               fontSize: '0.95rem',
               lineHeight: '1.5',
-              opacity: '0.95',
+              color: '#6c757d',
               margin: '0'
             }}>
               Skema / Profesi / Jabatan / Pekerjaan di bidang bidang Jaminan Sekuriti, Teknologi Informasi dan Konstruksi.
@@ -123,14 +144,15 @@ function Skema() {
 
           {/* Card 2 - 300++ LINK DUDI */}
           <div style={{
-            backgroundColor: '#ff8503',
+            backgroundColor: 'white',
             borderRadius: '12px',
             padding: '40px 30px',
             flex: '1',
             maxWidth: '320px',
-            color: 'white',
+            color: '#333',
             position: 'relative',
-            boxShadow: '0 8px 24px rgba(255, 133, 3, 0.2)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
+            border: '1px solid #838280',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -159,7 +181,8 @@ function Skema() {
               fontWeight: '700',
               marginBottom: '15px',
               lineHeight: '1.3',
-              letterSpacing: '0.5px'
+              letterSpacing: '0.5px',
+              color: '#2c3e50'
             }}>
               300++ LINK DUDI
             </h3>
@@ -167,7 +190,7 @@ function Skema() {
             <p style={{
               fontSize: '0.95rem',
               lineHeight: '1.5',
-              opacity: '0.95',
+              color: '#6c757d',
               margin: '0'
             }}>
               Perusahaan mitra LSP yang siap untuk menerima profesi anda, sehingga ada lebih banyak peluang dari semua bidang pekerjaan.
@@ -176,14 +199,15 @@ function Skema() {
 
           {/* Card 3 - 1000+ SDM TERVERIFIKASI */}
           <div style={{
-            backgroundColor: '#ff8503',
+            backgroundColor: 'white',
             borderRadius: '12px',
             padding: '40px 30px',
             flex: '1',
             maxWidth: '320px',
-            color: 'white',
+            color: '#333',
             position: 'relative',
-            boxShadow: '0 8px 24px rgba(255, 133, 3, 0.2)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
+            border: '1px solid #838280',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -215,7 +239,8 @@ function Skema() {
               fontWeight: '700',
               marginBottom: '15px',
               lineHeight: '1.3',
-              letterSpacing: '0.5px'
+              letterSpacing: '0.5px',
+              color: '#2c3e50'
             }}>
               1000+ SDM TERVERIFIKASI
             </h3>
@@ -223,7 +248,7 @@ function Skema() {
             <p style={{
               fontSize: '0.95rem',
               lineHeight: '1.5',
-              opacity: '0.95',
+              color: '#6c757d',
               margin: '0'
             }}>
               Daftar tenaga kerja profesional yang telah kami sertifikasi, dan siap untuk mendukung kebutuhan SDM tersertifikasi perusahaan Anda.

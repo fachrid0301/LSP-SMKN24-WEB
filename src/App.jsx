@@ -6,6 +6,8 @@ import Dashboard from "./layouts/Dashboard";
 import Profil from "./layouts/Profil";
 import MengapaKami from "./layouts/MengapaKami";
 import Skema from "./layouts/Skema";
+import CariSkema from "./layouts/CariSkema";
+import DataManagementStaff from "./layouts/DataManagementStaff"; // Tambahkan ini
 
 // Image Slider Component
 function ImageSlider() {
@@ -277,6 +279,16 @@ function App() {
       {/* Skema - Mengapa Kami */}
       <div ref={skemaRef}>
         <Skema />
+      </div>
+
+      {/* Cari Skema */}
+      <div style={{ padding: '60px 40px' }}>
+        <CariSkema />
+      </div>
+
+      {/* Data Management Staff */}
+      <div style={{ padding: '60px 40px' }}>
+        <DataManagementStaff />
       </div>
 
       {/* Section Sertifikasi */}

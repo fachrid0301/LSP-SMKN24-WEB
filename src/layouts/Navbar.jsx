@@ -36,14 +36,9 @@ function Navbar({ onLoginClick, onRegisterClick, onProfileClick }) {
             objectFit: "contain",
           }}
         />
-        <span
-          style={{
-            fontSize: "20px",
-            fontWeight: "700",
-            color: "#f97316",
-          }}
-        >
-          MyLSP
+        <span style={{ fontSize: "20px", fontWeight: "700" }}>
+          <span style={{ color: "#FE9C54" }}>My</span>
+          <span style={{ color: "#FF8303" }}>LSP</span>
         </span>
       </div>
       <div
@@ -57,7 +52,13 @@ function Navbar({ onLoginClick, onRegisterClick, onProfileClick }) {
           (name) => (
             <button
               key={name}
-              onClick={name === "Profile" ? onProfileClick : name === "Home" ? undefined : undefined}
+              onClick={
+                name === "Profile"
+                  ? onProfileClick
+                  : name === "Home"
+                  ? undefined
+                  : undefined
+              }
               style={{
                 background: "none",
                 border: "none",

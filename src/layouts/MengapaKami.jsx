@@ -1,179 +1,141 @@
 import React from 'react';
+import gambar from '/src/img/kenapakami.jpg';
 
 function MengapaKami() {
   return (
     <div
       style={{
-        fontFamily: "Poppins, sans-serif",
-        padding: "80px 40px",
-        backgroundColor: "#fff",
+        position: 'relative',
+        width: '100vw',
+        height: '350px',
+        backgroundImage: `url(${gambar})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        margin: 0,
+        padding: 0,
+        marginLeft: 'calc(-50vw + 50%)',
       }}
     >
-      {/* Judul Mengapa Kami */}
+      {/* Overlay orange semi-transparan di seluruh gambar */}
       <div
         style={{
-          background: `linear-gradient(to right, #2C94FF, #00C4FF), url('/src/img/kenapakami.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundBlendMode: 'overlay',
-          padding: "20px",
-          borderRadius: "10px",
-          marginBottom: "40px",
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(255, 131, 3, 0.7)',
+        }}
+      />
+
+      {/* Overlay biru di pojok kiri */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '600px',
+          height: '350px',
+          background: 'linear-gradient(135deg, #4A90E2 0%, #357ABD 100%)',
+          clipPath: 'polygon(0 0, 70% 0, 100% 100%, 0 100%)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          padding: '40px 50px',
+          boxSizing: 'border-box',
+          zIndex: 2,
         }}
       >
         <h2
           style={{
-            fontSize: "36px",
-            fontWeight: "700",
-            color: "#fff",
-            textAlign: "center",
-            margin: 0,
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+            color: 'white',
+            fontSize: '2.4rem',
+            fontWeight: 'bold',
+            margin: '0 0 20px 0',
+            lineHeight: '1.2',
           }}
         >
           Mengapa Kami?
         </h2>
+        
         <p
           style={{
-            fontSize: "16px",
-            color: "#fff",
-            textAlign: "center",
-            margin: "10px 0 0",
-            textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+            color: 'white',
+            fontSize: '1rem',
+            lineHeight: '1.5',
+            margin: 0,
+            opacity: 0.95,
+            maxWidth: '400px',
           }}
         >
-          Karenom komitmen kami untuk meningkatkan kompetensi dan memberikan pelayanan terbaik dalam bidang teknologi informasi nasional maupun internasional.
+          Karena komitmen kami untuk meningkatkan kebertrimaan Sertifikat Kompetensi oleh industri baik di tingkat nasional maupun internasional.
         </p>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "20px",
-            marginTop: "20px",
-            color: "#fff",
-            fontSize: "20px",
-            fontWeight: "600",
-            textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
-          }}
-        >
-          <span>16,533 Asesi</span>
-          <span>218 Asesor</span>
-          <span>35 Skema</span>
-          <span>103 TUK</span>
-        </div>
       </div>
 
-      {/* Proses Sertifikasi */}
+      {/* Statistik di tengah bagian kanan - GAP DIPERBESAR */}
       <div
         style={{
-          textAlign: "center",
-          marginBottom: "40px",
+          position: 'absolute',
+          top: '50%',
+          right: '50px',
+          transform: 'translateY(-50%)',
+          display: 'flex',
+          gap: '60px', // Diperbesar dari 40px ke 60px
+          zIndex: 3,
         }}
       >
-        <h3
-          style={{
-            fontSize: "24px",
-            fontWeight: "600",
-            color: "#111",
-            marginBottom: "20px",
-          }}
-        >
-          UJI SERTIFIKASI KOMPETENSI
-        </h3>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-            position: "relative",
-          }}
-        >
+        {[
+          { number: '16,533', label: 'Asesi' },
+          { number: '218', label: 'Asesor' },
+          { number: '35', label: 'Skema' },
+          { number: '103', label: 'TUK' }
+        ].map((item, index) => (
           <div
+            key={index}
             style={{
-              position: "absolute",
-              top: "50%",
-              left: 0,
-              right: 0,
-              height: "2px",
-              backgroundColor: "#ccc",
-              zIndex: 0,
-            }}
-          ></div>
-          <div
-            style={{
-              flex: "1",
-              backgroundColor: "#F5A623",
-              padding: "20px",
-              borderRadius: "10px",
-              color: "#fff",
-              textAlign: "center",
-              position: "relative",
-              zIndex: 1,
+              textAlign: 'center',
+              color: 'white',
             }}
           >
-            <div style={{ fontSize: "24px", marginBottom: "10px" }}>📋</div>
-            <h4 style={{ fontSize: "18px", margin: "0 0 10px" }}>SKEMA SERTIFIKASI</h4>
-            <p style={{ fontSize: "14px", margin: 0 }}>
-              Pelaksanaan uji kompetensi berdasarkan skema sertifikasi yang telah disusun oleh BNSP.
-            </p>
+            <div
+              style={{
+                fontSize: '2.2rem',
+                fontWeight: '800',
+                marginBottom: '5px',
+                textShadow: '3px 3px 6px rgba(0,0,0,0.8)',
+              }}
+            >
+              {item.number}
+            </div>
+            <div
+              style={{
+                fontSize: '1rem',
+                fontWeight: '600',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
+              }}
+            >
+              {item.label}
+            </div>
           </div>
-          <div
-            style={{
-              width: "20px",
-              height: "20px",
-              backgroundColor: "#F5A623",
-              borderRadius: "50%",
-              position: "relative",
-              zIndex: 1,
-            }}
-          ></div>
-          <div
-            style={{
-              flex: "1",
-              backgroundColor: "#F5A623",
-              padding: "20px",
-              borderRadius: "10px",
-              color: "#fff",
-              textAlign: "center",
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            <div style={{ fontSize: "24px", marginBottom: "10px" }}>🔗</div>
-            <h4 style={{ fontSize: "18px", margin: "0 0 10px" }}>300 + LINK DUDI</h4>
-            <p style={{ fontSize: "14px", margin: 0 }}>
-              Penyediaan link DUDI untuk meningkatkan kompetensi tenaga kerja profesional dan menciptakan peluang kerja.
-            </p>
-          </div>
-          <div
-            style={{
-              width: "20px",
-              height: "20px",
-              backgroundColor: "#F5A623",
-              borderRadius: "50%",
-              position: "relative",
-              zIndex: 1,
-            }}
-          ></div>
-          <div
-            style={{
-              flex: "1",
-              backgroundColor: "#F5A623",
-              padding: "20px",
-              borderRadius: "10px",
-              color: "#fff",
-              textAlign: "center",
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            <div style={{ fontSize: "24px", marginBottom: "10px" }}>💻</div>
-            <h4 style={{ fontSize: "18px", margin: "0 0 10px" }}>1000 + SOM TERVERIFIKASI</h4>
-            <p style={{ fontSize: "14px", margin: 0 }}>
-              Dukungan tenaga profesional yang terverifikasi oleh LSP untuk memproses data Digital Skill industri.
-            </p>
-          </div>
-        </div>
+        ))}
+      </div>
+
+      {/* Teks "UJI SERTIFIKASI KOMPETENSI" di bagian paling bawah */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          zIndex: 3,
+        }}
+      >
+     
       </div>
     </div>
   );

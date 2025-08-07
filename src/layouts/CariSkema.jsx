@@ -71,34 +71,6 @@ function CariSkema() {
             marginBottom: "60px",
           }}
         >
-          {/* More Detail Button */}
-          <div style={{ textAlign: "right", marginBottom: "20px" }}>
-            <button
-              onClick={handleMoreDetail}
-              style={{
-                backgroundColor: "transparent",
-                color: "#2196f3",
-                border: "2px solid #2196f3",
-                borderRadius: "25px",
-                padding: "8px 20px",
-                fontSize: "0.9rem",
-                fontWeight: "500",
-                cursor: "pointer",
-                transition: "all 0.3s ease"
-              }}
-              onMouseOver={(e) => {
-                e.target.style.backgroundColor = "#2196f3";
-                e.target.style.color = "white";
-              }}
-              onMouseOut={(e) => {
-                e.target.style.backgroundColor = "transparent";
-                e.target.style.color = "#2196f3";
-              }}
-            >
-              More Detail
-            </button>
-          </div>
-
           <h1 style={{
             fontSize: '2.5rem',
             fontWeight: '700',
@@ -113,6 +85,33 @@ function CariSkema() {
 
           {/* Cards Container */}
           <div style={{ position: "relative" }}>
+            {/* More Detail Button */}
+            <div style={{ textAlign: "right", marginBottom: "20px" }}>
+              <button
+                onClick={handleMoreDetail}
+                style={{
+                  backgroundColor: "transparent",
+                  color: "#2196f3",
+                  border: "2px solid #2196f3",
+                  borderRadius: "25px",
+                  padding: "8px 20px",
+                  fontSize: "0.9rem",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease"
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = "#2196f3";
+                  e.target.style.color = "white";
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = "transparent";
+                  e.target.style.color = "#2196f3";
+                }}
+              >
+                More Detail
+              </button>
+            </div>
             {/* Cards Wrapper */}
             <div
               style={{
@@ -163,15 +162,18 @@ function CariSkema() {
                         e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
                       }}
                     >
-                      {/* Image */}
+                      {/* Image with Text Overlay */}
                       <div
                         style={{
-                          height: '70%',
+                          height: '100%',
                           backgroundImage: `url(${item.image})`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
-                          position: 'relative'
+                          position: 'relative',
+                          display: 'flex',
+                          alignItems: 'flex-end',
+                          justifyContent: 'center'
                         }}
                       >
                         <div
@@ -184,24 +186,23 @@ function CariSkema() {
                             background: 'linear-gradient(to bottom, transparent 0%, rgba(196, 196, 196, 0.8) 70%, rgba(131, 130, 128, 0.9) 100%)'
                           }}
                         />
-                      </div>
 
-                      {/* Text */}
-                      <div
-                        style={{
-                          padding: '15px',
-                          fontSize: '1rem',
-                          fontWeight: '600',
-                          color: '#2c3e50',
-                          textAlign: 'center',
-                          height: '30%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          backgroundColor: 'white'
-                        }}
-                      >
-                        {item.title}
+                        {/* Text */}
+                        <div
+                          style={{
+                            padding: '20px',
+                            fontSize: '1.2rem',
+                            fontWeight: '700',
+                            color: 'white',
+                            textAlign: 'center',
+                            position: 'relative',
+                            zIndex: 2,
+                            // textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
+                            marginBottom: '10px'
+                          }}
+                        >
+                          {item.title}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -228,8 +229,8 @@ function CariSkema() {
                       width: '12px',
                       height: '12px',
                       borderRadius: '50%',
-                      border: currentIndex === index ? '2px solid #2196f3' : '2px solid #ccc',
-                      backgroundColor: currentIndex === index ? '#2196f3' : 'transparent',
+                      border: currentIndex === index ? '2px solid #000000' : '2px solid #ccc',
+                      backgroundColor: currentIndex === index ? '#000000' : 'transparent',
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
                       outline: 'none'

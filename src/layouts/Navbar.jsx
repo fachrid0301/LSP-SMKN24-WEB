@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-function Navbar({ onLoginClick, onRegisterClick, onProfileClick }) {
+function Navbar({ onNavClick, onLoginClick }) {
   return (
     <nav
       style={{
@@ -52,13 +50,7 @@ function Navbar({ onLoginClick, onRegisterClick, onProfileClick }) {
           (name) => (
             <button
               key={name}
-              onClick={
-                name === "Profile"
-                  ? onProfileClick
-                  : name === "Home"
-                  ? undefined
-                  : undefined
-              }
+              onClick={() => onNavClick(name.toLowerCase())}
               style={{
                 background: "none",
                 border: "none",

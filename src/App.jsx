@@ -7,6 +7,7 @@ import Profil from "./layouts/Profil";
 import MengapaKami from "./layouts/MengapaKami";
 import Skema from "./layouts/Skema";
 import CariSkema from "./layouts/CariSkema";
+import Footer from "./layouts/FooterPage";
 
 // Image Slider Component
 function ImageSlider() {
@@ -338,6 +339,9 @@ function App() {
           Register
         </button>
       </div>
+
+      {/* Footer Component */}
+      <Footer />
 
       <style jsx>{`
         * {

@@ -1,136 +1,154 @@
-function Profil() {
-  return (
-    <div
-      style={{
-        fontFamily: "Poppins, sans-serif",
-        padding: "80px 40px",
-        backgroundColor: "#fff",
-      }}
-    >
-      {/* Judul PROFILE */}
-      <h2
-        style={{
-          fontSize: "36px",
-          fontWeight: "700",
-          color: "#111",
-          textAlign: "center",
-          marginBottom: "60px",
-        }}
-      >
-        PROFILE
-      </h2>
+import { useState } from 'react';
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "40px",
-        }}
-      >
+function Login() {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    nik: '',
+    email: ''
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = () => {
+    console.log('Login data:', formData);
+  };
+
+  return (
+    <div style={{
+      minHeight: '100vh',
+      height: '100vh',
+      backgroundImage: "url('src/img/ADM_LOGIN.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: 'system-ui, -apple-system, sans-serif',
+      padding: '20px',
+      margin: '0',
+      width: '100vw',
+      position: 'relative'
+    }}>
+      <div style={{
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(10px)',
+        padding: '40px',
+        borderRadius: '20px',
+        width: '400px',
+        maxWidth: '90vw',
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1), 0 0 80px rgba(255, 255, 255, 0.1)',
+        textAlign: 'center',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        position: 'relative',
+        zIndex: 1
+      }}>
+        <h1 style={{
+          fontSize: '28px',
+          fontWeight: '600',
+          color: '#333',
+          marginBottom: '8px',
+          letterSpacing: '-0.5px'
+        }}>
+          Sign in
+        </h1>
         
-        <div style={{ flex: "1 1 300px", textAlign: "center" }}>
-          <img
-            src="src/img/profile_lsp.png"
-            alt="Profile"
+        <p style={{
+          fontSize: '14px',
+          color: '#666',
+          marginBottom: '30px',
+          fontWeight: '400'
+        }}>
+          Sign in your account
+        </p>
+
+        {/* Email */}
+        <div style={{ marginBottom: '20px', textAlign: 'left' }}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleInputChange}
             style={{
-              width: "100%",
-              maxWidth: "500px", 
-              height: "auto",
-              display: "block",
-              margin: "0 auto",
+              width: '100%',
+              padding: '16px 20px',
+              border: 'none',
+              borderBottom: '2px solid #e5e7eb',
+              fontSize: '16px',
+              backgroundColor: 'transparent',
+              outline: 'none',
+              fontFamily: 'inherit',
+              color: '#333',
+              transition: 'border-color 0.3s ease'
             }}
+            onFocus={(e) => e.target.style.borderBottomColor = '#f97316'}
+            onBlur={(e) => e.target.style.borderBottomColor = '#e5e7eb'}
           />
         </div>
 
-        {/* Teks kanan */}
-        <div style={{ flex: "1 1 400px" }}>
-          <div
+        {/* Password */}
+        <div style={{ marginBottom: '30px', textAlign: 'left' }}>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleInputChange}
             style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "16px",
+              width: '100%',
+              padding: '16px 20px',
+              border: 'none',
+              borderBottom: '2px solid #e5e7eb',
+              fontSize: '16px',
+              backgroundColor: 'transparent',
+              outline: 'none',
+              fontFamily: 'inherit',
+              color: '#333',
+              transition: 'border-color 0.3s ease'
             }}
-          >
-            <h3
-              style={{
-                fontSize: "24px",
-                fontWeight: "600",
-                color: "#111",
-                margin: 0,
-                paddingBottom: "6px",
-                marginRight: "10px",
-              }}
-            >
-              Tentang Kami
-            </h3>
-            <div
-              style={{
-                flex: 1,
-                height: "2px",
-                backgroundColor: "#ccc",
-                marginBottom: "6px",
-              }}
-            ></div>
-          </div>
-          <p
-            style={{
-              fontSize: "16px",
-              color: "#333",
-              marginBottom: "12px",
-              lineHeight: "1.6",
-              textAlign: "justify",
-            }}
-          >
-            Salah satu tujuan Pemerintah Indonesia adalah mendorong percepatan
-            pengakuan sertifikasi kompetensi kerja secara berkelanjutan pada
-            bidang profesi Teknologi Informasi dan Komunikasi yang
-            infrastrukturnya telah siap untuk melaksanakan proses sertifikasi.
-          </p>
-          <p
-            style={{
-              fontSize: "16px",
-              color: "#333",
-              marginBottom: "20px",
-              lineHeight: "1.6",
-              textAlign: "justify",
-            }}
-          >
-            Untuk merealisasikan percepatan pelaksanaan sertifikasi kompetensi,
-            Badan Nasional Sertifikasi Profesi (BNSP) telah memberikan lisensi
-            kepada Lembaga Sertifikasi Profesi Media Informatika pada tanggal 25
-            April 2022 Nomor BNSP-LSP-2121-ID Surat Keputusan
-            KEP.0868/BNSP/IV/2022 dan berlaku hingga 25 April 2027.
-          </p>
-          <button
-            style={{
-              backgroundColor: "white",
-              border: "5px solid #2C94FF",
-              color: "#2C94FF",
-              padding: "12px 24px",
-              fontWeight: "600",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              fontSize: "14px",
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = "#2C94FF";
-              e.target.style.color = "white";
-              e.target.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = "white";
-              e.target.style.color = "#2C94FF";
-              e.target.style.transform = "translateY(0)";
-            }}
-          >
-            Learn More &gt;
-          </button>
+            onFocus={(e) => e.target.style.borderBottomColor = '#f97316'}
+            onBlur={(e) => e.target.style.borderBottomColor = '#e5e7eb'}
+          />
         </div>
+
+        {/* Submit Button */}
+        <button
+          onClick={handleSubmit}
+          style={{
+            width: '100%',
+            padding: '16px',
+            background: 'linear-gradient(135deg, #ff7f50, #ff6b35)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '25px',
+            fontSize: '16px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 4px 15px rgba(255, 107, 53, 0.4)',
+            letterSpacing: '0.5px'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.transform = 'translateY(-2px)';
+            e.target.style.boxShadow = '0 6px 20px rgba(255, 107, 53, 0.6)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.transform = 'translateY(0)';
+            e.target.style.boxShadow = '0 4px 15px rgba(255, 107, 53, 0.4)';
+          }}
+        >
+          Sign in
+        </button>
       </div>
     </div>
   );
 }
 
-export default Profil;
+export default Login;

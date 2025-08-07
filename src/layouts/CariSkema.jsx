@@ -1,36 +1,57 @@
 import React, { useState } from "react";
 
 function CariSkema() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Data untuk setiap card dengan gambar dan judul yang berbeda
   const cardData = [
     {
       id: 1,
-      title: "Contoh 1",
-      image: "src/img/COMPANY.jpeg"
+      title: "DATA MANAGEMENT STAFF",
+      image: "src/img/lab.png"
     },
     {
       id: 2,
-      title: "Contoh 2",
-      image: "src/img/navbar_lsp.jpg"
+      title: "DIGITAL MARKETING",
+      image: "src/img/lab.png"
     },
     {
       id: 3,
-      title: "Contoh 3",
-      image: "src/img/kenapakami.jpg"
+      title: "DESAINER GRAFIS MUDA", 
+      image: "src/img/lab.png"
     },
     {
       id: 4,
-      title: "Contoh 4x",
-      image: "src/img/COMPANY.jpeg"
+      title: "PENGEMBANG WEB",
+      image: "src/img/lab.png"
+    },
+    {
+      id: 5,
+      title: "ADMINISTRASI SISTEM",
+      image: "src/img/lab.png"
+    },
+    {
+      id: 6,
+      title: "ANALISIS DATA",
+      image: "src/img/lab.png"
     }
   ];
+
+  const handleMoreDetail = () => {
+    alert("Navigasi ke halaman detail akan ditambahkan");
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const cardsPerView = 4;
+  const maxSlides = Math.max(0, cardData.length - cardsPerView);
 
   return (
     <div
       style={{
-        padding: "80px 0",
+        padding: "60px 0",
         width: "100%",
         position: "relative",
       }}
@@ -47,197 +68,176 @@ function CariSkema() {
         {/* Header Section */}
         <div
           style={{
-            textAlign: "center",
-            marginBottom: "100px",
+            marginBottom: "60px",
           }}
         >
-          <h1 style={{
-            fontSize: '3rem',
-            fontWeight: '700',
-            fontFamily: 'Poppins, sans-serif',
-            color: '#000000',
-            marginBottom: '30px',
-            letterSpacing: '-1px'
-          }}>
-            DAFTAR SKEMA SERTIFIKASI
-          </h1>
-
-          {/* Search Bar */}
-          <div
-            style={{
-              maxWidth: "500px",
-              margin: "0 auto",
-              position: "relative",
-              display: "flex",
-              backgroundColor: "white",
-              border: "2px solid #7EB3E9",
-              borderRadius: "50px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-              overflow: "hidden"
-            }}
-          >
-            <input
-              type="text"
-              placeholder="Cari skema sertifikasi..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              style={{
-                flex: "1",
-                padding: "15px 20px",
-                fontSize: "1.1rem",
-                border: "none",
-                outline: "none",
-                backgroundColor: "transparent"
-              }}
-            />
+          {/* More Detail Button */}
+          <div style={{ textAlign: "right", marginBottom: "20px" }}>
             <button
+              onClick={handleMoreDetail}
               style={{
-                backgroundColor: "#2196f3",
-                color: "white",
-                border: "none",
-                borderRadius: "50px",
-                padding: "15px 30px",
-                fontSize: "1rem",
-                fontWeight: "600",
+                backgroundColor: "transparent",
+                color: "#2196f3",
+                border: "2px solid #2196f3",
+                borderRadius: "25px",
+                padding: "8px 20px",
+                fontSize: "0.9rem",
+                fontWeight: "500",
                 cursor: "pointer",
                 transition: "all 0.3s ease"
               }}
               onMouseOver={(e) => {
-                e.target.style.backgroundColor = "#1976d2";
+                e.target.style.backgroundColor = "#2196f3";
+                e.target.style.color = "white";
               }}
               onMouseOut={(e) => {
-                e.target.style.backgroundColor = "#2196f3";
+                e.target.style.backgroundColor = "transparent";
+                e.target.style.color = "#2196f3";
               }}
             >
-              Cari
+              More Detail
             </button>
           </div>
 
-          {/* Scrollable Cards */}
-          <div
-            style={{
-              marginTop: '40px',
-              cursor: 'grab',
-              overflow: 'hidden',
-              position: 'relative',
-            }}
-            onMouseDown={(e) => {
-              const container = e.currentTarget;
-              container.isDown = true;
-              container.startX = e.pageX - container.offsetLeft;
-              container.scrollLeftStart = container.scrollLeft;
-              container.style.cursor = 'grabbing';
-            }}
-            onMouseLeave={(e) => {
-              const container = e.currentTarget;
-              container.isDown = false;
-              container.style.cursor = 'grab';
-            }}
-            onMouseUp={(e) => {
-              const container = e.currentTarget;
-              container.isDown = false;
-              container.style.cursor = 'grab';
-            }}
-            onMouseMove={(e) => {
-              const container = e.currentTarget;
-              if (!container.isDown) return;
-              e.preventDefault();
-              const x = e.pageX - container.offsetLeft;
-              const walk = (x - container.startX) * 1.5;
-              container.scrollLeft = container.scrollLeftStart - walk;
-            }}
-          >
+          <h1 style={{
+            fontSize: '2.5rem',
+            fontWeight: '700',
+            fontFamily: 'Arial, sans-serif',
+            color: '#000000',
+            marginBottom: '40px',
+            letterSpacing: '1px',
+            textAlign: 'center'
+          }}>
+            DAFTAR SKEMA SERTIFIKASI
+          </h1>
+
+          {/* Cards Container */}
+          <div style={{ position: "relative" }}>
+            {/* Cards Wrapper */}
             <div
               style={{
-                display: 'flex',
-                gap: '24px',
-                padding: '10px 10px 30px 10px',
-                overflow: 'visible',
-                width: 'max-content',
+                overflow: "hidden",
+                width: "100%"
               }}
             >
-              {cardData.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    position: 'relative',
-                    flexShrink: 0,
-                  }}
-                >
-                  {/* Shadow Element */}
+              {/* Cards Slider */}
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '20px',
+                  transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)`,
+                  transition: 'transform 0.5s ease',
+                  width: `${(cardData.length / cardsPerView) * 100}%`
+                }}
+              >
+                {cardData.map((item) => (
                   <div
+                    key={item.id}
                     style={{
-                      position: 'absolute',
-                      bottom: '-15px',
-                      left: '10px',
-                      right: '10px',
-                      height: '20px',
-                      background: 'rgba(0,0,0,0.15)',
-                      borderRadius: '50%',
-                      filter: 'blur(8px)',
-                      zIndex: 1
-                    }}
-                  />
-                  
-                  {/* Card */}
-                  <div
-                    style={{
-                      width: '340px',
-                      height: '480px',
-                      borderRadius: '15px',
-                      border: '3px solid #FF8303',
-                      overflow: 'hidden',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      backgroundColor: 'white',
-                      cursor: 'pointer',
-                      position: 'relative',
-                      zIndex: 2
+                      width: `${100 / cardData.length}%`,
+                      minWidth: '280px',
+                      flexShrink: 0,
                     }}
                   >
-                    {/* Image */}
+                    {/* Card */}
                     <div
                       style={{
-                        height: '65%',
-                        backgroundImage: `url(${item.image})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                        position: 'relative'
+                        width: '280px',
+                        height: '400px',
+                        borderRadius: '0px',
+                        overflow: 'hidden',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        backgroundColor: 'white',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        border: '1px solid #e0e0e0'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-5px)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
                       }}
                     >
+                      {/* Image */}
                       <div
                         style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%)'
+                          height: '70%',
+                          backgroundImage: `url(${item.image})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          position: 'relative'
                         }}
-                      />
-                    </div>
+                      >
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: 'linear-gradient(to bottom, transparent 0%, rgba(196, 196, 196, 0.8) 70%, rgba(131, 130, 128, 0.9) 100%)'
+                          }}
+                        />
+                      </div>
 
-                    {/* Text */}
-                    <div
-                      style={{
-                        padding: '20px',
-                        fontSize: '1.1rem',
-                        fontWeight: '600',
-                        color: '#2c3e50',
-                        textAlign: 'center',
-                        height: '35%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      {item.title}
+                      {/* Text */}
+                      <div
+                        style={{
+                          padding: '15px',
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          color: '#2c3e50',
+                          textAlign: 'center',
+                          height: '30%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          backgroundColor: 'white'
+                        }}
+                      >
+                        {item.title}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
+
+            {/* Dots Navigation */}
+            {maxSlides > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: '30px',
+                  gap: '8px'
+                }}
+              >
+                {Array.from({ length: maxSlides + 1 }, (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      borderRadius: '50%',
+                      border: currentIndex === index ? '2px solid #2196f3' : '2px solid #ccc',
+                      backgroundColor: currentIndex === index ? '#2196f3' : 'transparent',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      outline: 'none'
+                    }}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

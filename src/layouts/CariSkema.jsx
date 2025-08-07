@@ -2,43 +2,60 @@ import React, { useState } from "react";
 
 function CariSkema() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
-  // Data untuk setiap card dengan gambar dan judul yang berbeda
+  // Data untuk setiap card dengan gambar, judul, dan deskripsi
   const cardData = [
     {
       id: 1,
       title: "DATA MANAGEMENT STAFF",
-      image: "src/img/lab.png"
+      image: "src/img/lab.png",
+      description: "Skema sertifikasi Data Management Staff adalah skema sertifikasi klaster yang dikembangkan oleh Komite Skema LSP untuk memenuhi kebutuhan sertifikasi kompetensi kerja",
+      buttonText: "Detail"
     },
     {
       id: 2,
       title: "DIGITAL MARKETING",
-      image: "src/img/lab.png"
+      image: "src/img/lab.png",
+      description: "Skema Pemasaran Digital (Digital Marketing) adalah skema sertifikasi klaster yang dikembangkan oleh Komite Skema LSP untuk memenuhi kebutuhan sertifikasi kompetensi kerja",
+      buttonText: "Detail"
     },
     {
       id: 3,
       title: "DESAINER GRAFIS MUDA", 
-      image: "src/img/lab.png"
+      image: "src/img/lab.png",
+      description: "Skema sertifikasi Desainer Grafis Muda adalah skema sertifikasi klaster yang dikembangkan oleh Komite Skema LSP untuk memenuhi kebutuhan sertifikasi kompetensi kerja",
+      buttonText: "Detail"
     },
     {
       id: 4,
       title: "PENGEMBANG WEB",
-      image: "src/img/lab.png"
+      image: "src/img/lab.png",
+      description: "Skema sertifikasi Pengembang Web adalah skema sertifikasi klaster yang dikembangkan oleh Komite Skema LSP untuk memenuhi kebutuhan sertifikasi kompetensi kerja",
+      buttonText: "Detail"
     },
     {
       id: 5,
       title: "ADMINISTRASI SISTEM",
-      image: "src/img/lab.png"
+      image: "src/img/lab.png",
+      description: "Skema sertifikasi Administrasi Sistem adalah skema sertifikasi klaster yang dikembangkan oleh Komite Skema LSP untuk memenuhi kebutuhan sertifikasi kompetensi kerja",
+      buttonText: "Detail"
     },
     {
       id: 6,
       title: "ANALISIS DATA",
-      image: "src/img/lab.png"
+      image: "src/img/lab.png",
+      description: "Skema sertifikasi Analisis Data adalah skema sertifikasi klaster yang dikembangkan oleh Komite Skema LSP untuk memenuhi kebutuhan sertifikasi kompetensi kerja",
+      buttonText: "Detail"
     }
   ];
 
   const handleMoreDetail = () => {
     alert("Navigasi ke halaman detail akan ditambahkan");
+  };
+
+  const handleCardDetail = (cardTitle) => {
+    alert(`Detail untuk ${cardTitle} akan ditambahkan`);
   };
 
   const goToSlide = (index) => {
@@ -151,8 +168,11 @@ function CariSkema() {
                         cursor: 'pointer',
                         boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                        border: '1px solid #e0e0e0'
+                        border: '1px solid #e0e0e0',
+                        position: 'relative'
                       }}
+                      onMouseEnter={() => setHoveredCard(item.id)}
+                      onMouseLeave={() => setHoveredCard(null)}
                       onMouseOver={(e) => {
                         e.currentTarget.style.transform = 'translateY(-5px)';
                         e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
@@ -176,6 +196,7 @@ function CariSkema() {
                           justifyContent: 'center'
                         }}
                       >
+                        {/* Default Gradient Overlay */}
                         <div
                           style={{
                             position: 'absolute',
@@ -183,11 +204,95 @@ function CariSkema() {
                             left: 0,
                             right: 0,
                             bottom: 0,
-                            background: 'linear-gradient(to bottom, transparent 0%, rgba(196, 196, 196, 0.8) 70%, rgba(131, 130, 128, 0.9) 100%)'
+                            background: 'linear-gradient(to bottom, transparent 0%, rgba(196, 196, 196, 0.8) 70%, rgba(131, 130, 128, 0.9) 100%)',
+                            opacity: hoveredCard === item.id ? 0 : 1,
+                            transition: 'opacity 0.3s ease'
                           }}
                         />
 
-                        {/* Text */}
+                        {/* Hover Overlay with Description */}
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: 'linear-gradient(135deg, rgba(128, 128, 128, 0.95) 0%, rgba(96, 96, 96, 0.95) 100%)',
+                            opacity: hoveredCard === item.id ? 1 : 0,
+                            transition: 'opacity 0.3s ease',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            padding: '20px'
+                          }}
+                        >
+                          {/* Title on hover */}
+                          <div
+                            style={{
+                              fontSize: '1.2rem',
+                              fontWeight: '700',
+                              color: 'white',
+                              textAlign: 'left',
+                              marginBottom: '15px',
+                              lineHeight: '1.2'
+                            }}
+                          >
+                            {item.title}
+                          </div>
+
+                          {/* Description */}
+                          <div
+                            style={{
+                              flex: 1,
+                              display: 'flex',
+                              alignItems: 'center'
+                            }}
+                          >
+                            <p
+                              style={{
+                                fontSize: '0.85rem',
+                                color: 'white',
+                                textAlign: 'left',
+                                lineHeight: '1.4',
+                                margin: 0,
+                                opacity: 0.95
+                              }}
+                            >
+                              {item.description}
+                            </p>
+                          </div>
+
+                          {/* Detail Button */}
+                          <div style={{ textAlign: 'center', marginTop: '15px' }}>
+                            <button
+                              onClick={() => handleCardDetail(item.title)}
+                              style={{
+                                backgroundColor: 'transparent',
+                                color: 'white',
+                                border: '2px solid white',
+                                borderRadius: '20px',
+                                padding: '8px 20px',
+                                fontSize: '0.9rem',
+                                fontWeight: '600',
+                                cursor: 'pointer',
+                                transition: 'all 0.3s ease'
+                              }}
+                              onMouseOver={(e) => {
+                                e.target.style.backgroundColor = 'white';
+                                e.target.style.color = '#666';
+                              }}
+                              onMouseOut={(e) => {
+                                e.target.style.backgroundColor = 'transparent';
+                                e.target.style.color = 'white';
+                              }}
+                            >
+                              {item.buttonText}
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Default Title (when not hovered) */}
                         <div
                           style={{
                             padding: '20px',
@@ -197,8 +302,9 @@ function CariSkema() {
                             textAlign: 'center',
                             position: 'relative',
                             zIndex: 2,
-                            // textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
-                            marginBottom: '10px'
+                            marginBottom: '10px',
+                            opacity: hoveredCard === item.id ? 0 : 1,
+                            transition: 'opacity 0.3s ease'
                           }}
                         >
                           {item.title}

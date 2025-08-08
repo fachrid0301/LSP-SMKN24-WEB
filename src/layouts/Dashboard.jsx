@@ -2,451 +2,446 @@ import { useState } from 'react';
 
 function Dashboard() {
   const [activeMenu, setActiveMenu] = useState('Dashboard');
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const menuItems = [
-    { name: 'Dashboard', icon: '⬜' },
-    { name: 'Profile Update', icon: '👤' },
-    { name: 'List Assessment Aktif', icon: '📋' },
-    { name: 'Assessment Diikuti', icon: '📖' }
-  ];
 
   const handleMenuClick = (menuName) => {
-    if (menuName !== activeMenu) {
-      setIsLoading(true);
-      setTimeout(() => {
-        setActiveMenu(menuName);
-        setIsLoading(false);
-      }, 800); // 800ms loading animation
+    if (menuName === 'Logout') {
+      if (confirm('Apakah Anda yakin ingin logout?')) {
+        alert('Logout berhasil!');
+      }
+      return;
     }
+    setActiveMenu(menuName);
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5', fontFamily: 'Inter, sans-serif' }}>
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        @keyframes fadeIn {
-          0% { opacity: 0; }
-          100% { opacity: 1; }
-        }
-        @keyframes slideInUp {
-          0% { 
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          100% { 
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
-      {/* Top Header */}
-      <nav style={{ 
-        backgroundColor: 'white', 
-        padding: '8px 16px',
-        borderBottom: '1px solid #e5e7eb',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000
+    <div style={{ 
+      display: 'flex', 
+      minHeight: '100vh', 
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+    }}>
+      {/* Sidebar */}
+      <div style={{
+        width: '80px',
+        backgroundColor: '#ffffff',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingTop: '20px',
+        paddingBottom: '20px',
+        position: 'relative',
+        borderRadius: '15px',
+        boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
+        margin: '15px',
+        height: 'calc(100vh - 30px)'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            {/* Logo */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginRight: '20px'
-            }}>
-              {/* Logo Image Placeholder */}
-              <img 
-                src="src/img/LOGO_LSP_SMKN_24.jpg" 
-                alt="LSP Logo"
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '8px',
-                  marginRight: sidebarOpen ? '12px' : '0'
-                }}
-              />
-              {sidebarOpen && (
-                <span style={{ 
-                  fontSize: '18px', 
-                  fontWeight: '600', 
-                  color: '#374151'
-                }}>
-                  LSP Media Informatika
-                </span>
-              )}
-            </div>
-            
-            {/* Hamburger Menu */}
-            <button 
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setSidebarOpen(prev => !prev);
-              }}
-              style={{
-                background: 'none',
-                border: 'none',
-                padding: '6px',
-                cursor: 'pointer',
-                borderRadius: '4px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                outline: 'none'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#f3f4f6';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-              }}
-            >
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: '3px',
-                pointerEvents: 'none'
-              }}>
-                <div style={{ 
-                  width: '16px', 
-                  height: '2px', 
-                  backgroundColor: '#374151', 
-                  borderRadius: '1px',
-                  transition: 'all 0.2s ease'
-                }}></div>
-                <div style={{ 
-                  width: '16px', 
-                  height: '2px', 
-                  backgroundColor: '#374151', 
-                  borderRadius: '1px',
-                  transition: 'all 0.2s ease'
-                }}></div>
-                <div style={{ 
-                  width: '16px', 
-                  height: '2px', 
-                  backgroundColor: '#374151', 
-                  borderRadius: '1px',
-                  transition: 'all 0.2s ease'
-                }}></div>
-              </div>
-            </button>
-          </div>
-          
-          {/* Profile Avatar */}
-          <div style={{ position: 'relative' }}>
-            <div 
-              style={{
-                width: '32px',
-                height: '32px',
-                backgroundColor: '#f97316',
-                borderRadius: '50%',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '14px'
-              }}
-              onClick={() => setShowDropdown(!showDropdown)}
-            >
-              R
-            </div>
-            
-            {/* Dropdown Menu */}
-            {showDropdown && (
-              <div 
-                style={{
-                  position: 'absolute',
-                  top: '50px',
-                  right: '0',
-                  backgroundColor: 'white',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '8px',
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-                  minWidth: '160px',
-                  zIndex: 1000
-                }}
-              >
-                <div style={{ padding: '8px 0' }}>
-                  <button 
-                    style={{
-                      width: '100%',
-                      padding: '8px 16px',
-                      border: 'none',
-                      background: 'none',
-                      textAlign: 'left',
-                      fontSize: '14px',
-                      color: '#374151',
-                      cursor: 'pointer'
-                    }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#f3f4f6'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-                  >
-                    Profile
-                  </button>
-                  <button 
-                    style={{
-                      width: '100%',
-                      padding: '8px 16px',
-                      border: 'none',
-                      background: 'none',
-                      textAlign: 'left',
-                      fontSize: '14px',
-                      color: '#374151',
-                      cursor: 'pointer'
-                    }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#f3f4f6'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-                  >
-                    Settings
-                  </button>
-                  <hr style={{ margin: '8px 0', border: 'none', borderTop: '1px solid #e5e7eb' }} />
-                  <button 
-                    style={{
-                      width: '100%',
-                      padding: '8px 16px',
-                      border: 'none',
-                      background: 'none',
-                      textAlign: 'left',
-                      fontSize: '14px',
-                      color: '#dc2626',
-                      cursor: 'pointer'
-                    }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#fef2f2'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-                    onClick={() => {
-                      if (confirm('Apakah Anda yakin ingin logout?')) {
-                        alert('Logout berhasil!');
-                        setShowDropdown(false);
-                      }
-                    }}
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </nav>
-
-      <div style={{ display: 'flex' }}>
-        {/* Sidebar */}
+        {/* Logo Image */}
         <div style={{
-          width: sidebarOpen ? '240px' : '60px',
-          backgroundColor: 'white',
-          minHeight: 'calc(100vh - 57px)',
-          borderRight: '1px solid #e5e7eb',
-          padding: '16px 0',
-          transition: 'width 0.3s ease',
-          overflow: 'hidden'
+          marginBottom: '20px',
+          textAlign: 'center'
         }}>
-          {menuItems.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => handleMenuClick(item.name)}
-              style={{
-                padding: sidebarOpen ? '10px 20px' : '10px',
-                margin: sidebarOpen ? '3px 12px' : '3px 6px',
-                borderRadius: sidebarOpen ? '24px' : '10px',
-                cursor: 'pointer',
-                backgroundColor: activeMenu === item.name ? '#8b5cf6' : 'transparent',
-                color: activeMenu === item.name ? 'white' : '#6b7280',
-                fontWeight: activeMenu === item.name ? '500' : '400',
-                fontSize: '13px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: sidebarOpen ? 'flex-start' : 'center',
-                transition: 'all 0.2s ease',
-                whiteSpace: 'nowrap',
-                opacity: isLoading && activeMenu !== item.name ? 0.5 : 1
-              }}
-              onMouseEnter={(e) => {
-                if (activeMenu !== item.name && !isLoading) {
-                  e.target.style.backgroundColor = '#f3f4f6';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (activeMenu !== item.name) {
-                  e.target.style.backgroundColor = 'transparent';
-                }
-              }}
-            >
-              <div style={{
-                width: '16px',
-                height: '16px',
-                backgroundColor: activeMenu === item.name ? 'rgba(255,255,255,0.3)' : '#8b5cf6',
-                borderRadius: '3px',
-                marginRight: sidebarOpen ? '10px' : '0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}>
-                <div style={{
-                  width: '6px',
-                  height: '6px',
-                  backgroundColor: 'white',
-                  borderRadius: '1px'
-                }}></div>
-              </div>
-              {sidebarOpen && (
-                <span style={{ overflow: 'hidden' }}>{item.name}</span>
-              )}
-            </div>
-          ))}
+          <img 
+            src="src/img/image 12.png"
+            alt="LSP Logo"
+            style={{
+              width: '50px',
+              height: '50px',
+              borderRadius: '12px',
+              objectFit: 'cover'
+            }}
+          />
         </div>
 
-        {/* Main Content */}
-        <div style={{ 
-          flex: 1, 
-          padding: '30px',
-          backgroundColor: '#f5f5f5',
-          transition: 'margin-left 0.3s ease',
-          position: 'relative'
-        }}>
-          {/* Loading Overlay */}
-          {isLoading && (
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(245, 245, 245, 0.8)',
-              backdropFilter: 'blur(4px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 100,
-              animation: 'fadeIn 0.3s ease'
-            }}>
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '20px'
-              }}>
-                {/* Spinning Loader */}
-                <div style={{
-                  width: '40px',
-                  height: '40px',
-                  border: '4px solid #e5e7eb',
-                  borderTop: '4px solid #8b5cf6',
-                  borderRadius: '50%',
-                  animation: 'spin 1s linear infinite'
-                }}></div>
-                <div style={{
-                  color: '#6b7280',
-                  fontSize: '16px',
-                  fontWeight: '500'
-                }}>
-                  Loading...
-                </div>
-              </div>
-            </div>
-          )}
+        {/* Logo Icon - Home */}
+        <div style={{
+          width: '50px',
+          height: '50px',
+          backgroundColor: activeMenu === 'Dashboard' ? '#ff6b35' : '#f0f0f0',
+          borderRadius: '15px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '30px',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onClick={() => handleMenuClick('Dashboard')}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" 
+                  stroke={activeMenu === 'Dashboard' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <path d="M9 22V12H15V22" 
+                  stroke={activeMenu === 'Dashboard' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+          </svg>
+        </div>
 
-          {/* Welcome Header */}
-          <div style={{ marginBottom: '30px' }}>
-            <h1 style={{ 
-              fontSize: '28px', 
-              fontWeight: '600', 
-              color: '#6b7280',
-              margin: 0,
-              textAlign: 'center',
-              opacity: isLoading ? 0.3 : 1,
-              transition: 'opacity 0.3s ease'
-            }}>
-              {activeMenu === 'Dashboard' && 'Hello, Welcome Rian Pioriandana'}
-              {activeMenu === 'Profile Update' && 'Update Your Profile'}
-              {activeMenu === 'List Assessment Aktif' && 'Active Assessments'}
-              {activeMenu === 'Assessment Diikuti' && 'Joined Assessments'}
-            </h1>
-          </div>
+        {/* Profile Icon */}
+        <div style={{
+          width: '50px',
+          height: '50px',
+          backgroundColor: activeMenu === 'Profile' ? '#ff6b35' : 'transparent',
+          borderRadius: '15px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '30px',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onClick={() => handleMenuClick('Profile')}
+        onMouseEnter={(e) => {
+          if (activeMenu !== 'Profile') {
+            e.currentTarget.style.backgroundColor = '#f5f5f5';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (activeMenu !== 'Profile') {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }
+        }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" 
+                  stroke={activeMenu === 'Profile' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <circle cx="12" cy="7" r="4" 
+                    stroke={activeMenu === 'Profile' ? 'white' : '#666'} 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"/>
+          </svg>
+        </div>
 
-          {/* Content based on active menu */}
-          {!isLoading && (
-            <div style={{
-              animation: 'slideInUp 0.5s ease',
-              opacity: 1
-            }}>
-              {activeMenu === 'Dashboard' && (
-                <div style={{ textAlign: 'center', color: '#6b7280' }}>
-                  <p>Welcome to your dashboard! Here you can see an overview of your activities.</p>
-                </div>
-              )}
-              {activeMenu === 'Profile Update' && (
-                <div style={{ textAlign: 'center', color: '#6b7280' }}>
-                  <p>Update your personal information and preferences here.</p>
-                  <div style={{
-                    maxWidth: '400px',
-                    margin: '0 auto',
-                    padding: '20px',
-                    backgroundColor: 'white',
-                    borderRadius: '12px',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                  }}>
-                    Profile update form would go here...
-                  </div>
-                </div>
-              )}
-              {activeMenu === 'List Assessment Aktif' && (
-                <div style={{ textAlign: 'center', color: '#6b7280' }}>
-                  <p>View all your active assessments and their status.</p>
-                </div>
-              )}
-              {activeMenu === 'Assessment Diikuti' && (
-                <div style={{ textAlign: 'center', color: '#6b7280' }}>
-                  <p>See all assessments you have participated in.</p>
-                </div>
-              )}
-            </div>
-          )}
+        {/* List Icon */}
+        <div style={{
+          width: '50px',
+          height: '50px',
+          backgroundColor: activeMenu === 'Assessment' ? '#ff6b35' : 'transparent',
+          borderRadius: '15px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '30px',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onClick={() => handleMenuClick('Assessment')}
+        onMouseEnter={(e) => {
+          if (activeMenu !== 'Assessment') {
+            e.currentTarget.style.backgroundColor = '#f5f5f5';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (activeMenu !== 'Assessment') {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }
+        }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <line x1="8" y1="6" x2="21" y2="6" 
+                  stroke={activeMenu === 'Assessment' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <line x1="8" y1="12" x2="21" y2="12" 
+                  stroke={activeMenu === 'Assessment' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <line x1="8" y1="18" x2="21" y2="18" 
+                  stroke={activeMenu === 'Assessment' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <line x1="3" y1="6" x2="3.01" y2="6" 
+                  stroke={activeMenu === 'Assessment' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <line x1="3" y1="12" x2="3.01" y2="12" 
+                  stroke={activeMenu === 'Assessment' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <line x1="3" y1="18" x2="3.01" y2="18" 
+                  stroke={activeMenu === 'Assessment' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+          </svg>
+        </div>
 
-          {/* Footer */}
-          <div style={{ 
-            textAlign: 'center', 
-            marginTop: 'auto',
-            paddingTop: '150px',
-            opacity: isLoading ? 0.3 : 1,
-            transition: 'opacity 0.3s ease'
-          }}>
-            <p style={{ 
-              color: '#9ca3af', 
-              fontSize: '14px',
-              margin: 0
-            }}>
-              Copyright © LSP Media Informatika 2022
-            </p>
-          </div>
+        {/* Book Icon */}
+        <div style={{
+          width: '50px',
+          height: '50px',
+          backgroundColor: activeMenu === 'Reports' ? '#ff6b35' : 'transparent',
+          borderRadius: '15px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: 'auto',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onClick={() => handleMenuClick('Reports')}
+        onMouseEnter={(e) => {
+          if (activeMenu !== 'Reports') {
+            e.currentTarget.style.backgroundColor = '#f5f5f5';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (activeMenu !== 'Reports') {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }
+        }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20" 
+                  stroke={activeMenu === 'Reports' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z" 
+                  stroke={activeMenu === 'Reports' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+          </svg>
+        </div>
+
+        {/* Bottom Profile Icon */}
+        <div style={{
+          width: '50px',
+          height: '50px',
+          backgroundColor: activeMenu === 'Settings' ? '#ff6b35' : 'transparent',
+          borderRadius: '15px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '20px',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onClick={() => handleMenuClick('Settings')}
+        onMouseEnter={(e) => {
+          if (activeMenu !== 'Settings') {
+            e.currentTarget.style.backgroundColor = '#f5f5f5';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (activeMenu !== 'Settings') {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }
+        }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" 
+                  stroke={activeMenu === 'Settings' ? 'white' : '#666'} 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <circle cx="12" cy="7" r="4" 
+                    stroke={activeMenu === 'Settings' ? 'white' : '#666'} 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"/>
+          </svg>
+        </div>
+
+        {/* Logout Icon */}
+        <div style={{
+          width: '50px',
+          height: '50px',
+          backgroundColor: 'transparent',
+          borderRadius: '15px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onClick={() => handleMenuClick('Logout')}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = '#f5f5f5';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'transparent';
+        }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" 
+                  stroke="#666" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+            <polyline points="16,17 21,12 16,7" 
+                      stroke="#666" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"/>
+            <line x1="21" y1="12" x2="9" y2="12" 
+                  stroke="#666" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"/>
+          </svg>
         </div>
       </div>
 
-      {/* Click outside to close dropdown */}
-      {showDropdown && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 999
-          }}
-          onClick={() => setShowDropdown(false)}
-        />
-      )}
+      {/* Main Content */}
+      <div style={{ 
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        backgroundColor: '#fafafa'
+      }}>
+        {/* Main Content based on active menu */}
+        {activeMenu === 'Dashboard' && (
+          <div style={{ textAlign: 'center' }}>
+            <h1 style={{
+              fontSize: '6rem',
+              fontWeight: '900',
+              color: '#1a1a1a',
+              margin: 0,
+              letterSpacing: '-0.02em',
+              fontFamily: 'Georgia, serif'
+            }}>
+              Halo Sobat!
+            </h1>
+          </div>
+        )}
+
+        {activeMenu === 'Profile' && (
+          <div style={{ 
+            maxWidth: '600px',
+            width: '100%',
+            padding: '40px'
+          }}>
+            <h2 style={{
+              fontSize: '2.5rem',
+              fontWeight: '700',
+              color: '#1a1a1a',
+              marginBottom: '30px',
+              textAlign: 'center'
+            }}>
+              Profile Settings
+            </h2>
+            <div style={{
+              backgroundColor: 'white',
+              borderRadius: '12px',
+              padding: '40px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
+            }}>
+              <div style={{ marginBottom: '25px' }}>
+                <label style={{ 
+                  display: 'block', 
+                  marginBottom: '8px', 
+                  fontWeight: '600',
+                  color: '#1a1a1a'
+                }}>
+                  Nama Lengkap
+                </label>
+                <input 
+                  type="text" 
+                  defaultValue="Rian Pioriandana"
+                  style={{
+                    width: '100%',
+                    padding: '15px',
+                    border: '1px solid #ddd',
+                    borderRadius: '8px',
+                    fontSize: '16px',
+                    outline: 'none',
+                    transition: 'border-color 0.3s ease'
+                  }}
+                />
+              </div>
+              <button style={{
+                width: '100%',
+                padding: '15px',
+                backgroundColor: '#ff6b35',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}>
+                Update Profile
+              </button>
+            </div>
+          </div>
+        )}
+
+        {activeMenu === 'Assessment' && (
+          <div style={{ textAlign: 'center' }}>
+            <h1 style={{
+              fontSize: '3rem',
+              fontWeight: '700',
+              color: '#1a1a1a',
+              marginBottom: '20px'
+            }}>
+              Assessment Center
+            </h1>
+            <p style={{
+              fontSize: '1.2rem',
+              color: '#666',
+              maxWidth: '600px'
+            }}>
+              Kelola dan lihat semua assessment yang tersedia
+            </p>
+          </div>
+        )}
+
+        {activeMenu === 'Reports' && (
+          <div style={{ textAlign: 'center' }}>
+            <h1 style={{
+              fontSize: '3rem',
+              fontWeight: '700',
+              color: '#1a1a1a',
+              marginBottom: '20px'
+            }}>
+              Reports
+            </h1>
+            <p style={{
+              fontSize: '1.2rem',
+              color: '#666',
+              maxWidth: '600px'
+            }}>
+              Lihat laporan dan dokumentasi assessment
+            </p>
+          </div>
+        )}
+
+        {activeMenu === 'Settings' && (
+          <div style={{ textAlign: 'center' }}>
+            <h1 style={{
+              fontSize: '3rem',
+              fontWeight: '700',
+              color: '#1a1a1a',
+              marginBottom: '20px'
+            }}>
+              Settings
+            </h1>
+            <p style={{
+              fontSize: '1.2rem',
+              color: '#666',
+              maxWidth: '600px'
+            }}>
+              Kelola pengaturan aplikasi dan preferensi Anda
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -102,7 +102,7 @@ function CariSkema() {
 
           {/* Cards Container */}
           <div style={{ position: "relative" }}>
-            {/* More Detail Button */}
+            {/* More Detail Button
             <div style={{ textAlign: "right", marginBottom: "20px" }}>
               <button
                 onClick={handleMoreDetail}
@@ -128,7 +128,7 @@ function CariSkema() {
               >
                 More Detail
               </button>
-            </div>
+            </div> */}
             {/* Cards Wrapper */}
             <div
               style={{

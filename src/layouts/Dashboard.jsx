@@ -1,12 +1,17 @@
 import { useState } from 'react';
+import ManajemenData from './ManajemenData';
+import ListAsesmen from './ListAsesmen';
+import AsesmenDiikuti from './AsesmenDiikuti';
+// import ProfileSettings from './ProfileSettings';
 
-function Dashboard() {
+function Dashboard({ onBack }) {
   const [activeMenu, setActiveMenu] = useState('Dashboard');
 
   const handleMenuClick = (menuName) => {
     if (menuName === 'Logout') {
       if (confirm('Apakah Anda yakin ingin logout?')) {
         alert('Logout berhasil!');
+        if (onBack) onBack(); // Kembali ke home setelah logout
       }
       return;
     }
@@ -144,7 +149,7 @@ function Dashboard() {
               <circle cx="12" cy="7" r="4" 
                       stroke="currentColor" 
                       strokeWidth="2" 
-                      strokeLinecap="round" 
+                    trokeLinecap="round" 
                       strokeLinejoin="round"/>
             </svg>
             <span style={{ fontSize: '15px', fontWeight: '500' }}>Manajemen data</span>
@@ -355,127 +360,31 @@ function Dashboard() {
           </div>
         )}
 
-        {activeMenu === 'Profile' && (
-          <div style={{ 
-            maxWidth: '600px',
-            width: '100%',
-            padding: '40px'
-          }}>
-            <h2 style={{
-              fontSize: '2.5rem',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '30px',
-              textAlign: 'center'
-            }}>
-              Profile Settings
-            </h2>
-            <div style={{
-              backgroundColor: 'white',
-              borderRadius: '12px',
-              padding: '40px',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
-            }}>
-              <div style={{ marginBottom: '25px' }}>
-                <label style={{ 
-                  display: 'block', 
-                  marginBottom: '8px', 
-                  fontWeight: '600',
-                  color: '#1a1a1a'
-                }}>
-                  Nama Lengkap
-                </label>
-                <input 
-                  type="text" 
-                  defaultValue="Rian Pioriandana"
-                  style={{
-                    width: '100%',
-                    padding: '15px',
-                    border: '1px solid #ddd',
-                    borderRadius: '8px',
-                    fontSize: '16px',
-                    outline: 'none',
-                    transition: 'border-color 0.3s ease'
-                  }}
-                />
-              </div>
-              <button style={{
-                width: '100%',
-                padding: '15px',
-                backgroundColor: '#ff6b35',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}>
-                Update Profile
-              </button>
-            </div>
-          </div>
-        )}
-
-        {activeMenu === 'ManajemenData' && (
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={{
-              fontSize: '3rem',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '20px'
-            }}>
-              Manajemen Data
-            </h1>
-            <p style={{
-              fontSize: '1.2rem',
-              color: '#666',
-              maxWidth: '600px'
-            }}>
-              Kelola data pengguna, asesor, dan informasi lainnya
-            </p>
-          </div>
-        )}
-
-        {activeMenu === 'ListAsesmen' && (
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={{
-              fontSize: '3rem',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '20px'
-            }}>
-              List Asesmen
-            </h1>
-            <p style={{
-              fontSize: '1.2rem',
-              color: '#666',
-              maxWidth: '600px'
-            }}>
-              Daftar semua asesmen yang tersedia
-            </p>
-          </div>
-        )}
-
-        {activeMenu === 'AsesmenDiikuti' && (
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={{
-              fontSize: '3rem',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '20px'
-            }}>
-              Asesmen Diikuti
-            </h1>
-            <p style={{
-              fontSize: '1.2rem',
-              color: '#666',
-              maxWidth: '600px'
-            }}>
-              Riwayat asesmen yang telah Anda ikuti
-            </p>
-          </div>
-        )}
+        {activeMenu === 'ManajemenData' && <ManajemenData />}
+        {activeMenu === 'ListAsesmen' && <ListAsesmen />}
+        {activeMenu === 'AsesmenDiikuti' && <AsesmenDiikuti />}
+        {activeMenu === 'Profile' && <ProfileSettings />}
       </div>
+
+      {/* Back to Home Button */}
+      <button 
+        onClick={onBack} 
+        style={{ 
+          position: 'absolute', 
+          top: '20px', 
+          right: '20px', 
+          padding: '10px 20px', 
+          backgroundColor: '#ff6b35', 
+          color: 'white', 
+          border: 'none', 
+          borderRadius: '8px', 
+          fontSize: '16px', 
+          fontWeight: '600', 
+          cursor: 'pointer' 
+        }}
+      >
+        Back to Home
+      </button>
     </div>
   );
 }

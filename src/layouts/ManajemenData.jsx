@@ -1,24 +1,212 @@
 import React from 'react';
 
-function ManajemenData() {
+function ManajemenData({ onNavigate }) {
+  const styles = {
+    container: {
+      width: '100%',
+      height: '100vh',
+      backgroundColor: '#f5f5f5',
+      fontFamily: 'Arial, sans-serif',
+      overflow: 'hidden'
+    },
+    header: {
+      backgroundColor: 'white',
+      padding: '40px 0',
+      textAlign: 'center',
+      borderBottom: '1px solid #e0e0e0'
+    },
+    headerTitle: {
+      fontSize: '2.5rem',
+      fontWeight: 'bold',
+      color: '#000',
+      margin: 0,
+      letterSpacing: '2px'
+    },
+    content: {
+      height: 'calc(100vh - 140px)',
+      overflowY: 'auto',
+      padding: '0'
+    },
+    section: {
+      backgroundColor: 'white',
+      padding: '30px 40px',
+      borderBottom: '1px solid #d0d0d0'
+    },
+    sectionTitle: {
+      fontSize: '1.8rem',
+      fontWeight: 'bold',
+      color: '#000',
+      marginBottom: '20px',
+      margin: '0 0 20px 0'
+    },
+    dataContainer: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '25px',
+      maxWidth: '600px'
+    },
+    dataItem: {
+      color: '#333',
+      fontSize: '1rem'
+    },
+    dataLabel: {
+      fontWeight: '500'
+    },
+    button: {
+      backgroundColor: '#ff9500',
+      color: 'white',
+      padding: '10px 20px',
+      borderRadius: '5px',
+      border: 'none',
+      fontWeight: '500',
+      cursor: 'pointer',
+      fontSize: '14px',
+      transition: 'background-color 0.2s'
+    },
+    buttonHover: {
+      backgroundColor: '#e6850e'
+    }
+  };
+
+  const handleButtonHover = (e, isHover) => {
+    e.target.style.backgroundColor = isHover ? styles.buttonHover.backgroundColor : styles.button.backgroundColor;
+  };
+
+  const handleNavigation = (page) => {
+    // Callback untuk navigasi ke parent component atau router
+    if (onNavigate) {
+      onNavigate(page);
+    } else {
+      // Fallback jika tidak ada onNavigate prop
+      console.log(`Navigate to: ${page}`);
+      // Anda bisa ganti dengan router navigation seperti:
+      // window.location.href = `/${page}`;
+      // atau menggunakan React Router: navigate(`/${page}`);
+    }
+  };
+
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1 style={{
-        fontSize: '3rem',
-        fontWeight: '700',
-        color: '#1a1a1a',
-        marginBottom: '20px'
-      }}>
-        Manajemen Data
-      </h1>
-      <p style={{
-        fontSize: '1.2rem',
-        color: '#666',
-        maxWidth: '600px'
-      }}>
-        Kelola data pengguna, asesor, dan informasi lainnya
-      </p>
-      {/* Tambahkan konten spesifik seperti tabel atau form di sini */}
+    <div style={styles.container}>
+      {/* Header */}
+      <div style={styles.header}>
+        <h1 style={styles.headerTitle}>
+          MANAJEMEN DATA
+        </h1>
+      </div>
+
+      {/* Scrollable Content */}
+      <div style={styles.content}>
+        {/* ASESOR Section */}
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>ASESOR</h2>
+          <div style={styles.dataContainer}>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Peserta: </span>
+              <span>67</span>
+            </div>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Aktif: </span>
+              <span>67</span>
+            </div>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Tervalidasi: </span>
+              <span>61</span>
+            </div>
+          </div>
+          <button 
+            style={styles.button}
+            onMouseEnter={(e) => handleButtonHover(e, true)}
+            onMouseLeave={(e) => handleButtonHover(e, false)}
+            onClick={() => handleNavigation('asesor')}
+          >
+            Kelola Data
+          </button>
+        </div>
+
+        {/* ASESI Section */}
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>ASESI</h2>
+          <div style={styles.dataContainer}>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Peserta: </span>
+              <span>4000</span>
+            </div>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Lorem Ipsum</span>
+            </div>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Lorem Ipsum</span>
+            </div>
+          </div>
+          <button 
+            style={styles.button}
+            onMouseEnter={(e) => handleButtonHover(e, true)}
+            onMouseLeave={(e) => handleButtonHover(e, false)}
+            onClick={() => handleNavigation('asesi')}
+          >
+            Kelola Data
+          </button>
+        </div>
+
+        {/* ASESMEN Section */}
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>ASESMEN</h2>
+          <div style={styles.dataContainer}>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Skema: </span>
+              <span>4000</span>
+            </div>
+          </div>
+          <button 
+            style={styles.button}
+            onMouseEnter={(e) => handleButtonHover(e, true)}
+            onMouseLeave={(e) => handleButtonHover(e, false)}
+            onClick={() => handleNavigation('asesmen')}
+          >
+            Kelola Data
+          </button>
+        </div>
+
+        {/* JURUSAN Section */}
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>JURUSAN</h2>
+          <button 
+            style={styles.button}
+            onMouseEnter={(e) => handleButtonHover(e, true)}
+            onMouseLeave={(e) => handleButtonHover(e, false)}
+            onClick={() => handleNavigation('jurusan')}
+          >
+            Kelola Data
+          </button>
+        </div>
+
+        {/* MATA PELAJARAN Section */}
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>MATA PELAJARAN</h2>
+          <button 
+            style={styles.button}
+            onMouseEnter={(e) => handleButtonHover(e, true)}
+            onMouseLeave={(e) => handleButtonHover(e, false)}
+            onClick={() => handleNavigation('mata-pelajaran')}
+          >
+            Kelola Data
+          </button>
+        </div>
+
+        {/* KOMPETENSI Section */}
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>KOMPETENSI</h2>
+          <button 
+            style={styles.button}
+            onMouseEnter={(e) => handleButtonHover(e, true)}
+            onMouseLeave={(e) => handleButtonHover(e, false)}
+            onClick={() => handleNavigation('kompetensi')}
+          >
+            Kelola Data
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

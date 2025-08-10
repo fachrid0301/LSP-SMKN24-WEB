@@ -74,15 +74,13 @@ function ManajemenData({ onNavigate }) {
   };
 
   const handleNavigation = (page) => {
-    // Callback untuk navigasi ke parent component atau router
+    console.log('ManajemenData - Trying to navigate to:', page);
+    console.log('onNavigate function exists:', !!onNavigate);
+    
     if (onNavigate) {
       onNavigate(page);
     } else {
-      // Fallback jika tidak ada onNavigate prop
-      console.log(`Navigate to: ${page}`);
-      // Anda bisa ganti dengan router navigation seperti:
-      // window.location.href = `/${page}`;
-      // atau menggunakan React Router: navigate(`/${page}`);
+      console.log(`Navigate to: ${page} - but onNavigate is not available`);
     }
   };
 
@@ -171,6 +169,12 @@ function ManajemenData({ onNavigate }) {
         {/* JURUSAN Section */}
         <div style={styles.section}>
           <h2 style={styles.sectionTitle}>JURUSAN</h2>
+          <div style={styles.dataContainer}>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Program: </span>
+              <span>5</span>
+            </div>
+          </div>
           <button 
             style={styles.button}
             onMouseEnter={(e) => handleButtonHover(e, true)}
@@ -181,22 +185,15 @@ function ManajemenData({ onNavigate }) {
           </button>
         </div>
 
-        {/* MATA PELAJARAN Section */}
+        {/* SKEMA/KOMPETENSI Section */}
         <div style={styles.section}>
-          <h2 style={styles.sectionTitle}>MATA PELAJARAN</h2>
-          <button 
-            style={styles.button}
-            onMouseEnter={(e) => handleButtonHover(e, true)}
-            onMouseLeave={(e) => handleButtonHover(e, false)}
-            onClick={() => handleNavigation('mata-pelajaran')}
-          >
-            Kelola Data
-          </button>
-        </div>
-
-        {/* KOMPETENSI Section */}
-        <div style={styles.section}>
-          <h2 style={styles.sectionTitle}>KOMPETENSI</h2>
+          <h2 style={styles.sectionTitle}>SKEMA</h2>
+          <div style={styles.dataContainer}>
+            <div style={styles.dataItem}>
+              <span style={styles.dataLabel}>Program: </span>
+              <span>5</span>
+            </div>
+          </div>
           <button 
             style={styles.button}
             onMouseEnter={(e) => handleButtonHover(e, true)}

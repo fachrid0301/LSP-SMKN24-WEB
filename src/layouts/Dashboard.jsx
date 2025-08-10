@@ -4,67 +4,8 @@ import ListAsesmen from './ListAsesmen';
 import AsesmenDiikuti from './AsesmenDiikuti';
 // import ProfileSettings from './ProfileSettings';
 
-// Placeholder components untuk pages
-const PlaceholderPage = ({ title, onBack }) => (
-  <div style={{
-    padding: '40px',
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#fafafa',
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }}>
-    <div style={{
-      backgroundColor: 'white',
-      padding: '30px',
-      borderRadius: '15px',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-      maxWidth: '600px',
-      width: '100%',
-      textAlign: 'center'
-    }}>
-      <h1 style={{ 
-        fontSize: '2.5rem', 
-        marginBottom: '20px', 
-        color: '#1a1a1a',
-        fontWeight: '700'
-      }}>
-        Halaman {title}
-      </h1>
-      <p style={{ 
-        marginBottom: '30px', 
-        color: '#666',
-        fontSize: '1.2rem',
-        lineHeight: '1.6'
-      }}>
-        Ini adalah halaman {title}. Di sini Anda dapat mengelola data {title.toLowerCase()}.
-      </p>
-      <button 
-        onClick={onBack}
-        style={{
-          backgroundColor: '#ff6b35',
-          color: 'white',
-          padding: '15px 30px',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer',
-          fontWeight: '600',
-          fontSize: '1rem',
-          transition: 'background-color 0.2s'
-        }}
-        onMouseEnter={(e) => e.target.style.backgroundColor = '#e55a2b'}
-        onMouseLeave={(e) => e.target.style.backgroundColor = '#ff6b35'}
-      >
-        ← Kembali ke Manajemen Data
-      </button>
-    </div>
-  </div>
-);
-
 function Dashboard({ onBack }) {
   const [activeMenu, setActiveMenu] = useState('Dashboard');
-  const [currentPage, setCurrentPage] = useState(null); // Untuk handle pages
 
   const handleMenuClick = (menuName) => {
     if (menuName === 'Logout') {
@@ -75,18 +16,6 @@ function Dashboard({ onBack }) {
       return;
     }
     setActiveMenu(menuName);
-    setCurrentPage(null); // Reset page ketika ganti menu
-  };
-
-  // Function untuk handle navigasi dari ManajemenData ke pages
-  const handlePageNavigation = (page) => {
-    console.log('Dashboard - navigating to page:', page);
-    setCurrentPage(page);
-  };
-
-  // Function untuk kembali dari pages ke ManajemenData
-  const handleBackToManajemenData = () => {
-    setCurrentPage(null);
   };
 
   return (
@@ -220,7 +149,7 @@ function Dashboard({ onBack }) {
               <circle cx="12" cy="7" r="4" 
                       stroke="currentColor" 
                       strokeWidth="2" 
-                      strokeLinecap="round" 
+                    trokeLinecap="round" 
                       strokeLinejoin="round"/>
             </svg>
             <span style={{ fontSize: '15px', fontWeight: '500' }}>Manajemen data</span>
@@ -415,25 +344,8 @@ function Dashboard({ onBack }) {
         position: 'relative',
         backgroundColor: '#fafafa'
       }}>
-        {/* Render Pages jika ada */}
-        {currentPage === 'asesor' && (
-          <PlaceholderPage title="Asesor" onBack={handleBackToManajemenData} />
-        )}
-        {currentPage === 'asesi' && (
-          <PlaceholderPage title="Asesi" onBack={handleBackToManajemenData} />
-        )}
-        {currentPage === 'asesmen' && (
-          <PlaceholderPage title="Asesmen" onBack={handleBackToManajemenData} />
-        )}
-        {currentPage === 'jurusan' && (
-          <PlaceholderPage title="Jurusan" onBack={handleBackToManajemenData} />
-        )}
-        {currentPage === 'kompetensi' && (
-          <PlaceholderPage title="Kompetensi" onBack={handleBackToManajemenData} />
-        )}
-
-        {/* Main Content based on active menu (jika tidak ada currentPage) */}
-        {!currentPage && activeMenu === 'Dashboard' && (
+        {/* Main Content based on active menu */}
+        {activeMenu === 'Dashboard' && (
           <div style={{ textAlign: 'center' }}>
             <h1 style={{
               fontSize: '6rem',
@@ -448,17 +360,10 @@ function Dashboard({ onBack }) {
           </div>
         )}
 
-        {!currentPage && activeMenu === 'ManajemenData' && (
-          <ManajemenData onNavigate={handlePageNavigation} />
-        )}
-        {!currentPage && activeMenu === 'ListAsesmen' && <ListAsesmen />}
-        {!currentPage && activeMenu === 'AsesmenDiikuti' && <AsesmenDiikuti />}
-        {!currentPage && activeMenu === 'Profile' && (
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={{ fontSize: '2rem', color: '#1a1a1a' }}>Profile Settings</h1>
-            <p style={{ color: '#666' }}>Coming soon...</p>
-          </div>
-        )}
+        {activeMenu === 'ManajemenData' && <ManajemenData />}
+        {activeMenu === 'ListAsesmen' && <ListAsesmen />}
+        {activeMenu === 'AsesmenDiikuti' && <AsesmenDiikuti />}
+        {activeMenu === 'Profile' && <ProfileSettings />}
       </div>
 
       {/* Back to Home Button */}

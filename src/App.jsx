@@ -81,6 +81,8 @@ function App() {
   </>
 )}
 
+
+
       {currentPage === "register" && <Register onBack={handleBackToHome} />}
       {currentPage === "dashboard" && <Dashboard onBack={handleBackToHome} />}
       {currentPage === "login" && <Login onBack={handleBackToHome} />}

@@ -225,7 +225,7 @@ function ListAsesmen({ onBack }) {
                     fontWeight: '600',
                     color: '#333',
                     borderBottom: '1px solid #e0e0e0'
-                  }}>Nama Jadwal</th>
+                  }}>Nama Jadwal SMKN 24</th>
                   <th style={{
                     padding: '16px',
                     textAlign: 'left',

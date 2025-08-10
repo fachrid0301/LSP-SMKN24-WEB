@@ -2,69 +2,14 @@ import { useState } from 'react';
 import ManajemenData from './ManajemenData';
 import ListAsesmen from './ListAsesmen';
 import AsesmenDiikuti from './AsesmenDiikuti';
+// Placeholder for ProfileSettings (uncomment and import if needed)
 // import ProfileSettings from './ProfileSettings';
+import logoImage from '/src/img/image 12.png';
 
-// Placeholder components untuk pages
-const PlaceholderPage = ({ title, onBack }) => (
-  <div style={{
-    padding: '40px',
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#fafafa',
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }}>
-    <div style={{
-      backgroundColor: 'white',
-      padding: '30px',
-      borderRadius: '15px',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-      maxWidth: '600px',
-      width: '100%',
-      textAlign: 'center'
-    }}>
-      <h1 style={{ 
-        fontSize: '2.5rem', 
-        marginBottom: '20px', 
-        color: '#1a1a1a',
-        fontWeight: '700'
-      }}>
-        Halaman {title}
-      </h1>
-      <p style={{ 
-        marginBottom: '30px', 
-        color: '#666',
-        fontSize: '1.2rem',
-        lineHeight: '1.6'
-      }}>
-        Ini adalah halaman {title}. Di sini Anda dapat mengelola data {title.toLowerCase()}.
-      </p>
-      <button 
-        onClick={onBack}
-        style={{
-          backgroundColor: '#ff6b35',
-          color: 'white',
-          padding: '15px 30px',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer',
-          fontWeight: '600',
-          fontSize: '1rem',
-          transition: 'background-color 0.2s'
-        }}
-        onMouseEnter={(e) => e.target.style.backgroundColor = '#e55a2b'}
-        onMouseLeave={(e) => e.target.style.backgroundColor = '#ff6b35'}
-      >
-        ← Kembali ke Manajemen Data
-      </button>
-    </div>
-  </div>
-);
 
 function Dashboard({ onBack }) {
   const [activeMenu, setActiveMenu] = useState('Dashboard');
-  const [currentPage, setCurrentPage] = useState(null); // Untuk handle pages
+  const [currentSubPage, setCurrentSubPage] = useState(null); // State for sub-page navigation
 
   const handleMenuClick = (menuName) => {
     if (menuName === 'Logout') {
@@ -75,18 +20,12 @@ function Dashboard({ onBack }) {
       return;
     }
     setActiveMenu(menuName);
-    setCurrentPage(null); // Reset page ketika ganti menu
+    setCurrentSubPage(null); // Reset sub-page when switching menu
   };
 
-  // Function untuk handle navigasi dari ManajemenData ke pages
-  const handlePageNavigation = (page) => {
-    console.log('Dashboard - navigating to page:', page);
-    setCurrentPage(page);
-  };
-
-  // Function untuk kembali dari pages ke ManajemenData
-  const handleBackToManajemenData = () => {
-    setCurrentPage(null);
+  // Handle navigation from ManajemenData to sub-pages
+  const handleNavigate = (page) => {
+    setCurrentSubPage(page);
   };
 
   return (
@@ -120,7 +59,6 @@ function Dashboard({ onBack }) {
           <div style={{
             width: '60px',
             height: '60px',
-            backgroundColor: '#ff6b35',
             borderRadius: '12px',
             display: 'flex',
             alignItems: 'center',
@@ -128,21 +66,24 @@ function Dashboard({ onBack }) {
             margin: '0 auto',
             marginBottom: '15px'
           }}>
-            <span style={{
-              color: 'white',
-              fontSize: '24px',
-              fontWeight: 'bold'
-            }}>
-              LSP
-            </span>
+            <img
+              src={logoImage} // Use imported image
+              alt="LSP Logo"
+              style={{
+                width: '200%',
+                height: '200%',
+                objectFit: 'contain',
+                borderRadius: '12px'
+              }}
+            />
           </div>
           <h3 style={{
-            margin: 0,
+            margin: '0',
             fontSize: '16px',
             fontWeight: '600',
             color: '#1a1a1a'
           }}>
-            Logo
+          {/* LSP */}
           </h3>
         </div>
 
@@ -415,25 +356,8 @@ function Dashboard({ onBack }) {
         position: 'relative',
         backgroundColor: '#fafafa'
       }}>
-        {/* Render Pages jika ada */}
-        {currentPage === 'asesor' && (
-          <PlaceholderPage title="Asesor" onBack={handleBackToManajemenData} />
-        )}
-        {currentPage === 'asesi' && (
-          <PlaceholderPage title="Asesi" onBack={handleBackToManajemenData} />
-        )}
-        {currentPage === 'asesmen' && (
-          <PlaceholderPage title="Asesmen" onBack={handleBackToManajemenData} />
-        )}
-        {currentPage === 'jurusan' && (
-          <PlaceholderPage title="Jurusan" onBack={handleBackToManajemenData} />
-        )}
-        {currentPage === 'kompetensi' && (
-          <PlaceholderPage title="Kompetensi" onBack={handleBackToManajemenData} />
-        )}
-
-        {/* Main Content based on active menu (jika tidak ada currentPage) */}
-        {!currentPage && activeMenu === 'Dashboard' && (
+        {/* Main Content based on active menu and sub-page */}
+        {activeMenu === 'Dashboard' && (
           <div style={{ textAlign: 'center' }}>
             <h1 style={{
               fontSize: '6rem',
@@ -448,16 +372,33 @@ function Dashboard({ onBack }) {
           </div>
         )}
 
-        {!currentPage && activeMenu === 'ManajemenData' && (
-          <ManajemenData onNavigate={handlePageNavigation} />
+        {activeMenu === 'ManajemenData' && !currentSubPage && (
+          <ManajemenData onNavigate={handleNavigate} />
         )}
-        {!currentPage && activeMenu === 'ListAsesmen' && <ListAsesmen />}
-        {!currentPage && activeMenu === 'AsesmenDiikuti' && <AsesmenDiikuti />}
-        {!currentPage && activeMenu === 'Profile' && (
+        {activeMenu === 'ListAsesmen' && <ListAsesmen />}
+        {activeMenu === 'AsesmenDiikuti' && <AsesmenDiikuti />}
+        {activeMenu === 'Profile' && (
           <div style={{ textAlign: 'center' }}>
             <h1 style={{ fontSize: '2rem', color: '#1a1a1a' }}>Profile Settings</h1>
             <p style={{ color: '#666' }}>Coming soon...</p>
           </div>
+        )}
+
+        {/* Render sub-pages from ManajemenData */}
+        {currentSubPage === 'Asesor' && (
+          <PlaceholderPage title="Asesor" onBack={() => setCurrentSubPage(null)} />
+        )}
+        {currentSubPage === 'Asesi' && (
+          <PlaceholderPage title="Asesi" onBack={() => setCurrentSubPage(null)} />
+        )}
+        {currentSubPage === 'Asesmen' && (
+          <PlaceholderPage title="Asesmen" onBack={() => setCurrentSubPage(null)} />
+        )}
+        {currentSubPage === 'Jurusan' && (
+          <PlaceholderPage title="Jurusan" onBack={() => setCurrentSubPage(null)} />
+        )}
+        {currentSubPage === 'Kompetensi' && (
+          <PlaceholderPage title="Kompetensi" onBack={() => setCurrentSubPage(null)} />
         )}
       </div>
 
@@ -483,5 +424,63 @@ function Dashboard({ onBack }) {
     </div>
   );
 }
+
+// Placeholder component for sub-pages
+const PlaceholderPage = ({ title, onBack }) => (
+  <div style={{
+    padding: '40px',
+    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#fafafa',
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }}>
+    <div style={{
+      backgroundColor: 'white',
+      padding: '30px',
+      borderRadius: '15px',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+      maxWidth: '600px',
+      width: '100%',
+      textAlign: 'center'
+    }}>
+      <h1 style={{ 
+        fontSize: '2.5rem', 
+        marginBottom: '20px', 
+        color: '#1a1a1a',
+        fontWeight: '700'
+      }}>
+        Halaman {title}
+      </h1>
+      <p style={{ 
+        marginBottom: '30px', 
+        color: '#666',
+        fontSize: '1.2rem',
+        lineHeight: '1.6'
+      }}>
+        Ini adalah halaman {title}. Di sini Anda dapat mengelola data {title.toLowerCase()}.
+      </p>
+      <button 
+        onClick={onBack}
+        style={{
+          backgroundColor: '#ff6b35',
+          color: 'white',
+          padding: '15px 30px',
+          border: 'none',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          fontWeight: '600',
+          fontSize: '1rem',
+          transition: 'background-color 0.2s'
+        }}
+        onMouseEnter={(e) => e.target.style.backgroundColor = '#e55a2b'}
+        onMouseLeave={(e) => e.target.style.backgroundColor = '#ff6b35'}
+      >
+        ← Kembali ke Manajemen Data
+      </button>
+    </div>
+  </div>
+);
 
 export default Dashboard;

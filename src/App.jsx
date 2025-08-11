@@ -8,8 +8,9 @@ import CariSkema from "./layouts/CariSkema";
 import FooterPage from "./layouts/FooterPage";
 import Register from "./layouts/Register";
 import Dashboard from "./layouts/Dashboard";
-import Login from "./layouts/Login"; // 
-import SertifikasiCTA from "./layouts/SertifikasiCTA"; 
+import Login from "./layouts/Login";
+import SertifikasiCTA from "./layouts/SertifikasiCTA";
+import LandingPage from "./layouts/LandingPage"; // Import LandingPage
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -33,12 +34,17 @@ function App() {
   };
 
   const handleLoginClick = () => {
-    setCurrentPage("login"); // 
+    setCurrentPage("login");
   };
 
   const handleBackToHome = () => {
     setCurrentPage("home");
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Fungsi untuk navigasi ke LandingPage
+  const goToLandingPage = () => {
+    setCurrentPage("landingPage");
   };
 
   return (
@@ -47,42 +53,42 @@ function App() {
         <Navbar onNavClick={scrollToSection} onLoginClick={handleLoginClick} />
       )}
 
-     {currentPage === "home" && (
-  <>
-    <div ref={homeRef}>
-      <Home
-        goToRegister={() => setCurrentPage("register")}
-        goToDashboard={() => setCurrentPage("dashboard")}
-      />
-    </div>
-    <div ref={profileRef}>
-      <Profil />
-    </div>
-    <div ref={sertifikasiRef}>
-      <MengapaKami />
-    </div>
-    <div>
-      <Skema />
-    </div>
+      {currentPage === "home" && (
+        <>
+          <div ref={homeRef}>
+            <Home
+              goToRegister={() => setCurrentPage("register")}
+              goToDashboard={() => setCurrentPage("dashboard")}
+            />
+          </div>
+          <div ref={profileRef}>
+            <Profil />
+          </div>
+          <div ref={sertifikasiRef}>
+            <MengapaKami />
+          </div>
+          <div>
+            <Skema />
+          </div>
 
-   {/*  baru nambah */}
-    <SertifikasiCTA
-      goToRegister={() => setCurrentPage("register")}
-      goToDashboard={() => setCurrentPage("dashboard")}
-    />
+          <SertifikasiCTA
+            goToRegister={() => setCurrentPage("register")}
+            goToDashboard={() => setCurrentPage("dashboard")}
+          />
 
-    <div ref={galeriRef}>
-      <CariSkema />
-    </div>
-    <div ref={kontakRef}>
-      <FooterPage />
-    </div>
-  </>
-)}
+          <div ref={galeriRef}>
+            <CariSkema goToLandingPage={goToLandingPage} />
+          </div>
+          <div ref={kontakRef}>
+            <FooterPage />
+          </div>
+        </>
+      )}
 
       {currentPage === "register" && <Register onBack={handleBackToHome} />}
       {currentPage === "dashboard" && <Dashboard onBack={handleBackToHome} />}
       {currentPage === "login" && <Login onBack={handleBackToHome} />}
+      {currentPage === "landingPage" && <LandingPage onBack={handleBackToHome} />}
     </>
   );
 }

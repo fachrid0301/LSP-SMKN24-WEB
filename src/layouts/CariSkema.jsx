@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CariSkema() {
+function CariSkema({ goToLandingPage }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
 
@@ -54,8 +54,12 @@ function CariSkema() {
     alert("Navigasi ke halaman detail akan ditambahkan");
   };
 
-  const handleCardDetail = (cardTitle) => {
-    alert(`Detail untuk ${cardTitle} akan ditambahkan`);
+  const handleCardDetail = (cardTitle, event) => {
+    event.stopPropagation();
+    // Navigasi ke halaman LandingPage menggunakan prop function
+    if (goToLandingPage) {
+      goToLandingPage();
+    }
   };
 
   const goToSlide = (index) => {
@@ -224,7 +228,8 @@ function CariSkema() {
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
-                            padding: '20px'
+                            padding: '20px',
+                            pointerEvents: hoveredCard === item.id ? 'auto' : 'none'
                           }}
                         >
                           {/* Title on hover */}
@@ -266,7 +271,7 @@ function CariSkema() {
                           {/* Detail Button */}
                           <div style={{ textAlign: 'center', marginTop: '15px' }}>
                             <button
-                              onClick={() => handleCardDetail(item.title)}
+                              onClick={(e) => handleCardDetail(item.title, e)}
                               style={{
                                 backgroundColor: 'transparent',
                                 color: 'white',
@@ -276,7 +281,9 @@ function CariSkema() {
                                 fontSize: '0.9rem',
                                 fontWeight: '600',
                                 cursor: 'pointer',
-                                transition: 'all 0.3s ease'
+                                transition: 'all 0.3s ease',
+                                position: 'relative',
+                                zIndex: 10
                               }}
                               onMouseOver={(e) => {
                                 e.target.style.backgroundColor = 'white';

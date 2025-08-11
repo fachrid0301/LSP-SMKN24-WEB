@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import React, { useRef, useState, useEffect } from "react";
+=======
+import React, { useRef, useState } from "react";
+
+>>>>>>> d76bece8ed7264077cf6a670948da6c6947f24f6
 import Navbar from "./layouts/Navbar";
 import Home from "./layouts/Home";
 import Profil from "./layouts/Profil";
@@ -122,7 +127,7 @@ function App() {
         <Kontak onBack={handleBackToHome} />
       )}
 
-      {/* Halaman-halaman lainnya */}
+
       {currentPage === "register" && <Register onBack={handleBackToHome} />}
       {currentPage === "dashboard" && <Dashboard onBack={handleBackToHome} />}
       {currentPage === "login" && <Login onBack={handleBackToHome} />}

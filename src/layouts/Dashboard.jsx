@@ -1,16 +1,31 @@
 import { useState } from 'react';
+import ManajemenData from './ManajemenData';
+import ListAsesmen from './ListAsesmen';
+import AsesmenDiikuti from './AsesmenDiikuti';
+// Placeholder for ProfileSettings (uncomment and import if needed)
+// import ProfileSettings from './ProfileSettings';
+import logoImage from '/src/img/image 12.png';
 
-function Dashboard() {
+
+function Dashboard({ onBack }) {
   const [activeMenu, setActiveMenu] = useState('Dashboard');
+  const [currentSubPage, setCurrentSubPage] = useState(null); // State for sub-page navigation
 
   const handleMenuClick = (menuName) => {
     if (menuName === 'Logout') {
       if (confirm('Apakah Anda yakin ingin logout?')) {
         alert('Logout berhasil!');
+        if (onBack) onBack(); // Kembali ke home setelah logout
       }
       return;
     }
     setActiveMenu(menuName);
+    setCurrentSubPage(null); // Reset sub-page when switching menu
+  };
+
+  // Handle navigation from ManajemenData to sub-pages
+  const handleNavigate = (page) => {
+    setCurrentSubPage(page);
   };
 
   return (
@@ -44,7 +59,6 @@ function Dashboard() {
           <div style={{
             width: '60px',
             height: '60px',
-            backgroundColor: '#ff6b35',
             borderRadius: '12px',
             display: 'flex',
             alignItems: 'center',
@@ -52,21 +66,24 @@ function Dashboard() {
             margin: '0 auto',
             marginBottom: '15px'
           }}>
-            <span style={{
-              color: 'white',
-              fontSize: '24px',
-              fontWeight: 'bold'
-            }}>
-              LSP
-            </span>
+            <img
+              src={logoImage} // Use imported image
+              alt="LSP Logo"
+              style={{
+                width: '200%',
+                height: '200%',
+                objectFit: 'contain',
+                borderRadius: '12px'
+              }}
+            />
           </div>
           <h3 style={{
-            margin: 0,
+            margin: '0',
             fontSize: '16px',
             fontWeight: '600',
             color: '#1a1a1a'
           }}>
-            Logo
+          {/* LSP */}
           </h3>
         </div>
 
@@ -339,7 +356,7 @@ function Dashboard() {
         position: 'relative',
         backgroundColor: '#fafafa'
       }}>
-        {/* Main Content based on active menu */}
+        {/* Main Content based on active menu and sub-page */}
         {activeMenu === 'Dashboard' && (
           <div style={{ textAlign: 'center' }}>
             <h1 style={{
@@ -355,129 +372,115 @@ function Dashboard() {
           </div>
         )}
 
+        {activeMenu === 'ManajemenData' && !currentSubPage && (
+          <ManajemenData onNavigate={handleNavigate} />
+        )}
+        {activeMenu === 'ListAsesmen' && <ListAsesmen />}
+        {activeMenu === 'AsesmenDiikuti' && <AsesmenDiikuti />}
         {activeMenu === 'Profile' && (
-          <div style={{ 
-            maxWidth: '600px',
-            width: '100%',
-            padding: '40px'
-          }}>
-            <h2 style={{
-              fontSize: '2.5rem',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '30px',
-              textAlign: 'center'
-            }}>
-              Profile Settings
-            </h2>
-            <div style={{
-              backgroundColor: 'white',
-              borderRadius: '12px',
-              padding: '40px',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
-            }}>
-              <div style={{ marginBottom: '25px' }}>
-                <label style={{ 
-                  display: 'block', 
-                  marginBottom: '8px', 
-                  fontWeight: '600',
-                  color: '#1a1a1a'
-                }}>
-                  Nama Lengkap
-                </label>
-                <input 
-                  type="text" 
-                  defaultValue="Rian Pioriandana"
-                  style={{
-                    width: '100%',
-                    padding: '15px',
-                    border: '1px solid #ddd',
-                    borderRadius: '8px',
-                    fontSize: '16px',
-                    outline: 'none',
-                    transition: 'border-color 0.3s ease'
-                  }}
-                />
-              </div>
-              <button style={{
-                width: '100%',
-                padding: '15px',
-                backgroundColor: '#ff6b35',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}>
-                Update Profile
-              </button>
-            </div>
+          <div style={{ textAlign: 'center' }}>
+            <h1 style={{ fontSize: '2rem', color: '#1a1a1a' }}>Profile Settings</h1>
+            <p style={{ color: '#666' }}>Coming soon...</p>
           </div>
         )}
 
-        {activeMenu === 'ManajemenData' && (
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={{
-              fontSize: '3rem',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '20px'
-            }}>
-              Manajemen Data
-            </h1>
-            <p style={{
-              fontSize: '1.2rem',
-              color: '#666',
-              maxWidth: '600px'
-            }}>
-              Kelola data pengguna, asesor, dan informasi lainnya
-            </p>
-          </div>
+        {/* Render sub-pages from ManajemenData */}
+        {currentSubPage === 'Asesor' && (
+          <PlaceholderPage title="Asesor" onBack={() => setCurrentSubPage(null)} />
         )}
-
-        {activeMenu === 'ListAsesmen' && (
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={{
-              fontSize: '3rem',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '20px'
-            }}>
-              List Asesmen
-            </h1>
-            <p style={{
-              fontSize: '1.2rem',
-              color: '#666',
-              maxWidth: '600px'
-            }}>
-              Daftar semua asesmen yang tersedia
-            </p>
-          </div>
+        {currentSubPage === 'Asesi' && (
+          <PlaceholderPage title="Asesi" onBack={() => setCurrentSubPage(null)} />
         )}
-
-        {activeMenu === 'AsesmenDiikuti' && (
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={{
-              fontSize: '3rem',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '20px'
-            }}>
-              Asesmen Diikuti
-            </h1>
-            <p style={{
-              fontSize: '1.2rem',
-              color: '#666',
-              maxWidth: '600px'
-            }}>
-              Riwayat asesmen yang telah Anda ikuti
-            </p>
-          </div>
+        {currentSubPage === 'Asesmen' && (
+          <PlaceholderPage title="Asesmen" onBack={() => setCurrentSubPage(null)} />
+        )}
+        {currentSubPage === 'Jurusan' && (
+          <PlaceholderPage title="Jurusan" onBack={() => setCurrentSubPage(null)} />
+        )}
+        {currentSubPage === 'Kompetensi' && (
+          <PlaceholderPage title="Kompetensi" onBack={() => setCurrentSubPage(null)} />
         )}
       </div>
+
+      {/* Back to Home Button */}
+      <button 
+        onClick={onBack} 
+        style={{ 
+          position: 'absolute', 
+          top: '20px', 
+          right: '20px', 
+          padding: '10px 20px', 
+          backgroundColor: '#ff6b35', 
+          color: 'white', 
+          border: 'none', 
+          borderRadius: '8px', 
+          fontSize: '16px', 
+          fontWeight: '600', 
+          cursor: 'pointer' 
+        }}
+      >
+        Back to Home
+      </button>
     </div>
   );
 }
+
+// Placeholder component for sub-pages
+const PlaceholderPage = ({ title, onBack }) => (
+  <div style={{
+    padding: '40px',
+    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#fafafa',
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }}>
+    <div style={{
+      backgroundColor: 'white',
+      padding: '30px',
+      borderRadius: '15px',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+      maxWidth: '600px',
+      width: '100%',
+      textAlign: 'center'
+    }}>
+      <h1 style={{ 
+        fontSize: '2.5rem', 
+        marginBottom: '20px', 
+        color: '#1a1a1a',
+        fontWeight: '700'
+      }}>
+        Halaman {title}
+      </h1>
+      <p style={{ 
+        marginBottom: '30px', 
+        color: '#666',
+        fontSize: '1.2rem',
+        lineHeight: '1.6'
+      }}>
+        Ini adalah halaman {title}. Di sini Anda dapat mengelola data {title.toLowerCase()}.
+      </p>
+      <button 
+        onClick={onBack}
+        style={{
+          backgroundColor: '#ff6b35',
+          color: 'white',
+          padding: '15px 30px',
+          border: 'none',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          fontWeight: '600',
+          fontSize: '1rem',
+          transition: 'background-color 0.2s'
+        }}
+        onMouseEnter={(e) => e.target.style.backgroundColor = '#e55a2b'}
+        onMouseLeave={(e) => e.target.style.backgroundColor = '#ff6b35'}
+      >
+        ← Kembali ke Manajemen Data
+      </button>
+    </div>
+  </div>
+);
 
 export default Dashboard;

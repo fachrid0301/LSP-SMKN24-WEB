@@ -129,7 +129,7 @@ function ListAsesmen({ onBack }) {
           color: '#1a1a1a',
           margin: '0'
         }}>
-          List Asesmen
+          Assessment
         </h1>
       </div>
 
@@ -138,14 +138,14 @@ function ListAsesmen({ onBack }) {
         display: 'flex',
         gap: '20px',
         marginBottom: '40px',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        maxWidth: '500px'
       }}>
         <div style={{
           backgroundColor: '#ffffff',
           borderRadius: '12px',
           padding: '20px',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-          flex: '1',
           minWidth: '180px',
         }}>
           <div style={{
@@ -155,8 +155,9 @@ function ListAsesmen({ onBack }) {
           }}>
             <span style={{
               fontSize: '20px',
-              marginRight: '10px'
-            }}>📊</span>
+              marginRight: '10px',
+              color: '#007bff'
+            }}>📄</span>
             <span style={{
               fontSize: '14px',
               color: '#666',
@@ -175,7 +176,6 @@ function ListAsesmen({ onBack }) {
           borderRadius: '12px',
           padding: '20px',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-          flex: '1',
           minWidth: '180px',
         }}>
           <div style={{
@@ -185,7 +185,8 @@ function ListAsesmen({ onBack }) {
           }}>
             <span style={{
               fontSize: '20px',
-              marginRight: '10px'
+              marginRight: '10px',
+              color: '#6f42c1'
             }}>👥</span>
             <span style={{
               fontSize: '14px',
@@ -202,19 +203,19 @@ function ListAsesmen({ onBack }) {
       </div>
 
       {/* Search Bar */}
-      <div style={{ marginBottom: '30px' }}>
-        <div style={{ position: 'relative', width: '100%', maxWidth: '400px' }}>
+      <div style={{ marginBottom: '30px', maxWidth: '300px' }}> {/* Reduced maxWidth from 400px to 300px */}
+        <div style={{ position: 'relative', width: '100%' }}>
           <input
             type="text"
-            placeholder="Cari asesmen..."
+            placeholder="Cari"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{
               width: '100%',
-              padding: '12px 40px 12px 16px',
+              padding: '10px 35px 10px 12px', /* Reduced padding */
               border: '1px solid #ddd',
-              borderRadius: '8px',
-              fontSize: '14px',
+              borderRadius: '6px', /* Reduced border radius */
+              fontSize: '13px', /* Reduced font size */
               outline: 'none',
               backgroundColor: '#ffffff',
               boxSizing: 'border-box',
@@ -225,11 +226,11 @@ function ListAsesmen({ onBack }) {
           />
           <span style={{
             position: 'absolute',
-            right: '12px',
+            right: '10px',
             top: '50%',
             transform: 'translateY(-50%)',
             color: '#999',
-            fontSize: '16px'
+            fontSize: '14px' /* Slightly reduced font size */
           }}>🔍</span>
         </div>
       </div>

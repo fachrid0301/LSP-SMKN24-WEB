@@ -2,8 +2,7 @@ import React from 'react';
 
 function Skema() {
   const handleCardClick = (cardTitle) => {
-    alert(`Clicked on ${cardTitle}`);
-    // Replace alert with your desired click handler logic
+    // Click handler logic can be added here without alert
   };
 
   return (
@@ -97,14 +96,14 @@ function Skema() {
               border: 'none',
               padding: 0,
               cursor: 'pointer',
-              flex: '1',
-              maxWidth: '320px',
+              width: '320px',
+              height: '340px',
             }}
           >
             <div style={{
               backgroundColor: 'white',
               borderRadius: '12px',
-              padding: '40px 30px',
+              padding: '30px',
               color: '#333',
               position: 'relative',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
@@ -112,7 +111,10 @@ function Skema() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              textAlign: 'center'
+              width: '100%',
+              height: '100%',
+              boxSizing: 'border-box',
+              overflow: 'hidden'
             }}>
               {/* Icon Circle */}
               <div style={{
@@ -123,33 +125,46 @@ function Skema() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '25px',
-                boxShadow: '0 4px 12px rgba(0, 123, 255, 0.3)'
+                marginBottom: '20px',
+                boxShadow: '0 4px 12px rgba(0, 123, 255, 0.3)',
+                flexShrink: 0
               }}>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                  <rect x="3" y="3" width="6" height="6" rx="1"/>
+                  <rect x="15" y="3" width="6" height="6" rx="1"/>
+                  <rect x="3" y="15" width="6" height="6" rx="1"/>
+                  <rect x="15" y="15" width="6" height="6" rx="1"/>
+                  <rect x="9" y="9" width="6" height="6" rx="1"/>
+                  <line x1="9" y1="6" x2="15" y2="6"/>
+                  <line x1="6" y1="9" x2="6" y2="15"/>
+                  <line x1="18" y1="9" x2="18" y2="15"/>
+                  <line x1="9" y1="18" x2="15" y2="18"/>
                 </svg>
               </div>
               
               <h3 style={{
-                fontSize: '1.4rem',
+                fontSize: '1.25rem',
                 fontWeight: '700',
                 marginBottom: '15px',
                 lineHeight: '1.3',
                 letterSpacing: '0.5px',
-                color: '#2c3e50'
+                color: '#2c3e50',
+                flexShrink: 0,
+                textAlign: 'center',
+                width: '100%'
               }}>
                 36 SKEMA SERTIFIKASI
               </h3>
               
               <p style={{
-                fontSize: '0.95rem',
-                lineHeight: '1.5',
+                fontSize: '0.85rem',
+                lineHeight: '1.4',
                 color: '#6c757d',
-                margin: '0'
+                margin: '0',
+                textAlign: 'left',
+                width: '100%',
+                flex: '1',
+                overflow: 'hidden'
               }}>
                 Skema / Profesi / Jabatan / Pekerjaan di bidang bidang Jaminan Sekuriti, Teknologi Informasi dan Konstruksi.
               </p>
@@ -164,14 +179,14 @@ function Skema() {
               border: 'none',
               padding: 0,
               cursor: 'pointer',
-              flex: '1',
-              maxWidth: '320px',
+              width: '320px',
+              height: '340px',
             }}
           >
             <div style={{
               backgroundColor: 'white',
               borderRadius: '12px',
-              padding: '40px 30px',
+              padding: '30px',
               color: '#333',
               position: 'relative',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
@@ -179,7 +194,10 @@ function Skema() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              textAlign: 'center'
+              width: '100%',
+              height: '100%',
+              boxSizing: 'border-box',
+              overflow: 'hidden'
             }}>
               {/* Icon Circle */}
               <div style={{
@@ -190,31 +208,39 @@ function Skema() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '25px',
-                boxShadow: '0 4px 12px rgba(0, 123, 255, 0.3)'
+                marginBottom: '20px',
+                boxShadow: '0 4px 12px rgba(0, 123, 255, 0.3)',
+                flexShrink: 0
               }}>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                   <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
                   <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
                 </svg>
               </div>
               
               <h3 style={{
-                fontSize: '1.4rem',
+                fontSize: '1.25rem',
                 fontWeight: '700',
                 marginBottom: '15px',
                 lineHeight: '1.3',
                 letterSpacing: '0.5px',
-                color: '#2c3e50'
+                color: '#2c3e50',
+                flexShrink: 0,
+                textAlign: 'center',
+                width: '100%'
               }}>
                 300++ LINK DUDI
               </h3>
               
               <p style={{
-                fontSize: '0.95rem',
-                lineHeight: '1.5',
+                fontSize: '0.85rem',
+                lineHeight: '1.4',
                 color: '#6c757d',
-                margin: '0'
+                margin: '0',
+                textAlign: 'left',
+                width: '100%',
+                flex: '1',
+                overflow: 'hidden'
               }}>
                 Perusahaan mitra LSP yang siap untuk menerima profesi anda, sehingga ada lebih banyak peluang dari semua bidang pekerjaan.
               </p>
@@ -229,14 +255,14 @@ function Skema() {
               border: 'none',
               padding: 0,
               cursor: 'pointer',
-              flex: '1',
-              maxWidth: '320px',
+              width: '320px',
+              height: '340px',
             }}
           >
             <div style={{
               backgroundColor: 'white',
               borderRadius: '12px',
-              padding: '40px 30px',
+              padding: '30px',
               color: '#333',
               position: 'relative',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
@@ -244,7 +270,10 @@ function Skema() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              textAlign: 'center'
+              width: '100%',
+              height: '100%',
+              boxSizing: 'border-box',
+              overflow: 'hidden'
             }}>
               {/* Icon Circle */}
               <div style={{
@@ -255,34 +284,40 @@ function Skema() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '25px',
-                boxShadow: '0 4px 12px rgba(0, 123, 255, 0.3)'
+                marginBottom: '20px',
+                boxShadow: '0 4px 12px rgba(0, 123, 255, 0.3)',
+                flexShrink: 0
               }}>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2z"/>
-                  <path d="M8 21V7a2 2 0 012-2h4a2 2 0 012 2v14"/>
-                  <path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2"/>
-                  <path d="M8 11h8"/>
-                  <path d="M8 15h8"/>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                  <path d="M12 2l8 4-8 4-8-4 8-4z"/>
+                  <path d="M4 10l8 4 8-4"/>
+                  <path d="M4 14l8 4 8-4"/>
                 </svg>
               </div>
               
               <h3 style={{
-                fontSize: '1.4rem',
+                fontSize: '1.25rem',
                 fontWeight: '700',
                 marginBottom: '15px',
                 lineHeight: '1.3',
                 letterSpacing: '0.5px',
-                color: '#2c3e50'
+                color: '#2c3e50',
+                flexShrink: 0,
+                textAlign: 'center',
+                width: '100%'
               }}>
                 1000+ SDM TERVERIFIKASI
               </h3>
               
               <p style={{
-                fontSize: '0.95rem',
-                lineHeight: '1.5',
+                fontSize: '0.85rem',
+                lineHeight: '1.4',
                 color: '#6c757d',
-                margin: '0'
+                margin: '0',
+                textAlign: 'left',
+                width: '100%',
+                flex: '1',
+                overflow: 'hidden'
               }}>
                 Daftar tenaga kerja profesional yang telah kami sertifikasi, dan siap untuk mendukung kebutuhan SDM tersertifikasi perusahaan Anda.
               </p>

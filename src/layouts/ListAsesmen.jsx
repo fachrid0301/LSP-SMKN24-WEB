@@ -43,8 +43,11 @@ function ListAsesmen({ onBack }) {
       minHeight: '100vh',
       backgroundColor: '#f5f5f5',
       fontFamily: 'Arial, sans-serif',
-      padding: '30px 40px',
-      boxSizing: 'border-box'
+      padding: '20px', // Reduced padding for responsiveness
+      boxSizing: 'border-box',
+      width: '100%', // Full width to stick to sidebar
+      maxWidth: 'calc(100vw - 250px)', // Adjust for typical sidebar width (assuming ~250px)
+      margin: '0', // Remove default margin to avoid gaps
     }}>
         {/* Back Arrow */}
         <div style={{ marginBottom: '30px' }}>
@@ -82,17 +85,17 @@ function ListAsesmen({ onBack }) {
         {/* Stats Cards */}
         <div style={{
           display: 'flex',
-          gap: '30px',
+          gap: '20px', // Reduced gap for smaller screens
           marginBottom: '40px',
           flexWrap: 'wrap'
         }}>
           <div style={{
             backgroundColor: '#ffffff',
             borderRadius: '12px',
-            padding: '25px',
+            padding: '20px', // Slightly reduced padding
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            minWidth: '200px',
-            flex: '1'
+            flex: '1',
+            minWidth: '180px', // Adjusted for responsiveness
           }}>
             <div style={{
               display: 'flex',
@@ -119,10 +122,10 @@ function ListAsesmen({ onBack }) {
           <div style={{
             backgroundColor: '#ffffff',
             borderRadius: '12px',
-            padding: '25px',
+            padding: '20px', // Slightly reduced padding
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            minWidth: '200px',
-            flex: '1'
+            flex: '1',
+            minWidth: '180px', // Adjusted for responsiveness
           }}>
             <div style={{
               display: 'flex',
@@ -149,7 +152,7 @@ function ListAsesmen({ onBack }) {
 
         {/* Search Bar */}
         <div style={{ marginBottom: '30px' }}>
-          <div style={{ position: 'relative', maxWidth: '400px' }}>
+          <div style={{ position: 'relative', width: '100%', maxWidth: '400px' }}>
             <input
               type="text"
               placeholder="Cari asesmen..."
@@ -203,14 +206,14 @@ function ListAsesmen({ onBack }) {
             <table style={{
               width: '100%',
               borderCollapse: 'collapse',
-              minWidth: '800px'
+              minWidth: '600px' // Reduced minWidth for better responsiveness
             }}>
               <thead>
                 <tr style={{
                   backgroundColor: '#f8f9fa'
                 }}>
                   <th style={{
-                    padding: '16px',
+                    padding: '12px', // Reduced padding
                     textAlign: 'left',
                     fontSize: '14px',
                     fontWeight: '600',
@@ -219,15 +222,15 @@ function ListAsesmen({ onBack }) {
                     width: '60px'
                   }}>No</th>
                   <th style={{
-                    padding: '16px',
+                    padding: '12px',
                     textAlign: 'left',
                     fontSize: '14px',
                     fontWeight: '600',
                     color: '#333',
                     borderBottom: '1px solid #e0e0e0'
-                  }}>Nama Jadwal SMKN 24</th>
+                  }}>Nama Jadwal</th>
                   <th style={{
-                    padding: '16px',
+                    padding: '12px',
                     textAlign: 'left',
                     fontSize: '14px',
                     fontWeight: '600',
@@ -235,7 +238,7 @@ function ListAsesmen({ onBack }) {
                     borderBottom: '1px solid #e0e0e0'
                   }}>TUK</th>
                   <th style={{
-                    padding: '16px',
+                    padding: '12px',
                     textAlign: 'left',
                     fontSize: '14px',
                     fontWeight: '600',
@@ -243,7 +246,7 @@ function ListAsesmen({ onBack }) {
                     borderBottom: '1px solid #e0e0e0'
                   }}>Pembayaran</th>
                   <th style={{
-                    padding: '16px',
+                    padding: '12px',
                     textAlign: 'left',
                     fontSize: '14px',
                     fontWeight: '600',
@@ -251,7 +254,7 @@ function ListAsesmen({ onBack }) {
                     borderBottom: '1px solid #e0e0e0'
                   }}>Tanggal Ujian</th>
                   <th style={{
-                    padding: '16px',
+                    padding: '12px',
                     textAlign: 'left',
                     fontSize: '14px',
                     fontWeight: '600',
@@ -259,7 +262,7 @@ function ListAsesmen({ onBack }) {
                     borderBottom: '1px solid #e0e0e0'
                   }}>Lokasi Ujian</th>
                   <th style={{
-                    padding: '16px',
+                    padding: '12px',
                     textAlign: 'center',
                     fontSize: '14px',
                     fontWeight: '600',
@@ -276,26 +279,26 @@ function ListAsesmen({ onBack }) {
                       backgroundColor: index % 2 === 0 ? '#ffffff' : '#f9f9f9'
                     }}>
                       <td style={{
-                        padding: '16px',
+                        padding: '12px', // Reduced padding
                         borderBottom: '1px solid #f0f0f0',
                         fontSize: '14px',
                         color: '#666'
                       }}>{index + 1}</td>
                       <td style={{
-                        padding: '16px',
+                        padding: '12px',
                         borderBottom: '1px solid #f0f0f0',
                         fontSize: '14px',
                         color: '#333',
                         fontWeight: '500'
                       }}>{item.namaJadwal}</td>
                       <td style={{
-                        padding: '16px',
+                        padding: '12px',
                         borderBottom: '1px solid #f0f0f0',
                         fontSize: '14px',
                         color: '#666'
                       }}>{item.tuk}</td>
                       <td style={{
-                        padding: '16px',
+                        padding: '12px',
                         borderBottom: '1px solid #f0f0f0',
                         fontSize: '14px'
                       }}>
@@ -311,19 +314,19 @@ function ListAsesmen({ onBack }) {
                         </span>
                       </td>
                       <td style={{
-                        padding: '16px',
+                        padding: '12px',
                         borderBottom: '1px solid #f0f0f0',
                         fontSize: '14px',
                         color: '#666'
                       }}>{item.tanggalUjian}</td>
                       <td style={{
-                        padding: '16px',
+                        padding: '12px',
                         borderBottom: '1px solid #f0f0f0',
                         fontSize: '14px',
                         color: '#666'
                       }}>{item.lokasiUjian}</td>
                       <td style={{
-                        padding: '16px',
+                        padding: '12px',
                         borderBottom: '1px solid #f0f0f0',
                         textAlign: 'center'
                       }}>
@@ -365,8 +368,8 @@ function ListAsesmen({ onBack }) {
       {/* Add Button */}
       <div style={{
         position: 'fixed',
-        bottom: '30px',
-        right: '30px',
+        bottom: '20px', // Adjusted for better mobile view
+        right: '20px',
         zIndex: '1000'
       }}>
         <button style={{

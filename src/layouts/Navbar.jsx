@@ -1,4 +1,8 @@
+import React, { useState } from 'react';
+
 function Navbar({ onNavClick, onLoginClick }) {
+  const [isSertifikasiOpen, setIsSertifikasiOpen] = useState(false);
+
   return (
     <nav
       style={{
@@ -44,28 +48,95 @@ function Navbar({ onNavClick, onLoginClick }) {
           display: "flex",
           gap: "24px",
           alignItems: "center",
+          position: "relative",
         }}
       >
         {["Home", "Profile", "Sertifikasi", "Berita", "Galeri", "Kontak"].map(
           (name) => (
-            <button
+            <div
               key={name}
-              onClick={() => onNavClick(name.toLowerCase())}
-              style={{
-                background: "none",
-                border: "none",
-                fontSize: "17px",
-                color: "#333",
-                cursor: "pointer",
-                fontWeight: "500",
-                padding: "6px 0",
+              style={{ position: "relative" }}
+              onMouseEnter={() => {
+                if (name === "Sertifikasi") setIsSertifikasiOpen(true);
+              }}
+              onMouseLeave={() => {
+                if (name === "Sertifikasi") setIsSertifikasiOpen(false);
               }}
             >
-              {name}{" "}
-              {["Profile", "Sertifikasi", "Galeri"].includes(name) && (
-                <span style={{ fontSize: "10px" }}>▼</span>
+              <button
+                onClick={() => {
+                  if (name !== "Sertifikasi") onNavClick(name.toLowerCase());
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  fontSize: "17px",
+                  color: "#333",
+                  cursor: "pointer",
+                  fontWeight: "500",
+                  padding: "6px 0",
+                }}
+              >
+                {name}{" "}
+                {["Profile", "Sertifikasi", "Galeri"].includes(name) && (
+                  <span style={{ fontSize: "10px" }}>▼</span>
+                )}
+              </button>
+              {name === "Sertifikasi" && isSertifikasiOpen && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: 0,
+                    backgroundColor: "white",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                    borderRadius: "4px",
+                    minWidth: "150px",
+                    zIndex: 1,
+                    padding: "8px 0",
+                  }}
+                >
+                  <button
+                    onClick={() => onNavClick("sertifikasi")}
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      padding: "8px 16px",
+                      background: "none",
+                      border: "none",
+                      textAlign: "left",
+                      fontSize: "14px",
+                      color: "#333",
+                      cursor: "pointer",
+                      transition: "background-color 0.2s",
+                    }}
+                    onMouseOver={(e) => (e.target.style.backgroundColor = "#f5f5f5")}
+                    onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+                  >
+                    Sertifikasi
+                  </button>
+                  <button
+                    onClick={() => onNavClick("tempat-uji-kompetensi")}
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      padding: "8px 16px",
+                      background: "none",
+                      border: "none",
+                      textAlign: "left",
+                      fontSize: "14px",
+                      color: "#333",
+                      cursor: "pointer",
+                      transition: "background-color 0.2s",
+                    }}
+                    onMouseOver={(e) => (e.target.style.backgroundColor = "#f5f5f5")}
+                    onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+                  >
+                    Tempat Uji Kompetensi
+                  </button>
+                </div>
               )}
-            </button>
+            </div>
           )
         )}
       </div>

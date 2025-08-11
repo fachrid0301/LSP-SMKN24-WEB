@@ -10,8 +10,14 @@ import Register from "./layouts/Register";
 import Dashboard from "./layouts/Dashboard";
 import Login from "./layouts/Login";
 import SertifikasiCTA from "./layouts/SertifikasiCTA";
-import LandingPage from "./layouts/LandingPage"; // Import LandingPage
+import LandingPage from "./layouts/LandingPage";
 import Kontak from "./layouts/kontak";
+import ManajemenData from "./layouts/ManajemenData";
+import Asesor from "./layouts/Asesor";
+import Asesi from "./layouts/Asesi";
+import Asesmen from "./layouts/Asesmen";
+import Jurusan from "./layouts/Jurusan";
+import Kompetensi from "./layouts/Kompetensi";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -24,8 +30,7 @@ function App() {
   const kontakRef = useRef(null);
 
   const scrollToSection = (section) => {
-    // Handle navigation for all menu items
-    if (["register", "dashboard", "login"].includes(section)) {
+    if (["register", "dashboard", "login", "manajemenData"].includes(section)) {
       setCurrentPage(section);
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -37,7 +42,6 @@ function App() {
       return;
     }
 
-    // For Berita, assume it navigates to home for now (no dedicated section)
     if (section === "berita") {
       section = "home";
     }
@@ -80,19 +84,22 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Fungsi untuk navigasi ke LandingPage
   const goToLandingPage = () => {
     setCurrentPage("landingPage");
   };
 
+  const handleNavigate = (page) => {
+    setCurrentPage(page.toLowerCase()); // Ensure page name is lowercase to match rendering conditions
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
-      {/* Tampilkan Navbar untuk halaman home dan kontak */}
-      {(currentPage === "home" || currentPage === "kontak") && (
+      {(currentPage === "home" || currentPage === "kontak" || currentPage === "manajemenData" || 
+        currentPage === "asesi" || currentPage === "asesmen" || 
+        currentPage === "jurusan" || currentPage === "kompetensi") && (
         <Navbar onNavClick={scrollToSection} onLoginClick={handleLoginClick} />
       )}
-
-      {/* Halaman Home dengan semua section */}
 
       {currentPage === "home" && (
         <>
@@ -111,13 +118,10 @@ function App() {
           <div>
             <Skema />
           </div>
-<>
-
           <SertifikasiCTA
             goToRegister={() => setCurrentPage("register")}
             goToDashboard={() => setCurrentPage("dashboard")}
           />
-
           <div ref={galeriRef}>
             <CariSkema goToLandingPage={goToLandingPage} />
           </div>
@@ -125,18 +129,24 @@ function App() {
             <FooterPage />
           </div>
         </>
-        </>
       )}
 
-      {/* Halaman Kontak */}
       {currentPage === "kontak" && (
         <Kontak onBack={handleBackToHome} />
-
       )}
 
-      {/* Halaman-halaman lainnya */}
+      {currentPage === "manajemenData" && (
+        <ManajemenData onNavigate={handleNavigate} onBack={handleBackToHome} />
+      )}
+
+      {currentPage === "asesor" && <Asesor onBack={handleBackToHome} />}
+      {currentPage === "asesi" && <Asesi onBack={handleBackToHome} />}
+      {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />}
+      {currentPage === "jurusan" && <Jurusan onBack={handleBackToHome} />}
+      {currentPage === "kompetensi" && <Kompetensi onBack={handleBackToHome} />}
+
       {currentPage === "register" && <Register onBack={handleBackToHome} />}
-      {currentPage === "dashboard" && <Dashboard onBack={handleBackToHome} />}
+      {currentPage === "dashboard" && <Dashboard onBack={handleBackToHome} onNavigate={handleNavigate} />}
       {currentPage === "login" && <Login onBack={handleBackToHome} />}
       {currentPage === "landingPage" && <LandingPage onBack={handleBackToHome} />}
     </>

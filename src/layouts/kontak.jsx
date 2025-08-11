@@ -20,6 +20,18 @@ function Kontak({ onBack }) {
           justifyContent: 'center',
         }}
       >
+        {/* Blue overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(44, 148, 255, 0.3)',
+            zIndex: 1,
+          }}
+        ></div>
         {/* Orange Bar at Bottom */}
         <div
           style={{
@@ -29,6 +41,7 @@ function Kontak({ onBack }) {
             right: 0,
             height: '60px',
             backgroundColor: '#FF8C00',
+            zIndex: 2,
           }}
         ></div>
       </div>
@@ -102,6 +115,7 @@ function Kontak({ onBack }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              position: "relative",
             }}
           >
             <h2
@@ -110,6 +124,7 @@ function Kontak({ onBack }) {
                 fontWeight: "600",
                 marginBottom: "40px",
                 textAlign: "center",
+                color: "#fff",
               }}
             >
               Contact Information
@@ -120,34 +135,33 @@ function Kontak({ onBack }) {
               style={{
                 display: "flex",
                 alignItems: "flex-start",
-                marginBottom: "30px",
+                marginBottom: "35px",
                 gap: "20px",
+                position: "relative",
               }}
             >
               <div
                 style={{
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: "#fff",
-                  borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
-                  fontSize: "16px",
-                  color: "#6BB6FF",
+                  fontSize: "20px",
+                  color: "#fff",
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                 </svg>
               </div>
-              <div>
+              <div style={{ flex: 1 }}>
                 <p
                   style={{
                     margin: 0,
                     fontSize: "15px",
-                    lineHeight: "1.5",
+                    lineHeight: "1.6",
+                    color: "#fff",
+                    fontWeight: "400",
                   }}
                 >
                   Jl. Bambu Hitam No.3, RT.3/RW.1, Bambu Apus,
@@ -157,6 +171,17 @@ function Kontak({ onBack }) {
                   Khusus Ibukota Jakarta 13890
                 </p>
               </div>
+              {/* Decorative line below */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  right: "0",
+                  bottom: "-10px",
+                  height: "1px",
+                  backgroundColor: "#7EB3E9",
+                }}
+              ></div>
             </div>
 
             {/* Phone */}
@@ -164,25 +189,22 @@ function Kontak({ onBack }) {
               style={{
                 display: "flex",
                 alignItems: "center",
-                marginBottom: "30px",
+                marginBottom: "35px",
                 gap: "20px",
+                position: "relative",
               }}
             >
               <div
                 style={{
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: "#fff",
-                  borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
-                  fontSize: "16px",
-                  color: "#6BB6FF",
+                  fontSize: "20px",
+                  color: "#fff",
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                 </svg>
               </div>
@@ -190,10 +212,23 @@ function Kontak({ onBack }) {
                 style={{
                   margin: 0,
                   fontSize: "15px",
+                  color: "#fff",
+                  fontWeight: "400",
                 }}
               >
                 (021)8441976
               </p>
+              {/* Decorative line below */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  right: "0",
+                  bottom: "-10px",
+                  height: "1px",
+                  backgroundColor: "#7EB3E9",
+                }}
+              ></div>
             </div>
 
             {/* Email */}
@@ -201,25 +236,22 @@ function Kontak({ onBack }) {
               style={{
                 display: "flex",
                 alignItems: "center",
-                marginBottom: "30px",
+                marginBottom: "35px",
                 gap: "20px",
+                position: "relative",
               }}
             >
               <div
                 style={{
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: "#fff",
-                  borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
-                  fontSize: "16px",
-                  color: "#6BB6FF",
+                  fontSize: "20px",
+                  color: "#fff",
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
               </div>
@@ -227,10 +259,23 @@ function Kontak({ onBack }) {
                 style={{
                   margin: 0,
                   fontSize: "15px",
+                  color: "#fff",
+                  fontWeight: "400",
                 }}
               >
-                Lorem ipsum dolor sit amet
+                info@smkn24jkt.sch.id
               </p>
+              {/* Decorative line below */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  right: "0",
+                  bottom: "-10px",
+                  height: "1px",
+                  backgroundColor: "#7EB3E9",
+                }}
+              ></div>
             </div>
 
             {/* Website */}
@@ -243,19 +288,15 @@ function Kontak({ onBack }) {
             >
               <div
                 style={{
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: "#fff",
-                  borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
-                  fontSize: "16px",
-                  color: "#6BB6FF",
+                  fontSize: "20px",
+                  color: "#fff",
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                 </svg>
               </div>
@@ -263,11 +304,39 @@ function Kontak({ onBack }) {
                 style={{
                   margin: 0,
                   fontSize: "15px",
+                  color: "#fff",
+                  fontWeight: "400",
                 }}
               >
                 https://smkn24jkt.sch.id/
               </p>
             </div>
+
+            {/* Decorative elements */}
+            <div
+              style={{
+                position: "absolute",
+                top: "20px",
+                right: "20px",
+                width: "100px",
+                height: "100px",
+                background: "linear-gradient(45deg, rgba(255,255,255,0.1), transparent)",
+                borderRadius: "50%",
+                opacity: "0.5",
+              }}
+            ></div>
+            <div
+              style={{
+                position: "absolute",
+                bottom: "30px",
+                left: "10px",
+                width: "60px",
+                height: "60px",
+                background: "linear-gradient(135deg, rgba(255,255,255,0.1), transparent)",
+                borderRadius: "50%",
+                opacity: "0.3",
+              }}
+            ></div>
           </div>
 
           {/* Right Side - Send Us Messages Form */}
@@ -669,4 +738,4 @@ function Kontak({ onBack }) {
   );
 }
 
-export default Kontak;
+export default Kontak

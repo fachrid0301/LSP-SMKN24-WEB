@@ -100,27 +100,6 @@ function ListAsesmen({ onBack }) {
       maxWidth: 'calc(100vw - 250px)',
       margin: '0',
     }}>
-      {/* Back Arrow */}
-      <div style={{ marginBottom: '30px' }}>
-        <span
-          onClick={onBack}
-          style={{
-            fontSize: '20px',
-            cursor: 'pointer',
-            color: '#666',
-            padding: '5px',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            transition: 'color 0.2s ease'
-          }}
-          onMouseEnter={(e) => e.target.style.color = '#333'}
-          onMouseLeave={(e) => e.target.style.color = '#666'}
-        >
-          ← Kembali
-        </span>
-      </div>
-
       {/* Header */}
       <div style={{ marginBottom: '40px' }}>
         <h1 style={{
@@ -203,7 +182,7 @@ function ListAsesmen({ onBack }) {
       </div>
 
       {/* Search Bar */}
-      <div style={{ marginBottom: '30px', maxWidth: '300px' }}> {/* Reduced maxWidth from 400px to 300px */}
+      <div style={{ marginBottom: '30px', maxWidth: '300px' }}>
         <div style={{ position: 'relative', width: '100%' }}>
           <input
             type="text"
@@ -212,10 +191,10 @@ function ListAsesmen({ onBack }) {
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{
               width: '100%',
-              padding: '10px 35px 10px 12px', /* Reduced padding */
+              padding: '10px 35px 10px 12px',
               border: '1px solid #ddd',
-              borderRadius: '6px', /* Reduced border radius */
-              fontSize: '13px', /* Reduced font size */
+              borderRadius: '6px',
+              fontSize: '13px',
               outline: 'none',
               backgroundColor: '#ffffff',
               boxSizing: 'border-box',
@@ -230,7 +209,7 @@ function ListAsesmen({ onBack }) {
             top: '50%',
             transform: 'translateY(-50%)',
             color: '#999',
-            fontSize: '14px' /* Slightly reduced font size */
+            fontSize: '14px'
           }}>🔍</span>
         </div>
       </div>

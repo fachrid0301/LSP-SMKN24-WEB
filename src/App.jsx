@@ -10,11 +10,8 @@ import Register from "./layouts/Register";
 import Dashboard from "./layouts/Dashboard";
 import Login from "./layouts/Login";
 import SertifikasiCTA from "./layouts/SertifikasiCTA";
-<<<<<<< HEAD
 import LandingPage from "./layouts/LandingPage"; // Import LandingPage
-=======
 import Kontak from "./layouts/kontak";
->>>>>>> 2d7632d6943fea316a6e7a7d57973bbc666c8e59
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -95,10 +92,8 @@ function App() {
         <Navbar onNavClick={scrollToSection} onLoginClick={handleLoginClick} />
       )}
 
-<<<<<<< HEAD
-=======
       {/* Halaman Home dengan semua section */}
->>>>>>> 2d7632d6943fea316a6e7a7d57973bbc666c8e59
+
       {currentPage === "home" && (
         <>
           <div ref={homeRef}>
@@ -116,7 +111,7 @@ function App() {
           <div>
             <Skema />
           </div>
-<<<<<<< HEAD
+<>
 
           <SertifikasiCTA
             goToRegister={() => setCurrentPage("register")}
@@ -130,7 +125,6 @@ function App() {
             <FooterPage />
           </div>
         </>
-=======
           <SertifikasiCTA
             goToRegister={() => setCurrentPage("register")}
             goToDashboard={() => setCurrentPage("dashboard")}
@@ -147,7 +141,7 @@ function App() {
       {/* Halaman Kontak */}
       {currentPage === "kontak" && (
         <Kontak onBack={handleBackToHome} />
->>>>>>> 2d7632d6943fea316a6e7a7d57973bbc666c8e59
+
       )}
 
       {/* Halaman-halaman lainnya */}

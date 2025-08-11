@@ -125,16 +125,6 @@ function App() {
             <FooterPage />
           </div>
         </>
-          <SertifikasiCTA
-            goToRegister={() => setCurrentPage("register")}
-            goToDashboard={() => setCurrentPage("dashboard")}
-          />
-          <div ref={galeriRef}>
-            <CariSkema />
-          </div>
-          <div ref={kontakRef}>
-            <FooterPage />
-          </div>
         </>
       )}
 

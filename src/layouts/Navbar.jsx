@@ -6,8 +6,9 @@ function Navbar({ onNavClick, onLoginClick }) {
   return (
     <nav
       style={{
-        position: "relative",
-        zIndex: 10,
+        position: "sticky", // Ubah dari "relative" ke "sticky"
+        top: 0, // Menempel di bagian atas saat scroll
+        zIndex: 1000, // Z-index tinggi supaya di atas semua elemen
         backgroundColor: "white",
         display: "flex",
         alignItems: "center",
@@ -92,7 +93,7 @@ function Navbar({ onNavClick, onLoginClick }) {
                     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
                     borderRadius: "4px",
                     minWidth: "150px",
-                    zIndex: 1,
+                    zIndex: 1001, // Lebih tinggi dari navbar
                     padding: "8px 0",
                   }}
                 >

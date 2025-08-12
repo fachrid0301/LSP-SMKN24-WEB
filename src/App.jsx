@@ -19,7 +19,8 @@ import Asesmen from "./layouts/Asesmen";
 import Jurusan from "./layouts/Jurusan";
 import Kompetensi from "./layouts/Kompetensi";
 import ListAsesmen from "./layouts/ListAsesmen";
-import AsesmenDiikuti from "./layouts/AsesmenDiikuti"; // Ensure import
+import AsesmenDiikuti from "./layouts/AsesmenDiikuti"; 
+import Berita from "./layouts/Berita"; // ✅ Tambah import
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -40,7 +41,7 @@ function App() {
     "jurusan",
     "kompetensi",
     "listasesmen",
-    "asesmenDiikuti", // Include for sidebar rendering
+    "asesmenDiikuti",
   ];
 
   const scrollToSection = (section) => {
@@ -59,8 +60,10 @@ function App() {
       return;
     }
 
-    if (section === "berita") {
-      section = "home";
+    if (section === "berita") { // ✅ Biar bisa klik Berita
+      setCurrentPage("berita");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
     }
 
     if (currentPage !== "home") {
@@ -142,7 +145,7 @@ function App() {
       Dashboard: "dashboard",
       ManajemenData: "manajemenData",
       ListAsesmen: "listasesmen",
-      AsesmenDiikuti: "asesmenDiikuti", // Correct mapping
+      AsesmenDiikuti: "asesmenDiikuti",
       Profile: "dashboard",
     };
 
@@ -153,7 +156,7 @@ function App() {
 
   return (
     <>
-      {(currentPage === "home" || currentPage === "kontak") && (
+      {(currentPage === "home" || currentPage === "kontak" || currentPage === "berita") && (
         <Navbar onNavClick={scrollToSection} onLoginClick={handleLoginClick} />
       )}
 
@@ -194,6 +197,8 @@ function App() {
       )}
 
       {currentPage === "kontak" && <Kontak onBack={handleBackToHome} />}
+
+      {currentPage === "berita" && <Berita onBack={handleBackToHome} />} {/* ✅ Halaman Berita */}
 
       {currentPage === "dashboard" && (
         <Dashboard onBack={handleBackToHome} onNavigate={handleNavigate} />

@@ -19,13 +19,46 @@ import Asesmen from "./layouts/Asesmen";
 import Jurusan from "./layouts/Jurusan";
 import Kompetensi from "./layouts/Kompetensi";
 import ListAsesmen from "./layouts/ListAsesmen";
-import AsesmenDiikuti from "./layouts/AsesmenDiikuti"; 
-import Berita from "./layouts/Berita"; // ✅ Tambah import
+import AsesmenDiikuti from "./layouts/AsesmenDiikuti";
+import Berita from "./layouts/Berita";
+import AddListAsesmen from "./layouts/AddListAsesmen";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [activeMenu, setActiveMenu] = useState("Dashboard");
   const [pendingScroll, setPendingScroll] = useState(null);
+  const [assessmentData, setAssessmentData] = useState([
+    {
+      id: 1,
+      namaJadwal: "Sertifikasi Web Developer - Batch 1",
+      tuk: "TUK LSP Digital",
+      pembiayaan: "Dibayar Penuh",
+      tanggalUjian: "15 Sept 2025",
+      lokasiUjian: "Jakarta Pusat",
+      asesor: "Asesor A",
+      jumlahPeserta: 20,
+    },
+    {
+      id: 2,
+      namaJadwal: "Sertifikasi Mobile App Developer",
+      tuk: "TUK LSP Mobile",
+      pembiayaan: "Belum Dibayar",
+      tanggalUjian: "22 Sept 2025",
+      lokasiUjian: "Bandung",
+      asesor: "Asesor B",
+      jumlahPeserta: 15,
+    },
+    {
+      id: 3,
+      namaJadwal: "Sertifikasi Data Analyst",
+      tuk: "TUK LSP Data",
+      pembiayaan: "Dibayar Penuh",
+      tanggalUjian: "30 Sept 2025",
+      lokasiUjian: "Surabaya",
+      asesor: "Asesor C",
+      jumlahPeserta: 25,
+    }
+  ]);
 
   const homeRef = useRef(null);
   const profileRef = useRef(null);
@@ -42,6 +75,7 @@ function App() {
     "kompetensi",
     "listasesmen",
     "asesmenDiikuti",
+    "addlistasesmen",
   ];
 
   const scrollToSection = (section) => {
@@ -60,7 +94,7 @@ function App() {
       return;
     }
 
-    if (section === "berita") { // ✅ Biar bisa klik Berita
+    if (section === "berita") {
       setCurrentPage("berita");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -119,9 +153,10 @@ function App() {
       listasesmen: "ListAsesmen",
       asesmenDiikuti: "AsesmenDiikuti",
       profile: "Profile",
+      addlistasesmen: "ManajemenData",
     };
 
-    if (["asesor", "asesi", "asesmen", "jurusan", "kompetensi"].includes(pageLower)) {
+    if (["asesor", "asesi", "asesmen", "jurusan", "kompetensi", "addlistasesmen"].includes(pageLower)) {
       setActiveMenu("ManajemenData");
     } else if (menuMap[pageLower]) {
       setActiveMenu(menuMap[pageLower]);
@@ -152,6 +187,11 @@ function App() {
     if (pageMap[menuName]) {
       setCurrentPage(pageMap[menuName]);
     }
+  };
+
+  const handleAddAssessment = (newItem) => {
+    setAssessmentData([...assessmentData, newItem]);
+    handleNavigate("listasesmen");
   };
 
   return (
@@ -198,7 +238,7 @@ function App() {
 
       {currentPage === "kontak" && <Kontak onBack={handleBackToHome} />}
 
-      {currentPage === "berita" && <Berita onBack={handleBackToHome} />} {/* ✅ Halaman Berita */}
+      {currentPage === "berita" && <Berita onBack={handleBackToHome} />}
 
       {currentPage === "dashboard" && (
         <Dashboard onBack={handleBackToHome} onNavigate={handleNavigate} />
@@ -233,14 +273,24 @@ function App() {
             {currentPage === "asesi" && <Asesi onBack={handleBackToHome} />}
             {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />}
             {currentPage === "listasesmen" && (
-              <ListAsesmen onBack={handleBackToHome} />
+              <ListAsesmen
+                onBack={handleBackToHome}
+                onNavigate={handleNavigate}
+                assessmentData={assessmentData}
+                setAssessmentData={setAssessmentData}
+              />
             )}
             {currentPage === "jurusan" && <Jurusan onBack={handleBackToHome} />}
-            {currentPage === "kompetensi" && (
-              <Kompetensi onBack={handleBackToHome} />
-            )}
+            {currentPage === "kompetensi" && <Kompetensi onBack={handleBackToHome} />}
             {currentPage === "asesmenDiikuti" && (
               <AsesmenDiikuti onBack={handleBackToHome} />
+            )}
+            {currentPage === "addlistasesmen" && (
+              <AddListAsesmen
+                onBack={() => handleNavigate("listasesmen")}
+                onSave={handleAddAssessment}
+                assessmentData={assessmentData}
+              />
             )}
           </div>
         </div>

@@ -1,40 +1,8 @@
 import React, { useState } from 'react';
 
-function ListAsesmen({ onBack }) {
+function ListAsesmen({ onBack, onNavigate, assessmentData, setAssessmentData }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [assessmentData, setAssessmentData] = useState([
-    {
-      id: 1,
-      namaJadwal: "Sertifikasi Web Developer - Batch 1",
-      tuk: "TUK LSP Digital",
-      pembiayaan: "Dibayar Penuh",
-      tanggalUjian: "15 Sept 2025",
-      lokasiUjian: "Jakarta Pusat",
-      asesor: "Asesor A",
-      jumlahPeserta: 20,
-    },
-    {
-      id: 2,
-      namaJadwal: "Sertifikasi Mobile App Developer",
-      tuk: "TUK LSP Mobile",
-      pembiayaan: "Belum Dibayar",
-      tanggalUjian: "22 Sept 2025",
-      lokasiUjian: "Bandung",
-      asesor: "Asesor B",
-      jumlahPeserta: 15,
-    },
-    {
-      id: 3,
-      namaJadwal: "Sertifikasi Data Analyst",
-      tuk: "TUK LSP Data",
-      pembiayaan: "Dibayar Penuh",
-      tanggalUjian: "30 Sept 2025",
-      lokasiUjian: "Surabaya",
-      asesor: "Asesor C",
-      jumlahPeserta: 25,
-    }
-  ]);
-  const [modalMode, setModalMode] = useState(null); // 'add' or 'edit'
+  const [modalMode, setModalMode] = useState(null);
   const [currentItem, setCurrentItem] = useState(null);
 
   // Filter data berdasarkan search term
@@ -53,31 +21,13 @@ function ListAsesmen({ onBack }) {
     }
   };
 
-  const handleOpenModal = (mode, item = null) => {
-    if (mode === 'add') {
-      const newId = assessmentData.length > 0 ? Math.max(...assessmentData.map(i => i.id)) + 1 : 1;
-      setCurrentItem({
-        id: newId,
-        namaJadwal: '',
-        tuk: '',
-        pembiayaan: 'Dibayar Penuh',
-        tanggalUjian: '',
-        lokasiUjian: '',
-        asesor: '',
-        jumlahPeserta: 0,
-      });
-    } else {
-      setCurrentItem({ ...item });
-    }
+  const handleOpenModal = (mode, item) => {
+    setCurrentItem({ ...item });
     setModalMode(mode);
   };
 
   const handleSave = () => {
-    if (modalMode === 'add') {
-      setAssessmentData([...assessmentData, currentItem]);
-    } else {
-      setAssessmentData(assessmentData.map(i => i.id === currentItem.id ? currentItem : i));
-    }
+    setAssessmentData(assessmentData.map(i => i.id === currentItem.id ? currentItem : i));
     setModalMode(null);
   };
 
@@ -113,7 +63,6 @@ function ListAsesmen({ onBack }) {
     </svg>
   );
 
-  // New icons for stats cards
   const AssessmentIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007bff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -178,7 +127,7 @@ function ListAsesmen({ onBack }) {
         gap: '20px',
         marginBottom: '40px',
         flexWrap: 'wrap',
-        maxWidth: '50%', // Adjusted to half screen
+        maxWidth: '50%',
       }}>
         <div style={{
           backgroundColor: '#ffffff',
@@ -326,7 +275,7 @@ function ListAsesmen({ onBack }) {
           Daftar Asesmen
         </h2>
         <button
-          onClick={() => handleOpenModal('add')}
+          onClick={() => onNavigate('addlistasesmen')}
           style={{
             backgroundColor: '#fd7e14',
             color: '#ffffff',
@@ -574,8 +523,8 @@ function ListAsesmen({ onBack }) {
         </div>
       </div>
 
-      {/* Modal for Add/Edit */}
-      {modalMode && currentItem && (
+      {/* Modal for Edit */}
+      {modalMode === 'edit' && currentItem && (
         <div style={{
           position: 'fixed',
           top: 0,
@@ -604,7 +553,7 @@ function ListAsesmen({ onBack }) {
               textTransform: 'uppercase',
               textAlign: 'center'
             }}>
-              {modalMode === 'add' ? 'Tambahkan Data Baru' : 'Edit Data'}
+              Edit Data
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>

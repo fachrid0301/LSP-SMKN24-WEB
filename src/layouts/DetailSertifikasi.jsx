@@ -1,7 +1,5 @@
-// src/pages/Home.jsx
 import React from "react";
-import labImage from "../img/lab.png";
-import logoLSP from "../img/LOGO_LSP_SMKN_24.jpg";
+import labImage from "../img/komputer.png";
 
 const Home = () => {
   const handleMenuClick = (menuItem) => {
@@ -12,46 +10,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* NAVBAR */}
-      <nav className="navbar">
-        {/* Left - Logo */}
-        <div className="navbar-logo">
-          <img
-            src={logoLSP}
-            alt="Logo LSP"
-            className="logo-img"
-          />
-          <span className="logo-text">MyLSP</span>
-        </div>
-
-        {/* Middle - Menu */}
-        <ul className="navbar-menu">
-          <li className="menu-item" onClick={() => handleMenuClick('Home')}>Home</li>
-          <li className="menu-item" onClick={() => handleMenuClick('Profile')}>
-            Profile <span className="dropdown-arrow">▼</span>
-          </li>
-          <li className="menu-item" onClick={() => handleMenuClick('Sertifikasi')}>
-            Sertifikasi <span className="dropdown-arrow">▼</span>
-          </li>
-          <li className="menu-item" onClick={() => handleMenuClick('Berita')}>
-            Berita <span className="dropdown-arrow">▼</span>
-          </li>
-          <li className="menu-item" onClick={() => handleMenuClick('Galeri')}>
-            Galeri <span className="dropdown-arrow">▼</span>
-          </li>
-          <li className="menu-item" onClick={() => handleMenuClick('Kontak')}>Kontak</li>
-        </ul>
-
-        {/* Right - Blue background + Login */}
-        <div className="navbar-right">
-          <div className="login-container">
-            <button className="login-btn">
-              Login
-            </button>
-          </div>
-        </div>
-      </nav>
-
       {/* HERO */}
       <div className="hero-section">
         <img
@@ -263,107 +221,13 @@ const Home = () => {
           color: #222;
         }
 
-        /* NAVBAR STYLES */
-        .navbar {
-          display: flex;
-          align-items: center;
-          background-color: #fff;
-          height: 85px;
-          position: relative;
-          z-index: 10;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-          padding: 0 0 0 24px;
-        }
-
-        .navbar-logo {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .logo-img {
-          height: 85px;
-          width: 85px;
-          object-fit: contain;
-          border-radius: 8px;
-          background: rgba(255, 255, 255, 0.9);
-          padding: 3px;
-        }
-
-        .logo-text {
-          font-weight: 700;
-          font-size: 28px;
-          color: #ff7a00;
-        }
-
-        .navbar-menu {
-          display: flex;
-          list-style: none;
-          gap: 12px;
-          margin: 0;
-          padding: 0;
-          font-size: 16px;
-          font-weight: 400;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .menu-item {
-          cursor: pointer;
-          transition: all 0.3s ease;
-          padding: 8px 12px;
-          border-radius: 4px;
-          white-space: nowrap;
-        }
-
-        .menu-item:hover {
-          background-color: rgba(255, 122, 0, 0.1);
-          color: #ff7a00;
-          transform: translateY(-1px);
-        }
-
-        .menu-item:active {
-          transform: translateY(0);
-          background-color: rgba(255, 122, 0, 0.2);
-        }
-
-        .dropdown-arrow {
-          font-size: 12px;
-        }
-
-        .navbar-right {
-          position: relative;
-          height: 100%;
-          width: 300px;
-          margin-left: auto;
-          background: linear-gradient(135deg, transparent 35%, #4a9eff 35%);
-        }
-
-        .login-container {
-          position: absolute;
-          right: 40px;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-
-        .login-btn {
-          background: #fff;
-          border: none;
-          border-radius: 26px;
-          padding: 10px 20px;
-          font-size: 16px;
-          font-weight: 600;
-          box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-          cursor: pointer;
-        }
-
         /* HERO STYLES */
         .hero-section {
           width: 100%;
           height: 400px;
           background-color: #f5f5f5;
           overflow: hidden;
+          position: relative;
         }
 
         .hero-image {
@@ -372,6 +236,57 @@ const Home = () => {
           object-fit: cover;
           object-position: center;
           display: block;
+          transition: all 0.3s ease;
+        }
+
+        .hero-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            135deg,
+            rgba(74, 158, 255, 0.25) 0%,
+            rgba(74, 158, 255, 0.15) 30%,
+            rgba(74, 158, 255, 0.08) 60%,
+            transparent 100%
+          );
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .hero-section::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(
+            ellipse at top left,
+            rgba(74, 158, 255, 0.3) 0%,
+            rgba(74, 158, 255, 0.15) 25%,
+            rgba(74, 158, 255, 0.05) 50%,
+            transparent 70%
+          );
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .hero-section:hover .hero-image {
+          transform: scale(1.02);
+        }
+
+        .hero-section:hover::before {
+          background: linear-gradient(
+            135deg,
+            rgba(74, 158, 255, 0.35) 0%,
+            rgba(74, 158, 255, 0.20) 30%,
+            rgba(74, 158, 255, 0.12) 60%,
+            transparent 100%
+          );
         }
 
         /* ORANGE STRIP */
@@ -530,47 +445,64 @@ const Home = () => {
 
         .tabs-container {
           display: flex;
-          border-bottom: 2px solid #eee;
+          background: linear-gradient(135deg, #ff6b35, #f7931e, #ffc107, #ffeb3b);
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
         }
 
         .tab-item {
-          padding: 15px 25px;
-          cursor: pointer;
+          flex: 1;
+          padding: 12px 20px;
+          text-align: center;
+          color: white;
           font-weight: 500;
-          color: #666;
-          background-color: #f8f8f8;
-          border: 1px solid #ddd;
-          border-bottom: none;
-          margin-right: 2px;
+          cursor: pointer;
+          border-right: 1px solid rgba(255,255,255,0.2);
+          transition: all 0.3s ease;
+          position: relative;
+        }
+
+        .tab-item:last-child {
+          border-right: none;
+        }
+
+        .tab-item:hover {
+          background-color: rgba(255,255,255,0.1);
         }
 
         .tab-item.active {
-          background-color: #ff7a00;
-          color: #fff;
+          background-color: rgba(255,255,255,0.2);
           font-weight: 600;
         }
 
         /* TABLE STYLES */
         .table-container {
-          margin-top: 20px;
-          border: 2px solid #333;
-          border-radius: 15px;
+          border: 2px solid #e0e0e0;
+          border-top: none;
+          border-bottom-left-radius: 8px;
+          border-bottom-right-radius: 8px;
           overflow: hidden;
         }
 
         .unit-table {
           width: 100%;
           border-collapse: collapse;
+          background-color: white;
+        }
+
+        .unit-table thead {
+          background-color: #f8f9fa;
+          border-bottom: 2px solid #e0e0e0;
         }
 
         .unit-table th {
-          background-color: #fff;
-          padding: 15px;
+          padding: 15px 12px;
           text-align: center;
           font-weight: 600;
           color: #333;
-          border-bottom: 1px solid #333;
-          border-right: 1px solid #333;
+          border-right: 1px solid #e0e0e0;
+          font-size: 14px;
         }
 
         .unit-table th:last-child {
@@ -578,10 +510,12 @@ const Home = () => {
         }
 
         .unit-table td {
-          padding: 20px 15px;
-          border-bottom: 1px solid #ddd;
-          border-right: 1px solid #ddd;
+          padding: 15px 12px;
           text-align: center;
+          border-right: 1px solid #e0e0e0;
+          border-bottom: 1px solid #e0e0e0;
+          min-height: 50px;
+          color: #666;
         }
 
         .unit-table td:last-child {
@@ -592,8 +526,8 @@ const Home = () => {
           border-bottom: none;
         }
 
-        .unit-table tbody tr:nth-child(even) {
-          background-color: #f9f9f9;
+        .unit-table tbody tr:hover {
+          background-color: #f8f9fa;
         }
 
         /* FOOTER STYLES */
@@ -708,6 +642,57 @@ const Home = () => {
 
         .contact-btn:hover {
           background-color: #555;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+          .skema-header {
+            flex-direction: column;
+            gap: 20px;
+          }
+          
+          .main-title {
+            font-size: 32px;
+          }
+          
+          .stats-container {
+            flex-direction: column;
+          }
+          
+          .stats-card-middle {
+            border-left: none;
+            border-right: none;
+            border-top: 2px solid #e0e0e0;
+            border-bottom: 2px solid #e0e0e0;
+          }
+          
+          .footer {
+            flex-direction: column;
+            height: auto;
+          }
+          
+          .footer-right {
+            flex-direction: column;
+            gap: 30px;
+          }
+          
+          .tabs-container {
+            flex-wrap: wrap;
+          }
+          
+          .tab-item {
+            flex: 1 1 50%;
+            min-width: 120px;
+          }
+          
+          .unit-table {
+            font-size: 12px;
+          }
+          
+          .unit-table th,
+          .unit-table td {
+            padding: 8px 4px;
+          }
         }
       `}</style>
     </div>

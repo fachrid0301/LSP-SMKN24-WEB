@@ -10,7 +10,7 @@ import FooterPage from "./layouts/FooterPage";
 import Register from "./layouts/Register";
 import Login from "./layouts/Login";
 import SertifikasiCTA from "./layouts/SertifikasiCTA";
-import LandingPage from "./layouts/LandingPage";
+import LandingPage from "./layouts/DetailSertifikasi";
 import Kontak from "./layouts/kontak";
 import ManajemenData from "./layouts/ManajemenData";
 import Asesor from "./layouts/Asesor";
@@ -196,7 +196,7 @@ function App() {
 
   return (
     <>
-      {(currentPage === "home" || currentPage === "kontak" || currentPage === "berita") && (
+      {(currentPage === "home" || currentPage === "kontak" || currentPage === "berita" || currentPage === "landingPage") && (
         <Navbar onNavClick={scrollToSection} onLoginClick={handleLoginClick} />
       )}
 
@@ -303,4 +303,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

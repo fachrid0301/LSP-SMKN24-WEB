@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Navbar from "./layouts/Navbar";
+import Dashboard, { DashboardSidebar } from "./layouts/Dashboard";
 import Home from "./layouts/Home";
 import Profil from "./layouts/Profil";
 import MengapaKami from "./layouts/MengapaKami";
@@ -7,7 +8,6 @@ import Skema from "./layouts/Skema";
 import CariSkema from "./layouts/CariSkema";
 import FooterPage from "./layouts/FooterPage";
 import Register from "./layouts/Register";
-import Dashboard from "./layouts/Dashboard";
 import Login from "./layouts/Login";
 import SertifikasiCTA from "./layouts/SertifikasiCTA";
 import LandingPage from "./layouts/LandingPage";
@@ -16,12 +16,13 @@ import ManajemenData from "./layouts/ManajemenData";
 import Asesor from "./layouts/Asesor";
 import Asesi from "./layouts/Asesi";
 import Asesmen from "./layouts/Asesmen";
-import ListAsesmen from "./layouts/ListAsesmen"; // Import terpisah untuk List Asesmen
 import Jurusan from "./layouts/Jurusan";
 import Kompetensi from "./layouts/Kompetensi";
+import ListAsesmen from "./layouts/ListAsesmen";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
+  const [activeMenu, setActiveMenu] = useState("Dashboard");
   const [pendingScroll, setPendingScroll] = useState(null);
 
   const homeRef = useRef(null);
@@ -30,9 +31,22 @@ function App() {
   const galeriRef = useRef(null);
   const kontakRef = useRef(null);
 
+  const pagesWithSidebar = [
+    "manajemenData",
+    "asesor",
+    "asesi",
+    "asesmen",
+    "jurusan",
+    "kompetensi",
+    "listasesmen",
+  ];
+
   const scrollToSection = (section) => {
-    if (["register", "dashboard", "login", "manajemenData", "listasesmen"].includes(section)) {
+    if (["register", "dashboard", "login", "manajemenData"].includes(section)) {
       setCurrentPage(section);
+      if (section === "dashboard") {
+        setActiveMenu("Dashboard");
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -82,6 +96,7 @@ function App() {
 
   const handleBackToHome = () => {
     setCurrentPage("home");
+    setActiveMenu("Dashboard");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -90,15 +105,56 @@ function App() {
   };
 
   const handleNavigate = (page) => {
-    setCurrentPage(page.toLowerCase()); // Ensure page name is lowercase to match rendering conditions
+    const pageLower = page.toLowerCase();
+    setCurrentPage(pageLower);
+
+    // Set menu yang sesuai berdasarkan page, tetapi jangan ubah activeMenu untuk sub-pages ManajemenData
+    const menuMap = {
+      'dashboard': 'Dashboard',
+      'manajemenData': 'ManajemenData',
+      'listasesmen': 'ListAsesmen',
+      'asesmenDiikuti': 'AsesmenDiikuti',
+      'profile': 'Profile'
+    };
+
+    // Jika navigasi ke sub-pages dari ManajemenData (asesor, asesi, asesmen, jurusan, kompetensi), 
+    // pertahankan activeMenu sebagai 'ManajemenData'
+    if (['asesor', 'asesi', 'asesmen', 'jurusan', 'kompetensi'].includes(pageLower)) {
+      setActiveMenu('ManajemenData');
+    } else if (menuMap[pageLower]) {
+      setActiveMenu(menuMap[pageLower]);
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSidebarMenuClick = (menuName) => {
+    if (menuName === 'Logout') {
+      if (confirm('Apakah Anda yakin ingin logout?')) {
+        alert('Logout berhasil!');
+        handleBackToHome();
+      }
+      return;
+    }
+
+    setActiveMenu(menuName);
+
+    const pageMap = {
+      'Dashboard': 'dashboard',
+      'ManajemenData': 'manajemenData',
+      'ListAsesmen': 'listasesmen',
+      'AsesmenDiikuti': 'asesi',
+      'Profile': 'dashboard'
+    };
+
+    if (pageMap[menuName]) {
+      setCurrentPage(pageMap[menuName]);
+    }
   };
 
   return (
     <>
-      {(currentPage === "home" || currentPage === "kontak" || currentPage === "manajemenData" || 
-        currentPage === "asesi" || currentPage === "asesmen" || 
-        currentPage === "jurusan" || currentPage === "kompetensi") && (
+      {(currentPage === "home" || currentPage === "kontak") && (
         <Navbar onNavClick={scrollToSection} onLoginClick={handleLoginClick} />
       )}
 
@@ -107,7 +163,10 @@ function App() {
           <div ref={homeRef}>
             <Home
               goToRegister={() => setCurrentPage("register")}
-              goToDashboard={() => setCurrentPage("dashboard")}
+              goToDashboard={() => {
+                setCurrentPage("dashboard");
+                setActiveMenu("Dashboard");
+              }}
             />
           </div>
           <div ref={profileRef}>
@@ -121,7 +180,10 @@ function App() {
           </div>
           <SertifikasiCTA
             goToRegister={() => setCurrentPage("register")}
-            goToDashboard={() => setCurrentPage("dashboard")}
+            goToDashboard={() => {
+              setCurrentPage("dashboard");
+              setActiveMenu("Dashboard");
+            }}
           />
           <div ref={galeriRef}>
             <CariSkema goToLandingPage={goToLandingPage} />
@@ -136,19 +198,82 @@ function App() {
         <Kontak onBack={handleBackToHome} />
       )}
 
-      {currentPage === "manajemenData" && (
-        <ManajemenData onNavigate={handleNavigate} onBack={handleBackToHome} />
+      {currentPage === "dashboard" && (
+        <Dashboard 
+          onBack={handleBackToHome} 
+          onNavigate={handleNavigate}
+        />
       )}
 
-      {currentPage === "asesor" && <Asesor onBack={handleBackToHome} />}
-      {currentPage === "asesi" && <Asesi onBack={handleBackToHome} />}
-      {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />}
-      {currentPage === "listasesmen" && <ListAsesmen onBack={handleBackToHome} />}
-      {currentPage === "jurusan" && <Jurusan onBack={handleBackToHome} />}
-      {currentPage === "kompetensi" && <Kompetensi onBack={handleBackToHome} />}
+      {pagesWithSidebar.includes(currentPage) && (
+        <div style={{ 
+          display: 'flex', 
+          minHeight: '100vh', 
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+          backgroundColor: '#f5f5f5'
+        }}>
+          <DashboardSidebar 
+            activeMenu={activeMenu} 
+            onMenuClick={handleSidebarMenuClick} 
+          />
+
+          <div style={{ 
+            flex: 1,
+            backgroundColor: '#fafafa',
+            padding: '20px'
+          }}>
+            {currentPage === "manajemenData" && (
+              <ManajemenData onNavigate={handleNavigate} onBack={handleBackToHome} />
+            )}
+            
+            {currentPage === "asesor" && (
+              <Asesor onBack={handleBackToHome} />
+            )}
+            
+            {currentPage === "asesi" && (
+              <Asesi onBack={handleBackToHome} />
+            )}
+            
+            {currentPage === "asesmen" && (
+              <Asesmen onBack={handleBackToHome} />
+            )}
+            
+            {currentPage === "listasesmen" && (
+              <ListAsesmen onBack={handleBackToHome} />
+            )}
+            
+            {currentPage === "jurusan" && (
+              <Jurusan onBack={handleBackToHome} />
+            )}
+            
+            {currentPage === "kompetensi" && (
+              <Kompetensi onBack={handleBackToHome} />
+            )}
+          </div>
+
+          <button 
+            onClick={handleBackToHome}
+            style={{ 
+              position: 'absolute', 
+              top: '20px', 
+              right: '20px', 
+              padding: '10px 20px', 
+              backgroundColor: '#ff6b35', 
+              color: 'white', 
+              border: 'none', 
+              borderRadius: '8px', 
+              fontSize: '16px', 
+              fontWeight: '600', 
+              cursor: 'pointer',
+              zIndex: '1001'
+            }}
+          >
+            Back to Home
+          </button>
+        </div>
+      )}
 
       {currentPage === "register" && <Register onBack={handleBackToHome} />}
-      {currentPage === "dashboard" && <Dashboard onBack={handleBackToHome} onNavigate={handleNavigate} />}
       {currentPage === "login" && <Login onBack={handleBackToHome} />}
       {currentPage === "landingPage" && <LandingPage onBack={handleBackToHome} />}
     </>

@@ -15,7 +15,8 @@ import Kontak from "./layouts/kontak";
 import ManajemenData from "./layouts/ManajemenData";
 import Asesor from "./layouts/Asesor";
 import Asesi from "./layouts/Asesi";
-import Asesmen from "./layouts/Asesmen"; // Updated import to Asesmen
+import Asesmen from "./layouts/Asesmen";
+import ListAsesmen from "./layouts/ListAsesmen"; // Import terpisah untuk List Asesmen
 import Jurusan from "./layouts/Jurusan";
 import Kompetensi from "./layouts/Kompetensi";
 
@@ -30,7 +31,7 @@ function App() {
   const kontakRef = useRef(null);
 
   const scrollToSection = (section) => {
-    if (["register", "dashboard", "login", "manajemenData"].includes(section)) {
+    if (["register", "dashboard", "login", "manajemenData", "listasesmen"].includes(section)) {
       setCurrentPage(section);
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -89,7 +90,7 @@ function App() {
   };
 
   const handleNavigate = (page) => {
-    setCurrentPage(page.toLowerCase());
+    setCurrentPage(page.toLowerCase()); // Ensure page name is lowercase to match rendering conditions
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -141,7 +142,8 @@ function App() {
 
       {currentPage === "asesor" && <Asesor onBack={handleBackToHome} />}
       {currentPage === "asesi" && <Asesi onBack={handleBackToHome} />}
-      {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />} {/* Updated to Asesmen */}
+      {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />}
+      {currentPage === "listasesmen" && <ListAsesmen onBack={handleBackToHome} />}
       {currentPage === "jurusan" && <Jurusan onBack={handleBackToHome} />}
       {currentPage === "kompetensi" && <Kompetensi onBack={handleBackToHome} />}
 

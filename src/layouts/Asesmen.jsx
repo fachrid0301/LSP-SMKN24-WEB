@@ -10,4 +10,4 @@ function Asesmen ({ onBack }) {
   );
 }
 
-export default Asesmen;
+export default Asesmen; 

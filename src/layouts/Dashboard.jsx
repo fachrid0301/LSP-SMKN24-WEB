@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ManajemenData from './ManajemenData';
-import ListAsesmen from './Asesmen';
+import ListAsesmen from './ListAsesmen'; // Import yang benar untuk List Asesmen
 import AsesmenDiikuti from './AsesmenDiikuti';
 import logoImage from '/src/img/image 12.png';
 
@@ -15,6 +15,13 @@ function Dashboard({ onBack, onNavigate }) {
       }
       return;
     }
+    
+    // Jika menu yang diklik memerlukan navigasi ke halaman terpisah
+    if (menuName === 'ListAsesmen' && onNavigate) {
+      onNavigate('listasesmen'); // Navigasi ke halaman List Asesmen terpisah
+      return;
+    }
+    
     setActiveMenu(menuName);
   };
 
@@ -365,7 +372,10 @@ function Dashboard({ onBack, onNavigate }) {
         {activeMenu === 'ManajemenData' && (
           <ManajemenData onNavigate={onNavigate} />
         )}
-        {activeMenu === 'ListAsesmen' && <ListAsesmen />}
+        
+        {/* Hapus bagian ini karena ListAsesmen sekarang navigasi ke halaman terpisah */}
+        {/* {activeMenu === 'ListAsesmen' && <ListAsesmen />} */}
+        
         {activeMenu === 'AsesmenDiikuti' && <AsesmenDiikuti />}
         {activeMenu === 'Profile' && (
           <div style={{ textAlign: 'center' }}>

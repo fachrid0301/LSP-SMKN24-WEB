@@ -390,26 +390,6 @@ function Dashboard({ onBack, onNavigate }) {
           </div>
         )}
       </div>
-
-      {/* Back to Home Button */}
-      <button 
-        onClick={onBack} 
-        style={{ 
-          position: 'absolute', 
-          top: '20px', 
-          right: '20px', 
-          padding: '10px 20px', 
-          backgroundColor: '#ff6b35', 
-          color: 'white', 
-          border: 'none', 
-          borderRadius: '8px', 
-          fontSize: '16px', 
-          fontWeight: '600', 
-          cursor: 'pointer' 
-        }}
-      >
-        Back to Home
-      </button>
     </div>
   );
 }

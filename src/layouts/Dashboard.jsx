@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ManajemenData from './ManajemenData';
-import ListAsesmen from './ListAsesmen';
+import ListAsesmen from './Asesmen';
 import AsesmenDiikuti from './AsesmenDiikuti';
 import logoImage from '/src/img/image 12.png';
 

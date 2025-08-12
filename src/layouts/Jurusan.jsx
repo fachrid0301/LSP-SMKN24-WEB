@@ -8,13 +8,7 @@ function Jurusan({ onBack }) {
     { id: 4, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Perhotalan' },
     { id: 5, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Busana' },
     { id: 6, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Usaha Layanan Pariwisata' },
-    { id: 7, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Kuliner' },
-    { id: 8, kompetensiKeahlian: '', jumlahSiswa: '' },
-    { id: 9, kompetensiKeahlian: '', jumlahSiswa: '' },
-    { id: 10, kompetensiKeahlian: '', jumlahSiswa: '' },
-    { id: 11, kompetensiKeahlian: '', jumlahSiswa: '' },
-    { id: 12, kompetensiKeahlian: '', jumlahSiswa: '' },
-    { id: 13, kompetensiKeahlian: '', jumlahSiswa: '' }
+    { id: 7, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Kuliner' }
   ]);
 
   const handleEditClick = (id) => {
@@ -25,13 +19,16 @@ function Jurusan({ onBack }) {
     <div style={{ 
       padding: '0', 
       backgroundColor: '#f5f5f5',
-      minHeight: '100vh'
+      minHeight: '100vh',
+      width: '100%'
     }}>
       {/* Header */}
       <div style={{
         backgroundColor: '#f5f5f5',
         padding: '20px 30px',
-        borderBottom: '1px solid #e0e0e0'
+        borderBottom: '1px solid #e0e0e0',
+        width: '100%',
+        boxSizing: 'border-box'
       }}>
         <div style={{ 
           display: 'flex', 
@@ -78,7 +75,11 @@ function Jurusan({ onBack }) {
       </div>
 
       {/* Table */}
-      <div style={{ padding: '0 30px 30px 30px' }}>
+      <div style={{ 
+        padding: '0 30px 30px 30px',
+        width: '100%',
+        boxSizing: 'border-box'
+      }}>
         <table style={{ 
           width: '100%', 
           borderCollapse: 'separate',
@@ -147,7 +148,7 @@ function Jurusan({ onBack }) {
                   borderTop: 'none',
                   backgroundColor: 'white'
                 }}>
-                  {item.kompetensiKeahlian ? item.id : ''}
+                  {item.id}
                 </td>
                 <td style={{
                   padding: '15px 20px',
@@ -197,6 +198,29 @@ function Jurusan({ onBack }) {
             ))}
           </tbody>
         </table>
+      </div>
+      
+      {/* Back Button */}
+      <div style={{ 
+        padding: '0 30px 30px 30px',
+        width: '100%',
+        boxSizing: 'border-box'
+      }}>
+        <button 
+          onClick={onBack}
+          style={{
+            backgroundColor: '#6c757d',
+            color: 'white',
+            border: 'none',
+            padding: '10px 20px',
+            borderRadius: '4px',
+            fontSize: '14px',
+            cursor: 'pointer',
+            fontWeight: '500'
+          }}
+        >
+          ← Kembali ke Home
+        </button>
       </div>
     </div>
   );

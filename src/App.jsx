@@ -19,6 +19,8 @@ import Asesmen from "./layouts/Asesmen";
 import Jurusan from "./layouts/Jurusan";
 import Kompetensi from "./layouts/Kompetensi";
 import ListAsesmen from "./layouts/ListAsesmen";
+import AsesmenDiikuti from "./layouts/AsesmenDiikuti"; 
+import Berita from "./layouts/Berita"; // ✅ Tambah import
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -39,6 +41,7 @@ function App() {
     "jurusan",
     "kompetensi",
     "listasesmen",
+    "asesmenDiikuti",
   ];
 
   const scrollToSection = (section) => {
@@ -57,8 +60,10 @@ function App() {
       return;
     }
 
-    if (section === "berita") {
-      section = "home";
+    if (section === "berita") { // ✅ Biar bisa klik Berita
+      setCurrentPage("berita");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
     }
 
     if (currentPage !== "home") {
@@ -108,19 +113,16 @@ function App() {
     const pageLower = page.toLowerCase();
     setCurrentPage(pageLower);
 
-    // Set menu yang sesuai berdasarkan page, tetapi jangan ubah activeMenu untuk sub-pages ManajemenData
     const menuMap = {
-      'dashboard': 'Dashboard',
-      'manajemenData': 'ManajemenData',
-      'listasesmen': 'ListAsesmen',
-      'asesmenDiikuti': 'AsesmenDiikuti',
-      'profile': 'Profile'
+      dashboard: "Dashboard",
+      manajemenData: "ManajemenData",
+      listasesmen: "ListAsesmen",
+      asesmenDiikuti: "AsesmenDiikuti",
+      profile: "Profile",
     };
 
-    // Jika navigasi ke sub-pages dari ManajemenData (asesor, asesi, asesmen, jurusan, kompetensi), 
-    // pertahankan activeMenu sebagai 'ManajemenData'
-    if (['asesor', 'asesi', 'asesmen', 'jurusan', 'kompetensi'].includes(pageLower)) {
-      setActiveMenu('ManajemenData');
+    if (["asesor", "asesi", "asesmen", "jurusan", "kompetensi"].includes(pageLower)) {
+      setActiveMenu("ManajemenData");
     } else if (menuMap[pageLower]) {
       setActiveMenu(menuMap[pageLower]);
     }
@@ -129,9 +131,9 @@ function App() {
   };
 
   const handleSidebarMenuClick = (menuName) => {
-    if (menuName === 'Logout') {
-      if (confirm('Apakah Anda yakin ingin logout?')) {
-        alert('Logout berhasil!');
+    if (menuName === "Logout") {
+      if (confirm("Apakah Anda yakin ingin logout?")) {
+        alert("Logout berhasil!");
         handleBackToHome();
       }
       return;
@@ -140,11 +142,11 @@ function App() {
     setActiveMenu(menuName);
 
     const pageMap = {
-      'Dashboard': 'dashboard',
-      'ManajemenData': 'manajemenData',
-      'ListAsesmen': 'listasesmen',
-      'AsesmenDiikuti': 'asesi',
-      'Profile': 'dashboard'
+      Dashboard: "dashboard",
+      ManajemenData: "manajemenData",
+      ListAsesmen: "listasesmen",
+      AsesmenDiikuti: "asesmenDiikuti",
+      Profile: "dashboard",
     };
 
     if (pageMap[menuName]) {
@@ -154,7 +156,7 @@ function App() {
 
   return (
     <>
-      {(currentPage === "home" || currentPage === "kontak") && (
+      {(currentPage === "home" || currentPage === "kontak" || currentPage === "berita") && (
         <Navbar onNavClick={scrollToSection} onLoginClick={handleLoginClick} />
       )}
 
@@ -194,63 +196,53 @@ function App() {
         </>
       )}
 
-      {currentPage === "kontak" && (
-        <Kontak onBack={handleBackToHome} />
-      )}
+      {currentPage === "kontak" && <Kontak onBack={handleBackToHome} />}
+
+      {currentPage === "berita" && <Berita onBack={handleBackToHome} />} {/* ✅ Halaman Berita */}
 
       {currentPage === "dashboard" && (
-        <Dashboard 
-          onBack={handleBackToHome} 
-          onNavigate={handleNavigate}
-        />
+        <Dashboard onBack={handleBackToHome} onNavigate={handleNavigate} />
       )}
 
       {pagesWithSidebar.includes(currentPage) && (
-        <div style={{ 
-          display: 'flex', 
-          minHeight: '100vh', 
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-          backgroundColor: '#f5f5f5'
-        }}>
-          <DashboardSidebar 
-            activeMenu={activeMenu} 
-            onMenuClick={handleSidebarMenuClick} 
+        <div
+          style={{
+            display: "flex",
+            minHeight: "100vh",
+            fontFamily:
+              '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            backgroundColor: "#f5f5f5",
+          }}
+        >
+          <DashboardSidebar
+            activeMenu={activeMenu}
+            onMenuClick={handleSidebarMenuClick}
           />
 
-          <div style={{ 
-            flex: 1,
-            backgroundColor: '#fafafa',
-            padding: '20px'
-          }}>
+          <div
+            style={{
+              flex: 1,
+              backgroundColor: "#fafafa",
+              padding: "20px",
+            }}
+          >
             {currentPage === "manajemenData" && (
               <ManajemenData onNavigate={handleNavigate} onBack={handleBackToHome} />
             )}
-            
-            {currentPage === "asesor" && (
-              <Asesor onBack={handleBackToHome} />
-            )}
-            
-            {currentPage === "asesi" && (
-              <Asesi onBack={handleBackToHome} />
-            )}
-            
-            {currentPage === "asesmen" && (
-              <Asesmen onBack={handleBackToHome} />
-            )}
-            
+            {currentPage === "asesor" && <Asesor onBack={handleBackToHome} />}
+            {currentPage === "asesi" && <Asesi onBack={handleBackToHome} />}
+            {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />}
             {currentPage === "listasesmen" && (
               <ListAsesmen onBack={handleBackToHome} />
             )}
-            
-            {currentPage === "jurusan" && (
-              <Jurusan onBack={handleBackToHome} />
-            )}
-            
+            {currentPage === "jurusan" && <Jurusan onBack={handleBackToHome} />}
             {currentPage === "kompetensi" && (
               <Kompetensi onBack={handleBackToHome} />
             )}
+            {currentPage === "asesmenDiikuti" && (
+              <AsesmenDiikuti onBack={handleBackToHome} />
+            )}
           </div>
-
         </div>
       )}
 

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import AddJurusan from './AddJurusan';
+import EditJurusan from './EditJurusan';
 
 function Jurusan({ onBack }) {
   const [data, setData] = useState([
@@ -11,8 +13,47 @@ function Jurusan({ onBack }) {
     { id: 7, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Kuliner' }
   ]);
 
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState('add');
+  const [formData, setFormData] = useState({
+    kompetensiKeahlian: '',
+    jumlahSiswa: ''
+  });
+  const [editingId, setEditingId] = useState(null);
+
+  const handleAddClick = () => {
+    setModalType('add');
+    setFormData({ kompetensiKeahlian: '', jumlahSiswa: '' });
+    setShowModal(true);
+  };
+
   const handleEditClick = (id) => {
-    console.log(`Edit data dengan ID: ${id}`);
+    const item = data.find(d => d.id === id);
+    if (item) {
+      setModalType('edit');
+      setFormData({
+        kompetensiKeahlian: item.kompetensiKeahlian,
+        jumlahSiswa: item.jumlahSiswa
+      });
+      setEditingId(id);
+      setShowModal(true);
+    }
+  };
+
+  const handleSave = (newData) => {
+    if (modalType === 'add') {
+      const newId = Math.max(...data.map(d => d.id)) + 1;
+      setData(prev => [...prev, { id: newId, ...newData }]);
+    } else {
+      setData(prev => prev.map(item => 
+        item.id === editingId ? { ...item, ...newData } : item
+      ));
+    }
+    setShowModal(false);
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
   };
 
   return (
@@ -59,16 +100,19 @@ function Jurusan({ onBack }) {
         </div>
         
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button style={{
-            backgroundColor: '#FF8A50',
-            color: 'white',
-            border: 'none',
-            padding: '8px 16px',
-            borderRadius: '4px',
-            fontSize: '14px',
-            cursor: 'pointer',
-            fontWeight: '500'
-          }}>
+          <button 
+            onClick={handleAddClick}
+            style={{
+              backgroundColor: '#FF8A50',
+              color: 'white',
+              border: 'none',
+              padding: '8px 16px',
+              borderRadius: '4px',
+              fontSize: '14px',
+              cursor: 'pointer',
+              fontWeight: '500'
+            }}
+          >
             + Tambah Data Baru
           </button>
         </div>
@@ -199,7 +243,25 @@ function Jurusan({ onBack }) {
           </tbody>
         </table>
       </div>
-      
+
+      {/* Modal */}
+      {showModal && modalType === 'add' && (
+        <AddJurusan
+          formData={formData}
+          setFormData={setFormData}
+          handleSave={handleSave}
+          handleCancel={handleCancel}
+        />
+      )}
+      {showModal && modalType === 'edit' && (
+        <EditJurusan
+          formData={formData}
+          setFormData={setFormData}
+          handleSave={handleSave}
+          handleCancel={handleCancel}
+        />
+      )}
+
       {/* Back Button */}
       <div style={{ 
         padding: '0 30px 30px 30px',

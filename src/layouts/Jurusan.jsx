@@ -209,17 +209,18 @@ function Jurusan({ onBack }) {
         <button 
           onClick={onBack}
           style={{
-            backgroundColor: '#6c757d',
+            backgroundColor: '#FF8A50',
             color: 'white',
             border: 'none',
-            padding: '10px 20px',
-            borderRadius: '4px',
+            padding: '12px 24px',
+            borderRadius: '8px',
             fontSize: '14px',
             cursor: 'pointer',
-            fontWeight: '500'
+            fontWeight: '500',
+            boxShadow: '0 2px 4px rgba(255, 138, 80, 0.3)'
           }}
         >
-          ← Kembali ke Home
+          Kembali ke Home
         </button>
       </div>
     </div>

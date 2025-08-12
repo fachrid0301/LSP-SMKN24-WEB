@@ -24,13 +24,14 @@ import ListAsesmen from "./layouts/ListAsesmen";
 import AsesmenDiikuti from "./layouts/AsesmenDiikuti";
 import Berita from "./layouts/Berita";
 import AddListAsesmen from "./layouts/AddListAsesmen";
+import EditListAsesmen from "./layouts/EditListAsesmen";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [activeMenu, setActiveMenu] = useState("Dashboard");
   const [pendingScroll, setPendingScroll] = useState(null);
   const [editData, setEditData] = useState(null); // For storing data to edit
-  
+
   // State untuk data jurusan
   const [jurusanData, setJurusanData] = useState([
     { id: 1, kompetensiKeahlian: 'Rekayasa Perangkat Lunak', jumlahSiswa: '45' },
@@ -49,7 +50,7 @@ function App() {
       namaJadwal: "Sertifikasi Web Developer - Batch 1",
       tuk: "TUK LSP Digital",
       pembiayaan: "Dibayar Penuh",
-      tanggalUjian: "15 Sept 2025",
+      tanggalUjian: "2025-09-15",
       lokasiUjian: "Jakarta Pusat",
       asesor: "Asesor A",
       jumlahPeserta: 20,
@@ -59,7 +60,7 @@ function App() {
       namaJadwal: "Sertifikasi Mobile App Developer",
       tuk: "TUK LSP Mobile",
       pembiayaan: "Belum Dibayar",
-      tanggalUjian: "22 Sept 2025",
+      tanggalUjian: "2025-09-22",
       lokasiUjian: "Bandung",
       asesor: "Asesor B",
       jumlahPeserta: 15,
@@ -69,7 +70,7 @@ function App() {
       namaJadwal: "Sertifikasi Data Analyst",
       tuk: "TUK LSP Data",
       pembiayaan: "Dibayar Penuh",
-      tanggalUjian: "30 Sept 2025",
+      tanggalUjian: "2025-09-30",
       lokasiUjian: "Surabaya",
       asesor: "Asesor C",
       jumlahPeserta: 25,
@@ -94,6 +95,7 @@ function App() {
     "listasesmen",
     "asesmenDiikuti",
     "addlistasesmen",
+    "editlistasesmen",
   ];
 
   const scrollToSection = (section) => {
@@ -166,7 +168,7 @@ function App() {
     setCurrentPage(pageLower);
     
     // Store data for edit operations
-    if (data && pageLower === 'editjurusan') {
+    if (data && (pageLower === 'editjurusan' || pageLower === 'editlistasesmen')) {
       setEditData(data);
     }
 
@@ -179,9 +181,10 @@ function App() {
       addlistasesmen: "ManajemenData",
       addjurusan: "ManajemenData",
       editjurusan: "ManajemenData",
+      editlistasesmen: "ManajemenData",
     };
 
-    if (["asesor", "asesi", "asesmen", "jurusan", "kompetensi", "addlistasesmen", "addjurusan", "editjurusan"].includes(pageLower)) {
+    if (["asesor", "asesi", "asesmen", "jurusan", "kompetensi", "addlistasesmen", "addjurusan", "editjurusan", "editlistasesmen"].includes(pageLower)) {
       setActiveMenu("ManajemenData");
     } else if (menuMap[pageLower]) {
       setActiveMenu(menuMap[pageLower]);
@@ -219,13 +222,20 @@ function App() {
     handleNavigate("listasesmen");
   };
 
-  // Handler untuk menambah data jurusan
+  const handleEditAssessment = (updatedItem) => {
+    setAssessmentData(prevData =>
+      prevData.map(item =>
+        item.id === updatedItem.id ? updatedItem : item
+      )
+    );
+    handleNavigate("listasesmen");
+  };
+
   const handleAddJurusan = (newItem) => {
     setJurusanData([...jurusanData, newItem]);
     handleNavigate("jurusan");
   };
 
-  // Handler untuk edit data jurusan
   const handleEditJurusan = (updatedItem) => {
     setJurusanData(prevData =>
       prevData.map(item =>
@@ -351,6 +361,13 @@ function App() {
                 onBack={() => handleNavigate("listasesmen")}
                 onSave={handleAddAssessment}
                 assessmentData={assessmentData}
+              />
+            )}
+            {currentPage === "editlistasesmen" && (
+              <EditListAsesmen
+                onBack={() => handleNavigate("listasesmen")}
+                onSave={handleEditAssessment}
+                item={editData}
               />
             )}
           </div>

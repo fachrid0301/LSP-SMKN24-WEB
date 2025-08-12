@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 function ListAsesmen({ onBack, onNavigate, assessmentData, setAssessmentData }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   // Filter data berdasarkan search term
   const filteredData = assessmentData.filter(item =>
@@ -13,10 +15,21 @@ function ListAsesmen({ onBack, onNavigate, assessmentData, setAssessmentData }) 
     item.pembiayaan.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDelete = (id) => {
-    if (window.confirm('Yakin ingin menghapus data ini?')) {
-      setAssessmentData(assessmentData.filter(item => item.id !== id));
+  const handleOpenDeleteModal = (id) => {
+    setItemToDelete(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setItemToDelete(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (itemToDelete) {
+      setAssessmentData(assessmentData.filter(item => item.id !== itemToDelete));
     }
+    handleCloseDeleteModal();
   };
 
   // Simple icon components
@@ -457,7 +470,7 @@ function ListAsesmen({ onBack, onNavigate, assessmentData, setAssessmentData }) 
                       <button style={{
                         padding: '6px 12px',
                         backgroundColor: '#ff0000',
-                        color: '#000000',
+                        color: '#ffffff',
                         border: 'none',
                         borderRadius: '6px',
                         fontSize: '12px',
@@ -470,7 +483,7 @@ function ListAsesmen({ onBack, onNavigate, assessmentData, setAssessmentData }) 
                       }}
                       onMouseEnter={(e) => e.target.style.backgroundColor = '#cc0000'}
                       onMouseLeave={(e) => e.target.style.backgroundColor = '#ff0000'}
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() => handleOpenDeleteModal(item.id)}
                       >
                         <DeleteIcon /> Hapus
                       </button>
@@ -493,6 +506,109 @@ function ListAsesmen({ onBack, onNavigate, assessmentData, setAssessmentData }) 
           </table>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000,
+        }}>
+          <div style={{
+            backgroundColor: '#ffffff',
+            borderRadius: '16px',
+            padding: '30px',
+            width: '100%',
+            maxWidth: '400px',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
+            textAlign: 'center',
+            fontFamily: 'Arial, sans-serif',
+          }}>
+            <h3 style={{
+              fontSize: '20px',
+              fontWeight: '700',
+              color: '#2c3e50',
+              marginBottom: '20px',
+            }}>
+              Konfirmasi Penghapusan
+            </h3>
+            <p style={{
+              fontSize: '16px',
+              color: '#34495e',
+              marginBottom: '30px',
+            }}>
+              Apakah Anda yakin ingin menghapus data asesmen ini? Tindakan ini tidak dapat dibatalkan.
+            </p>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: '20px',
+            }}>
+              <button
+                onClick={handleCloseDeleteModal}
+                style={{
+                  padding: '12px 24px',
+                  backgroundColor: '#6c757d',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 12px rgba(108, 117, 125, 0.3)',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#5a6268';
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 6px 20px rgba(108, 117, 125, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = '#6c757d';
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 12px rgba(108, 117, 125, 0.3)';
+                }}
+              >
+                Batal
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                style={{
+                  padding: '12px 24px',
+                  backgroundColor: '#ff0000',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 12px rgba(255, 0, 0, 0.3)',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#cc0000';
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 6px 20px rgba(255, 0, 0, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = '#ff0000';
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 12px rgba(255, 0, 0, 0.3)';
+                }}
+              >
+                Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

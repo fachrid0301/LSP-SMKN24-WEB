@@ -17,6 +17,8 @@ import Asesor from "./layouts/Asesor";
 import Asesi from "./layouts/Asesi";
 import Asesmen from "./layouts/Asesmen";
 import Jurusan from "./layouts/Jurusan";
+import AddJurusan from "./layouts/AddJurusan";
+import EditJurusan from "./layouts/EditJurusan";
 import Kompetensi from "./layouts/Kompetensi";
 import ListAsesmen from "./layouts/ListAsesmen";
 import AsesmenDiikuti from "./layouts/AsesmenDiikuti";
@@ -27,6 +29,20 @@ function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [activeMenu, setActiveMenu] = useState("Dashboard");
   const [pendingScroll, setPendingScroll] = useState(null);
+  const [editData, setEditData] = useState(null); // For storing data to edit
+  
+  // State untuk data jurusan
+  const [jurusanData, setJurusanData] = useState([
+    { id: 1, kompetensiKeahlian: 'Rekayasa Perangkat Lunak', jumlahSiswa: '45' },
+    { id: 2, kompetensiKeahlian: 'Teknik Komputer dan Jaringan', jumlahSiswa: '38' },
+    { id: 3, kompetensiKeahlian: 'Multimedia', jumlahSiswa: '42' },
+    { id: 4, kompetensiKeahlian: 'Perhotalan', jumlahSiswa: '35' },
+    { id: 5, kompetensiKeahlian: 'Busana', jumlahSiswa: '28' },
+    { id: 6, kompetensiKeahlian: 'Usaha Layanan Pariwisata', jumlahSiswa: '30' },
+    { id: 7, kompetensiKeahlian: 'Kuliner', jumlahSiswa: '32' }
+  ]);
+
+  // State untuk data assessment
   const [assessmentData, setAssessmentData] = useState([
     {
       id: 1,
@@ -72,6 +88,8 @@ function App() {
     "asesi",
     "asesmen",
     "jurusan",
+    "addjurusan",
+    "editjurusan",
     "kompetensi",
     "listasesmen",
     "asesmenDiikuti",
@@ -143,9 +161,14 @@ function App() {
     setCurrentPage("landingPage");
   };
 
-  const handleNavigate = (page) => {
+  const handleNavigate = (page, data = null) => {
     const pageLower = page.toLowerCase();
     setCurrentPage(pageLower);
+    
+    // Store data for edit operations
+    if (data && pageLower === 'editjurusan') {
+      setEditData(data);
+    }
 
     const menuMap = {
       dashboard: "Dashboard",
@@ -154,9 +177,11 @@ function App() {
       asesmenDiikuti: "AsesmenDiikuti",
       profile: "Profile",
       addlistasesmen: "ManajemenData",
+      addjurusan: "ManajemenData",
+      editjurusan: "ManajemenData",
     };
 
-    if (["asesor", "asesi", "asesmen", "jurusan", "kompetensi", "addlistasesmen"].includes(pageLower)) {
+    if (["asesor", "asesi", "asesmen", "jurusan", "kompetensi", "addlistasesmen", "addjurusan", "editjurusan"].includes(pageLower)) {
       setActiveMenu("ManajemenData");
     } else if (menuMap[pageLower]) {
       setActiveMenu(menuMap[pageLower]);
@@ -192,6 +217,22 @@ function App() {
   const handleAddAssessment = (newItem) => {
     setAssessmentData([...assessmentData, newItem]);
     handleNavigate("listasesmen");
+  };
+
+  // Handler untuk menambah data jurusan
+  const handleAddJurusan = (newItem) => {
+    setJurusanData([...jurusanData, newItem]);
+    handleNavigate("jurusan");
+  };
+
+  // Handler untuk edit data jurusan
+  const handleEditJurusan = (updatedItem) => {
+    setJurusanData(prevData =>
+      prevData.map(item =>
+        item.id === updatedItem.id ? updatedItem : item
+      )
+    );
+    handleNavigate("jurusan");
   };
 
   return (
@@ -272,6 +313,28 @@ function App() {
             {currentPage === "asesor" && <Asesor onBack={handleBackToHome} />}
             {currentPage === "asesi" && <Asesi onBack={handleBackToHome} />}
             {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />}
+            {currentPage === "jurusan" && (
+              <Jurusan 
+                onBack={handleBackToHome} 
+                onNavigate={handleNavigate}
+                jurusanData={jurusanData}
+                setJurusanData={setJurusanData}
+              />
+            )}
+            {currentPage === "addjurusan" && (
+              <AddJurusan
+                onBack={() => handleNavigate("jurusan")}
+                onSave={handleAddJurusan}
+              />
+            )}
+            {currentPage === "editjurusan" && (
+              <EditJurusan
+                onBack={() => handleNavigate("jurusan")}
+                onSave={handleEditJurusan}
+                initialData={editData}
+              />
+            )}
+            {currentPage === "kompetensi" && <Kompetensi onBack={handleBackToHome} />}
             {currentPage === "listasesmen" && (
               <ListAsesmen
                 onBack={handleBackToHome}
@@ -280,8 +343,6 @@ function App() {
                 setAssessmentData={setAssessmentData}
               />
             )}
-            {currentPage === "jurusan" && <Jurusan onBack={handleBackToHome} />}
-            {currentPage === "kompetensi" && <Kompetensi onBack={handleBackToHome} />}
             {currentPage === "asesmenDiikuti" && (
               <AsesmenDiikuti onBack={handleBackToHome} />
             )}
@@ -303,4 +364,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

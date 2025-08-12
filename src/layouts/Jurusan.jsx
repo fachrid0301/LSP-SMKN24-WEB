@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
+import AddJurusan from './AddJurusan';
+import EditJurusan from './EditJurusan';
 
 function Jurusan({ onBack }) {
   const [data, setData] = useState([
     { id: 1, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Rekayasa Perangkat Lunak' },
     { id: 2, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Rekayasa Perangkat Lunak' },
     { id: 3, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Rekayasa Perangkat Lunak' },
-    { id: 4, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Perhotalan' },
+    { id: 4, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Perhotelan' },
     { id: 5, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Busana' },
     { id: 6, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Usaha Layanan Pariwisata' },
     { id: 7, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Kuliner' }
   ]);
 
+  const [halaman, setHalaman] = useState('list'); // list | add | edit
+  const [editItem, setEditItem] = useState(null);
+
   const handleEditClick = (id) => {
-    console.log(`Edit data dengan ID: ${id}`);
+    const item = data.find(d => d.id === id);
+    setEditItem(item);
+    setHalaman('edit');
   };
+
+  if (halaman === 'add') {
+    return <AddJurusan onBack={() => setHalaman('list')} />;
+  }
+
+  if (halaman === 'edit') {
+    return <EditJurusan item={editItem} onBack={() => setHalaman('list')} />;
+  }
 
   return (
     <div style={{ 
@@ -59,16 +74,19 @@ function Jurusan({ onBack }) {
         </div>
         
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button style={{
-            backgroundColor: '#FF8A50',
-            color: 'white',
-            border: 'none',
-            padding: '8px 16px',
-            borderRadius: '4px',
-            fontSize: '14px',
-            cursor: 'pointer',
-            fontWeight: '500'
-          }}>
+          <button 
+            onClick={() => setHalaman('add')}
+            style={{
+              backgroundColor: '#FF8A50',
+              color: 'white',
+              border: 'none',
+              padding: '8px 16px',
+              borderRadius: '4px',
+              fontSize: '14px',
+              cursor: 'pointer',
+              fontWeight: '500'
+            }}
+          >
             + Tambah Data Baru
           </button>
         </div>
@@ -138,7 +156,7 @@ function Jurusan({ onBack }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {data.map((item) => (
               <tr key={item.id}>
                 <td style={{
                   padding: '15px 20px',

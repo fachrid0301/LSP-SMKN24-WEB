@@ -1,11 +1,203 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Jurusan({ onBack }) {
+  const [data, setData] = useState([
+    { id: 1, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Rekayasa Perangkat Lunak' },
+    { id: 2, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Rekayasa Perangkat Lunak' },
+    { id: 3, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Rekayasa Perangkat Lunak' },
+    { id: 4, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Perhotalan' },
+    { id: 5, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Busana' },
+    { id: 6, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Usaha Layanan Pariwisata' },
+    { id: 7, kompetensiKeahlian: 'Erwin Alaskar Mega', jumlahSiswa: 'Kuliner' },
+    { id: 8, kompetensiKeahlian: '', jumlahSiswa: '' },
+    { id: 9, kompetensiKeahlian: '', jumlahSiswa: '' },
+    { id: 10, kompetensiKeahlian: '', jumlahSiswa: '' },
+    { id: 11, kompetensiKeahlian: '', jumlahSiswa: '' },
+    { id: 12, kompetensiKeahlian: '', jumlahSiswa: '' },
+    { id: 13, kompetensiKeahlian: '', jumlahSiswa: '' }
+  ]);
+
+  const handleEditClick = (id) => {
+    console.log(`Edit data dengan ID: ${id}`);
+  };
+
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Halaman Jurusan</h1>
-      <p>Ini adalah halaman untuk mengelola data jurusan. Tambahkan form, tabel, atau fitur lain di sini.</p>
-      <button onClick={onBack}>Kembali ke Home</button>
+    <div style={{ 
+      padding: '0', 
+      backgroundColor: '#f5f5f5',
+      minHeight: '100vh'
+    }}>
+      {/* Header */}
+      <div style={{
+        backgroundColor: '#f5f5f5',
+        padding: '20px 30px',
+        borderBottom: '1px solid #e0e0e0'
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center',
+          marginBottom: '20px'
+        }}>
+          <button 
+            onClick={onBack}
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: '20px',
+              marginRight: '15px',
+              cursor: 'pointer',
+              color: '#333'
+            }}
+          >
+            ←
+          </button>
+          <h1 style={{
+            fontSize: '24px',
+            fontWeight: 'bold',
+            margin: '0',
+            color: '#333'
+          }}>
+            JURUSAN
+          </h1>
+        </div>
+        
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button style={{
+            backgroundColor: '#FF8A50',
+            color: 'white',
+            border: 'none',
+            padding: '8px 16px',
+            borderRadius: '4px',
+            fontSize: '14px',
+            cursor: 'pointer',
+            fontWeight: '500'
+          }}>
+            + Tambah Data Baru
+          </button>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div style={{ padding: '0 30px 30px 30px' }}>
+        <table style={{ 
+          width: '100%', 
+          borderCollapse: 'separate',
+          borderSpacing: '0',
+          fontSize: '14px',
+          backgroundColor: 'white',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+        }}>
+          <thead>
+            <tr>
+              <th style={{
+                padding: '15px 20px',
+                textAlign: 'center',
+                fontWeight: '500',
+                color: '#666',
+                backgroundColor: '#e9ecef',
+                border: '1px solid #dee2e6',
+                width: '60px'
+              }}>
+                No
+              </th>
+              <th style={{
+                padding: '15px 20px',
+                textAlign: 'center',
+                fontWeight: '500',
+                color: '#666',
+                backgroundColor: '#e9ecef',
+                border: '1px solid #dee2e6',
+                borderLeft: 'none'
+              }}>
+                Kompetensi Keahlian
+              </th>
+              <th style={{
+                padding: '15px 20px',
+                textAlign: 'center',
+                fontWeight: '500',
+                color: '#666',
+                backgroundColor: '#e9ecef',
+                border: '1px solid #dee2e6',
+                borderLeft: 'none'
+              }}>
+                Jumlah Siswa
+              </th>
+              <th style={{
+                padding: '15px 20px',
+                textAlign: 'center',
+                fontWeight: '500',
+                color: '#666',
+                backgroundColor: '#e9ecef',
+                border: '1px solid #dee2e6',
+                borderLeft: 'none',
+                width: '120px'
+              }}>
+                Aksi
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={item.id}>
+                <td style={{
+                  padding: '15px 20px',
+                  textAlign: 'center',
+                  color: '#333',
+                  border: '1px solid #dee2e6',
+                  borderTop: 'none',
+                  backgroundColor: 'white'
+                }}>
+                  {item.kompetensiKeahlian ? item.id : ''}
+                </td>
+                <td style={{
+                  padding: '15px 20px',
+                  color: '#333',
+                  border: '1px solid #dee2e6',
+                  borderTop: 'none',
+                  borderLeft: 'none',
+                  backgroundColor: 'white'
+                }}>
+                  {item.kompetensiKeahlian}
+                </td>
+                <td style={{
+                  padding: '15px 20px',
+                  color: '#333',
+                  border: '1px solid #dee2e6',
+                  borderTop: 'none',
+                  borderLeft: 'none',
+                  backgroundColor: 'white'
+                }}>
+                  {item.jumlahSiswa}
+                </td>
+                <td style={{
+                  padding: '15px 20px',
+                  textAlign: 'center',
+                  border: '1px solid #dee2e6',
+                  borderTop: 'none',
+                  borderLeft: 'none',
+                  backgroundColor: 'white'
+                }}>
+                  <button
+                    onClick={() => handleEditClick(item.id)}
+                    style={{
+                      backgroundColor: '#FFC107',
+                      color: '#333',
+                      border: 'none',
+                      padding: '6px 12px',
+                      borderRadius: '4px',
+                      fontSize: '12px',
+                      cursor: 'pointer',
+                      fontWeight: '500'
+                    }}
+                  >
+                    Edit Data
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

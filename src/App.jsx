@@ -15,7 +15,7 @@ import Kontak from "./layouts/kontak";
 import ManajemenData from "./layouts/ManajemenData";
 import Asesor from "./layouts/Asesor";
 import Asesi from "./layouts/Asesi";
-import Asesmen from "./layouts/Asesmen";
+import Asesmen from "./layouts/Asesmen"; // Updated import to Asesmen
 import Jurusan from "./layouts/Jurusan";
 import Kompetensi from "./layouts/Kompetensi";
 
@@ -89,7 +89,7 @@ function App() {
   };
 
   const handleNavigate = (page) => {
-    setCurrentPage(page.toLowerCase()); // Ensure page name is lowercase to match rendering conditions
+    setCurrentPage(page.toLowerCase());
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -141,7 +141,7 @@ function App() {
 
       {currentPage === "asesor" && <Asesor onBack={handleBackToHome} />}
       {currentPage === "asesi" && <Asesi onBack={handleBackToHome} />}
-      {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />}
+      {currentPage === "asesmen" && <Asesmen onBack={handleBackToHome} />} {/* Updated to Asesmen */}
       {currentPage === "jurusan" && <Jurusan onBack={handleBackToHome} />}
       {currentPage === "kompetensi" && <Kompetensi onBack={handleBackToHome} />}
 

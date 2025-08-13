@@ -67,8 +67,8 @@ function AddJurusan({ onBack, onSave }) {
       overflow: 'auto',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      padding: '20px',
+      padding: '0',
+      margin: '0',
       boxSizing: 'border-box'
     }}>
       <h2 style={{
@@ -76,7 +76,7 @@ function AddJurusan({ onBack, onSave }) {
         fontWeight: 'bold',
         color: '#333',
         textAlign: 'center',
-        marginBottom: '30px',
+        margin: '20px 0',
         textTransform: 'uppercase'
       }}>
         Tambah Data Jurusan
@@ -84,15 +84,13 @@ function AddJurusan({ onBack, onSave }) {
 
       <div style={{
         backgroundColor: '#fff',
-        borderRadius: '10px',
         boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-        padding: '60px 80px',
-        width: '90%',
-        maxWidth: '1200px',
-        minHeight: '70vh',
+        padding: '40px',
+        width: '100%',
+        flex: '1',
         display: 'flex',
         flexDirection: 'column',
-        gap: '40px',
+        gap: '30px',
         justifyContent: 'center'
       }}>
         <div>
@@ -174,7 +172,8 @@ function AddJurusan({ onBack, onSave }) {
           display: 'flex',
           justifyContent: 'center',
           gap: '20px',
-          marginTop: '50px'
+          marginTop: '30px',
+          paddingBottom: '20px'
         }}>
           <button
             onClick={onBack}

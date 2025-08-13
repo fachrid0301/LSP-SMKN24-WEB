@@ -103,20 +103,22 @@ function EditJurusan({ onBack, onSave, onDelete, initialData }) {
         backgroundColor: '#fff',
         borderRadius: '10px',
         boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-        padding: '30px',
-        width: '100%',
-        maxWidth: '600px',
+        padding: '60px 80px',
+        width: '90%',
+        maxWidth: '1200px',
+        minHeight: '70vh',
         display: 'flex',
         flexDirection: 'column',
-        gap: '20px'
+        gap: '40px',
+        justifyContent: 'center'
       }}>
         <div>
           <label style={{
             display: 'block',
-            fontSize: '14px',
+            fontSize: '18px',
             fontWeight: '600',
             color: '#333',
-            marginBottom: '5px'
+            marginBottom: '15px'
           }}>
             Kompetensi Keahlian
           </label>
@@ -128,18 +130,19 @@ function EditJurusan({ onBack, onSave, onDelete, initialData }) {
             placeholder="Masukkan kompetensi keahlian"
             style={{
               width: '100%',
-              padding: '10px',
+              padding: '20px 25px',
               border: '1px solid #ccc',
-              borderRadius: '5px',
-              fontSize: '14px',
-              boxSizing: 'border-box'
+              borderRadius: '8px',
+              fontSize: '16px',
+              boxSizing: 'border-box',
+              minHeight: '60px'
             }}
           />
           {errors.kompetensiKeahlian && (
             <p style={{
               color: '#e53e3e',
-              fontSize: '12px',
-              marginTop: '5px'
+              fontSize: '14px',
+              marginTop: '8px'
             }}>
               {errors.kompetensiKeahlian}
             </p>
@@ -149,10 +152,10 @@ function EditJurusan({ onBack, onSave, onDelete, initialData }) {
         <div>
           <label style={{
             display: 'block',
-            fontSize: '14px',
+            fontSize: '18px',
             fontWeight: '600',
             color: '#333',
-            marginBottom: '5px'
+            marginBottom: '15px'
           }}>
             Jumlah Siswa
           </label>
@@ -165,18 +168,19 @@ function EditJurusan({ onBack, onSave, onDelete, initialData }) {
             min="0"
             style={{
               width: '100%',
-              padding: '10px',
+              padding: '20px 25px',
               border: '1px solid #ccc',
-              borderRadius: '5px',
-              fontSize: '14px',
-              boxSizing: 'border-box'
+              borderRadius: '8px',
+              fontSize: '16px',
+              boxSizing: 'border-box',
+              minHeight: '60px'
             }}
           />
           {errors.jumlahSiswa && (
             <p style={{
               color: '#e53e3e',
-              fontSize: '12px',
-              marginTop: '5px'
+              fontSize: '14px',
+              marginTop: '8px'
             }}>
               {errors.jumlahSiswa}
             </p>
@@ -186,8 +190,8 @@ function EditJurusan({ onBack, onSave, onDelete, initialData }) {
         <div style={{
           display: 'flex',
           justifyContent: 'center',
-          gap: '15px',
-          marginTop: '30px'
+          gap: '20px',
+          marginTop: '50px'
         }}>
           <button
             onClick={handleSubmit}
@@ -195,12 +199,13 @@ function EditJurusan({ onBack, onSave, onDelete, initialData }) {
               backgroundColor: '#f4a261',
               color: '#fff',
               border: 'none',
-              padding: '12px 30px',
-              borderRadius: '25px',
-              fontSize: '14px',
+              padding: '8px 20px',
+              borderRadius: '20px',
+              fontSize: '12px',
               fontWeight: '600',
               cursor: 'pointer',
-              minWidth: '150px',
+              minWidth: '100px',
+              height: '35px',
               transition: 'background-color 0.3s ease',
               boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
             }}
@@ -212,20 +217,21 @@ function EditJurusan({ onBack, onSave, onDelete, initialData }) {
           <button
             onClick={handleDelete}
             style={{
-              backgroundColor: '#6c757d',
+              backgroundColor: '#dc3545',
               color: '#fff',
               border: 'none',
-              padding: '12px 30px',
-              borderRadius: '25px',
-              fontSize: '14px',
+              padding: '8px 20px',
+              borderRadius: '20px',
+              fontSize: '12px',
               fontWeight: '600',
               cursor: 'pointer',
-              minWidth: '120px',
+              minWidth: '80px',
+              height: '35px',
               transition: 'background-color 0.3s ease',
               boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
             }}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#5a6268'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#6c757d'}
+            onMouseOver={(e) => e.target.style.backgroundColor = '#c82333'}
+            onMouseOut={(e) => e.target.style.backgroundColor = '#dc3545'}
           >
             Hapus Data
           </button>

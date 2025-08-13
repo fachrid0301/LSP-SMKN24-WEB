@@ -239,7 +239,7 @@ function Skema({ onBack }) {
             boxShadow: '0 2px 4px rgba(255, 138, 80, 0.3)'
           }}
         >
-          Kembali ke Home
+
         </button>
       </div>
     </div>

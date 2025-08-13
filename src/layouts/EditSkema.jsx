@@ -268,7 +268,7 @@ function EditSkema({ onBack, onSave, initialData }) {
                   minWidth: '120px'
                 }}
               >
-                Batal
+              Batal
               </button>
             </div>
           </div>

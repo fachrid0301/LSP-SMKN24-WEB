@@ -267,3 +267,5 @@ function AddSkema({ onBack, onSave }) {
 }
 
 export default AddSkema;
+
+//hsahshhhs

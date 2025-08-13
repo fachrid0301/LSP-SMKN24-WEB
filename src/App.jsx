@@ -17,6 +17,8 @@ import Asesor from './layouts/Asesor';
 import AddAsesor from './layouts/AddAsesor';
 import EditAsesor from './layouts/EditAsesor';
 import Asesi from './layouts/Asesi';
+import AddAsesi from './layouts/AddAsesi';
+import EditAsesi from './layouts/EditAsesi';
 import Asesmen from './layouts/Asesmen';
 import Jurusan from './layouts/Jurusan';
 import AddJurusan from './layouts/AddJurusan';
@@ -38,6 +40,15 @@ function App() {
     { id: 2, no: 2, nama: 'Arul Maulita Singo, M.kom', pekerjaan: 'Guru', sertifikat: 'Tidak Tersertifikasi', tanggal: '22/8/2024' },
     { id: 3, no: 3, nama: 'Arul Maulita Singo, M.kom', pekerjaan: 'Guru', sertifikat: 'Tersertifikasi', tanggal: '22/8/2024' },
     { id: 4, no: 4, nama: 'Arul Maulita Singo, M.kom', pekerjaan: 'Guru', sertifikat: 'Tersertifikasi', tanggal: '22/8/2024' },    
+  ]);
+  const [asesiData, setAsesiData] = useState([
+    { id: 1, no: 1, nama: 'Erwin Abristor Mega', pekerjaan: 'Siswa', jurusan: 'Rekayasa Perangkat Lunak', kelas: '12' },
+    { id: 2, no: 2, nama: 'Erwin Abristor Mega', pekerjaan: 'Siswa', jurusan: 'Rekayasa Perangkat Lunak', kelas: '11' },
+    { id: 3, no: 3, nama: 'Erwin Abristor Mega', pekerjaan: 'Siswa', jurusan: 'Rekayasa Perangkat Lunak', kelas: '10' },
+    { id: 4, no: 4, nama: 'Erwin Abristor Mega', pekerjaan: 'Siswa', jurusan: 'Perhotelan', kelas: '11' },
+    { id: 5, no: 5, nama: 'Erwin Abristor Mega', pekerjaan: 'Siswa', jurusan: 'Busana', kelas: '11' },
+    { id: 6, no: 6, nama: 'Erwin Abristor Mega', pekerjaan: 'Siswa', jurusan: 'Usaha Layanan Pariwisata', kelas: '11' },
+    { id: 7, no: 7, nama: 'Erwin Abristor Mega', pekerjaan: 'Siswa', jurusan: 'Kuliner', kelas: '11' }
   ]);
   const [jurusanData, setJurusanData] = useState([
     { id: 1, kompetensiKeahlian: 'Rekayasa Perangkat Lunak', jumlahSiswa: '45' },
@@ -182,9 +193,11 @@ function App() {
       editlistasesmen: 'ManajemenData',
       addasesor: 'ManajemenData',
       editasesor: 'ManajemenData',
+      addasesi: 'ManajemenData',
+      editasesi: 'ManajemenData',
     };
 
-    if (['asesor', 'asesi', 'asesmen', 'jurusan', 'kompetensi', 'addlistasesmen', 'addjurusan', 'editjurusan', 'addasesor', 'editasesor'].includes(pageLower)) {
+    if (['asesor', 'asesi', 'asesmen', 'jurusan', 'kompetensi', 'addlistasesmen', 'addjurusan', 'editjurusan', 'addasesor', 'editasesor', 'addasesi', 'editasesi'].includes(pageLower)) {
       setActiveMenu('ManajemenData');
     } else if (menuMap[pageLower]) {
       setActiveMenu(menuMap[pageLower]);
@@ -257,6 +270,20 @@ function App() {
       asesor.id === updatedData.id ? updatedData : asesor
     ));
     handleNavigate('asesor');
+  };
+
+  const handleAddAsesi = (newData) => {
+    const newId = Math.max(...asesiData.map(a => a.id), 0) + 1;
+    const newNo = Math.max(...asesiData.map(a => a.no), 0) + 1;
+    setAsesiData([...asesiData, { ...newData, id: newId, no: newNo }]);
+    handleNavigate('asesi');
+  };
+
+  const handleEditAsesi = (updatedData) => {
+    setAsesiData(asesiData.map(asesi =>
+      asesi.id === updatedData.id ? updatedData : asesi
+    ));
+    handleNavigate('asesi');
   };
 
   return (
@@ -338,7 +365,14 @@ function App() {
                 setAsesorData={setAsesorData}
               />
             )}
-            {currentPage === 'asesi' && <Asesi onBack={handleBackToHome} />}
+            {currentPage === 'asesi' && (
+              <Asesi
+                onBack={handleBackToHome}
+                onNavigate={handleNavigate}
+                asesiData={asesiData}
+                setAsesiData={setAsesiData}
+              />
+            )}
             {currentPage === 'asesmen' && <Asesmen onBack={handleBackToHome} />}
             {currentPage === 'jurusan' && (
               <Jurusan
@@ -375,6 +409,19 @@ function App() {
           data={editData}
           onSave={handleEditAsesor}
           onCancel={() => handleNavigate('asesor')}
+        />
+      )}
+      {currentPage === 'addasesi' && (
+        <AddAsesi
+          onSave={handleAddAsesi}
+          onCancel={() => handleNavigate('asesi')}
+        />
+      )}
+      {currentPage === 'editasesi' && (
+        <EditAsesi
+          data={editData}
+          onSave={handleEditAsesi}
+          onCancel={() => handleNavigate('asesi')}
         />
       )}
       {currentPage === 'addjurusan' && (

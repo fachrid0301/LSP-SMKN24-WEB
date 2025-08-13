@@ -44,7 +44,7 @@ function Berita() {
       image: "src/img/sidebarnews.jpg"
     },
     {
-      title: "Lorem ipsum dolor sit amet consectetur adipiscing elit", 
+      title: "Lorem ipsum dolor sit amet consectetur adipiscing elit",
       image: "src/img/sidebarnews.jpg"
     }
   ];
@@ -59,23 +59,13 @@ function Berita() {
           backgroundImage: "url('src/img/auditoriums.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          marginTop: "60px" // Added margin for navbar space
+          marginTop: "0"
         }}>
-          {/* Blue diagonal overlay */}
-          <div style={{
-            position: "absolute",
-            bottom: 0,
-            right: 0,
-            width: "300px",
-            height: "100px",
-            backgroundColor: "#1976D2",
-            clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)"
-          }}></div>
         </div>
 
         {/* Orange breadcrumb section */}
         <div style={{
-          backgroundColor: "#FF5722",
+          backgroundColor: "#ff9324",
           padding: "15px 40px",
           color: "white"
         }}>
@@ -84,70 +74,163 @@ function Berita() {
             margin: "0 auto",
             fontSize: "14px"
           }}>
-            <span 
-              onClick={() => setSelectedNews(null)}
-              style={{ cursor: "pointer" }}
-            >
-              Home &gt; Berita Terkini
-            </span>
-            <span> &gt; {selectedNews.title}</span>
+            
+           
           </div>
         </div>
 
-        {/* Detail Content */}
-        <div style={{ padding: "60px 40px", backgroundColor: "#f8f9fa" }}>
+         <span 
+                onClick={() => setSelectedNews(null)}
+                style={{
+                  color: "#000000",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  marginBottom: "1px",
+                  display: "block"
+                }}
+              >
+                Home &gt; Berita Terkini
+              </span>
+
+        {/* Centered Header Section */}
+        <div style={{ 
+          padding: "40px 40px 0 40px",
+          backgroundColor: "#f8f9fa",
+          textAlign: "center"
+        }}>
+          
+          <h1 style={{
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#A6B28B",
+            marginBottom: "5px",
+            textTransform: "uppercase",
+            margin: "0 0 5px 0"
+          }}>
+            SMKN 24 JAKARTA
+          </h1>
+          <h1 style={{
+            fontSize: "36px",
+            fontWeight: "bold",
+            color: "#333",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
+            margin: "0 0 40px 0"
+          }}>
+            BERITA TERKINI
+          </h1>
+        </div>
+
+        {/* Main Content with Sidebar */}
+        <div style={{ padding: "30px 60px 30px 60px", backgroundColor: "#f8f9fa" }}>
           <div style={{
             maxWidth: "1200px",
-            margin: "0 auto"
+            margin: "0 auto",
+            display: "flex",
+            gap: "50px"
           }}>
-            <button 
-              onClick={() => setSelectedNews(null)}
-              style={{
-                backgroundColor: "#FF5722",
-                color: "white",
-                border: "none",
-                padding: "10px 20px",
-                borderRadius: "5px",
-                fontSize: "14px",
-                cursor: "pointer",
-                marginBottom: "30px"
-              }}
-            >
-              ← Kembali ke Berita
-            </button>
-
-            <div style={{
-              backgroundColor: "white",
-              borderRadius: "8px",
-              overflow: "hidden",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-            }}>
-              <img 
-                src={selectedNews.image}
-                alt={selectedNews.title}
+            {/* Detail Content */}
+            <div style={{ flex: "2.2" }}>
+              <span 
+                onClick={() => setSelectedNews(null)}
                 style={{
-                  width: "100%",
-                  height: "400px",
-                  objectFit: "cover"
+                  color: "#000000",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  marginBottom: "1px",
+                  display: "block"
                 }}
-              />
-              <div style={{ padding: "40px" }}>
-                <h1 style={{
-                  fontSize: "32px",
-                  fontWeight: "bold",
-                  color: "#333",
-                  marginBottom: "20px",
-                  lineHeight: "1.4"
+              >
+              </span>
+
+              <div style={{
+                backgroundColor: "white",
+                borderRadius: "10px",
+                overflow: "hidden",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
+              }}>
+                <img 
+                  src={selectedNews.image}
+                  alt={selectedNews.title}
+                  style={{
+                    width: "100%",
+                    height: "400px",
+                    objectFit: "cover"
+                  }}
+                />
+                <div style={{ padding: "40px" }}>
+                  <h1 style={{
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                    color: "#333",
+                    marginBottom: "20px",
+                    lineHeight: "1.4"
+                  }}>
+                    {selectedNews.title}
+                  </h1>
+                  <p style={{
+                    fontSize: "16px",
+                    color: "#666",
+                    lineHeight: "1.6"
+                  }}>
+                    {selectedNews.fullContent}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+           {/* Right Sidebar */}
+          <div style={{ flex: "1", marginTop: "10px" }}>
+            <div style={{
+              backgroundColor: "#fff",
+              borderRadius: "8px",
+              padding: "25px",
+              boxShadow: "0 3px 10px rgba(0,0,0,0.1)",
+              marginLeft: "-10px"
+            }}>
+              <h3 style={{
+                fontSize: "18px",
+                fontWeight: "bold",
+                marginBottom: "25px",
+                color: "#333",
+                textAlign: "center"
+              }}>
+                Berita Terpopuler
+              </h3>
+              
+              {sidebarNews.map((item, index) => (
+                <div key={index} style={{
+                  display: "flex",
+                  gap: "12px",
+                  paddingBottom: "18px",
+                  marginBottom: "18px",
+                  borderBottom: index !== sidebarNews.length - 1 ? "1px solid #eee" : "none",
+                  cursor: "pointer"
                 }}>
-                  {selectedNews.title}
-                </h1>
-                <p style={{
-                  fontSize: "16px",
-                  color: "#666",
-                  lineHeight: "1.6"
-                }}>
-                  {selectedNews.fullContent}
-                </p>
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    style={{
+                      width: "70px",
+                      height: "55px",
+                      objectFit: "cover",
+                      borderRadius: "4px",
+                      flexShrink: 0
+                    }}
+                  />
+                  <div style={{ flex: 1 }}>
+                    <p style={{
+                      fontSize: "12px",
+                      color: "#333",
+                      lineHeight: "1.4",
+                      margin: "0",
+                      fontWeight: "500"
+                    }}>
+                      {item.title}
+                    </p>
+                  </div>
+                </div>
+              ))}
               </div>
             </div>
           </div>
@@ -384,7 +467,7 @@ function Berita() {
        backgroundImage: "url('src/img/auditoriums.png')",
        backgroundSize: "cover",
        backgroundPosition: "center",
-       marginTop: "0px"
+       marginTop: "0"
       }}>
       </div>
 
@@ -403,7 +486,7 @@ function Berita() {
         </div>
       </div>
 
-      {/* Centered Header Section - Outside main content */}
+      {/* Centered Header Section */}
       <div style={{ 
         padding: "40px 40px 0 40px",
         backgroundColor: "#f8f9fa",
@@ -432,18 +515,19 @@ function Berita() {
       </div>
 
       {/* Main Content */}
-      <div style={{ padding: "20px 40px 60px 40px", backgroundColor: "#f8f9fa" }}>
+      <div style={{ padding: "90px 80px 60px 70px", backgroundColor: "#f8f9fa" }}>
         <div style={{
           display: "flex",
-          gap: "50px"
+          gap: "50px",
+          alignItems: "flex-start" // Ensure alignment starts from the top
         }}>
           {/* Left Content - News Grid */}
           <div style={{ flex: "2.2" }}>
-
             <div style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "25px"
+              gap: "25px",
+              marginTop: "0" // Aligned with sidebar top
             }}>
               {newsData.map((news) => (
                 <div
@@ -500,7 +584,7 @@ function Berita() {
           </div>
 
           {/* Right Sidebar */}
-          <div style={{ flex: "1", marginTop: "0px" }}>
+          <div style={{ flex: "1", marginTop: "0" }}>
             <div style={{
               backgroundColor: "#fff",
               borderRadius: "8px",
@@ -543,7 +627,7 @@ function Berita() {
                       fontSize: "12px",
                       color: "#333",
                       lineHeight: "1.4",
-                      margin: 0,
+                      margin: "0",
                       fontWeight: "500"
                     }}>
                       {item.title}

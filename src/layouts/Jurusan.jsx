@@ -16,20 +16,28 @@ function Jurusan({ onBack }) {
   const [halaman, setHalaman] = useState('list'); // list | add | edit
   const [editItem, setEditItem] = useState(null);
 
+  const handleAddSave = (newItem) => {
+    setData(prev => [...prev, newItem]);
+    setHalaman('list');
+  };
+
   const handleEditClick = (id) => {
     const item = data.find(d => d.id === id);
     setEditItem(item);
     setHalaman('edit');
   };
 
+  // Render AddJurusan (akan full screen tanpa sidebar)
   if (halaman === 'add') {
-    return <AddJurusan onBack={() => setHalaman('list')} />;
+    return <AddJurusan onBack={() => setHalaman('list')} onSave={handleAddSave} />;
   }
 
+  // Render EditJurusan
   if (halaman === 'edit') {
     return <EditJurusan item={editItem} onBack={() => setHalaman('list')} />;
   }
 
+  // Main list dengan layout asli (ada ruang untuk sidebar)
   return (
     <div style={{ 
       padding: '0', 
